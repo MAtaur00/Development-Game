@@ -32,7 +32,7 @@ void j1Map::Draw()
 		return;
 
 	// TODO 5(old): Prepare the loop to draw all tilesets + Blit
-	MapLayer* layer = data.layers.start->data; // for now we just use the first layer and tileset
+	MapLayer* layer = data.layers.start->data; 
 	TileSet* tileset = data.tilesets.start->data;
 
 	for (uint x = 0; x < data.width; x++)
