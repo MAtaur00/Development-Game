@@ -30,7 +30,7 @@ bool j1Scene::Awake()
 // Called before the first frame
 bool j1Scene::Start()
 {
-	App->map->Load("level2.tmx");
+	App->map->Load("level1.tmx");
 	return true;
 }
 

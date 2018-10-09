@@ -30,8 +30,6 @@ struct MapLayer
 	}
 };
 
-// TODO 6 (old): Short function to get the value of x,y
-
 // ----------------------------------------------------
 struct TileSet
 {

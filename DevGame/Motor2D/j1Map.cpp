@@ -31,27 +31,34 @@ void j1Map::Draw()
 	if (map_loaded == false)
 		return;
 
-	// TODO 5(old): Prepare the loop to draw all tilesets + Blit
-	MapLayer* layer = data.layers.start->data; // for now we just use the first layer and tileset
-	TileSet* tileset = data.tilesets.start->data;
+	p2List_item<MapLayer*>* layer_pointer = data.layers.start;
+	p2List_item<TileSet*>* tileset_pointer = data.tilesets.start;
 
-	for (uint x = 0; x < data.width; x++)
+	for (tileset_pointer; tileset_pointer != nullptr; tileset_pointer = tileset_pointer->next)
 	{
-		for (uint y = 0; y < data.height; y++)
+		for (layer_pointer; layer_pointer != nullptr; layer_pointer = layer_pointer->next)
 		{
-			iPoint coordenates = MapToWorld(x, y);
-			SDL_Rect rect = tileset->GetTileRect(layer->Get(x, y));
-			App->render->Blit(tileset->texture, coordenates.x, coordenates.y, &rect);
+			for (uint x = 0; x < data.width; x++)
+			{
+				for (uint y = 0; y < data.height; y++)
+				{
+					SDL_Rect rect = tileset_pointer->data->GetTileRect(layer_pointer->data->Get(x, y));
+					iPoint coordinates = MapToWorld(x, y);
+					if (layer_pointer->data->name == "Background") {
+						App->render->Blit(tileset_pointer->data->texture, coordinates.x, coordinates.y, &rect, 0.7f);
+					}
+					else if (layer_pointer->data->name == "Map") {
+						App->render->Blit(tileset_pointer->data->texture, coordinates.x, coordinates.y, &rect, 1.0f);
+					}
+				}
+			}
 		}
 	}
-
-	// TODO 10(old): Complete the draw function
 }
 
 iPoint j1Map::MapToWorld(int x, int y) const
 {
 	iPoint ret(0, 0);
-	// TODO 8(old): Create a method that translates x,y coordinates from map positions to world positions
 
 	switch (data.type)
 	{
@@ -94,7 +101,7 @@ iPoint j1Map::WorldToMap(int x, int y) const
 SDL_Rect TileSet::GetTileRect(int id) const
 {
 	SDL_Rect rect = { 0, 0, 0, 0 };
-	// TODO 7(old): Create a method that receives a tile id and returns it's Rect
+	// Receives a tile id and returns it's Rect
 	int relative_id = id - firstgid;
 	rect.w = tile_width;
 	rect.h = tile_height;
