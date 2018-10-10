@@ -97,7 +97,7 @@ bool ModulePlayer::Update(float dt)
 
 	fPoint tempPos = playerData.pos;
 
-	tempPos.y += dt * 50;
+	tempPos.y += dt * 80;
 
 	if (CheckCollision(GetPlayerTile({ tempPos.x + 5, tempPos.y + playerData.player_height })) == COLLISION_TYPE::AIR 
 		&& CheckCollision(GetPlayerTile({ tempPos.x + 10, tempPos.y + playerData.player_height })) == COLLISION_TYPE::AIR)
@@ -117,12 +117,12 @@ bool ModulePlayer::Update(float dt)
 	{
 		tempPos = playerData.pos;
 
-		tempPos.x += dt * 50;
+		tempPos.x += dt * 75;
 
 		if (CheckCollision(GetPlayerTile({ tempPos.x + playerData.player_width, tempPos.y })) == COLLISION_TYPE::AIR
 			&& CheckCollision(GetPlayerTile({ tempPos.x + playerData.player_width, tempPos.y + playerData.player_height })) == COLLISION_TYPE::AIR)
 		{
-			playerData.pos.x += dt * 50;
+			playerData.pos.x += dt * 75;
 			animation = &running_right;
 		}	
 
@@ -134,12 +134,12 @@ bool ModulePlayer::Update(float dt)
 	{
 		tempPos = playerData.pos;
 
-		tempPos.x -= dt * 50;
+		tempPos.x -= dt * 75;
 
 		if (CheckCollision(GetPlayerTile({ tempPos.x, tempPos.y })) == COLLISION_TYPE::AIR
 			&& CheckCollision(GetPlayerTile({ tempPos.x, tempPos.y + playerData.player_height })) == COLLISION_TYPE::AIR)
 		{
-			playerData.pos.x -= dt * 50;
+			playerData.pos.x -= dt * 75;
 			animation = &running_left;
 		}
 
@@ -151,12 +151,12 @@ bool ModulePlayer::Update(float dt)
 	{
 		tempPos = playerData.pos;
 
-		tempPos.y -= dt * 100;
+		tempPos.y -= dt * 200;
 
 		if (CheckCollision(GetPlayerTile({ tempPos.x + 5, tempPos.y})) == COLLISION_TYPE::AIR
 			&& CheckCollision(GetPlayerTile({ tempPos.x + 10, tempPos.y})) == COLLISION_TYPE::AIR)
 		{
-			playerData.pos.y -= dt * 100;
+			playerData.pos.y -= dt * 200;
 			if (looking_left)
 				animation = &running_left;
 			else if (looking_right)
