@@ -9,6 +9,7 @@
 #include "j1Map.h"
 #include "j1Scene.h"
 #include "ModuleFadeToBlack.h"
+#include "ModulePlayer.h"
 
 j1Scene::j1Scene() : j1Module()
 {
@@ -50,17 +51,24 @@ bool j1Scene::Update(float dt)
 	if(App->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
 		App->SaveGame();
 
-	if(App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
-		App->render->camera.y -= 1;
+	//if(App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+	//	App->render->camera.y -= 1;
 
-	if(App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
-		App->render->camera.y += 1;
+	//if(App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+	//	App->render->camera.y += 1;
 
-	if(App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
-		App->render->camera.x -= 1;
+	if (App->player->playerData.pos.x - (-App->render->camera.x + (1 * App->render->camera.w / 2)) >= 0) 
+	{
+		if (App->render->camera.x - App->render->camera.w > -(App->map->data.width*App->map->data.tile_width))
+			App->render->camera.x -= 2;
+	}
 
-	if(App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-		App->render->camera.x += 1;
+	if (App->player->playerData.pos.x - (-App->render->camera.x + (1 * App->render->camera.w / 2)) <= 0) 
+	{
+		if (App->render->camera.x < 0)
+			App->render->camera.x += 2;
+	}
+	
 
 
 

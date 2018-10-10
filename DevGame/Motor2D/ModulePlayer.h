@@ -7,6 +7,14 @@
 
 struct SDL_Texture;
 
+enum COLLISION_TYPE
+{
+	GROUND,
+	AIR,
+	DEATH,
+	WIN
+};
+
 enum ANIMATION_STATE 
 {
 	IDLE_LEFT,
@@ -20,8 +28,10 @@ enum ANIMATION_STATE
 struct PlayerData 
 {
 
-	iPoint pos;
-	float x, y, w, h;
+	int player_width = 25;
+	int player_height = 30;
+
+	fPoint pos;
 
 	float speed = 350.0f;
 	float jumpSpeed = 800.0f;
@@ -37,10 +47,14 @@ public:
 	virtual ~ModulePlayer();
 
 	bool Start();
-	bool Update();
+	bool Update(float dt);
 	bool CleanUp();
 
 	void SpawnPLayer();
+
+	int GetPlayerTile(fPoint pos) const;
+
+	COLLISION_TYPE CheckCollision(int x) const;
 
 	bool Load(pugi::xml_node& data);
 
@@ -58,6 +72,11 @@ public:
 	Animation jumping_left = Animation();
 
 	PlayerData playerData;
+
+	fPoint initial_pos;
+
+	bool looking_right = false;
+	bool looking_left = false;
 
 	SDL_Texture* texture = nullptr;
 

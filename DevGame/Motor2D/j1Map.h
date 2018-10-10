@@ -107,6 +107,8 @@ public:
 
 	MapData data;
 
+	fPoint initial_position = {35, 448};
+
 private:
 
 	pugi::xml_document	map_file;

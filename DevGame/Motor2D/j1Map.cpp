@@ -80,7 +80,6 @@ iPoint j1Map::MapToWorld(int x, int y) const
 iPoint j1Map::WorldToMap(int x, int y) const
 {
 	iPoint ret(0, 0);
-	// TODO 2: Add orthographic world to map coordinates
 
 	switch (data.type)
 	{
