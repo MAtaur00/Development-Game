@@ -7,14 +7,6 @@
 
 struct SDL_Texture;
 
-enum COLLISION_TYPE
-{
-	GROUND,
-	AIR,
-	DEATH,
-	WIN
-};
-
 enum ANIMATION_STATE 
 {
 	IDLE_LEFT,
@@ -50,15 +42,17 @@ public:
 	bool Update(float dt);
 	bool CleanUp();
 
-	void SpawnPLayer();
-
 	int GetPlayerTile(fPoint pos) const;
-
-	COLLISION_TYPE CheckCollision(int x) const;
 
 	bool Load(pugi::xml_node& data);
 
 	bool Save(pugi::xml_node& data) const;
+
+	void LoadTexture();
+
+	void FindPlayerSpawn();
+
+	void SpawnPlayer();
 
 public:
 
@@ -79,6 +73,8 @@ public:
 	bool looking_left = false;
 
 	SDL_Texture* texture = nullptr;
+
+	p2Point<int> spawn;
 
 };
 

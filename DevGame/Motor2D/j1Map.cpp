@@ -45,10 +45,10 @@ void j1Map::Draw()
 					SDL_Rect rect = tileset_pointer->data->GetTileRect(layer_pointer->data->Get(x, y));
 					iPoint coordinates = MapToWorld(x, y);
 					if (layer_pointer->data->name == "Background") {
-						App->render->Blit(tileset_pointer->data->texture, coordinates.x, coordinates.y, &rect, 0.7f);
+						App->render->Blit(tileset_pointer->data->texture, coordinates.x, coordinates.y, &rect, layer_pointer->data->speed);
 					}
 					else if (layer_pointer->data->name == "Map") {
-						App->render->Blit(tileset_pointer->data->texture, coordinates.x, coordinates.y, &rect, 1.0f);
+						App->render->Blit(tileset_pointer->data->texture, coordinates.x, coordinates.y, &rect);
 					}
 				}
 			}
@@ -143,7 +143,7 @@ bool j1Map::CleanUp()
 }
 
 // Load new map
-bool j1Map::Load(const char* file_name)
+bool j1Map::Load(p2SString file_name)
 {
 	bool ret = true;
 	p2SString tmp("%s%s", folder.GetString(), file_name);
@@ -355,12 +355,40 @@ bool j1Map::LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set)
 
 bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 {
-	bool ret = true;
+	/*bool ret = true;
 
 	layer->name = node.attribute("name").as_string();
 	layer->width = node.attribute("width").as_int();
 	layer->height = node.attribute("height").as_int();
+	
 	pugi::xml_node layer_data = node.child("data");
+
+	const char* aux = node.child("properties").child("property").attribute("name").as_string();
+
+	if (strcmp(aux, "speed") == 0)
+		layer->speed = node.child("properties").child("property").attribute("value").as_float();
+
+	layer->data = new uint[layer->width*layer->height];
+
+	memset(layer->data, 0, layer->width*layer->height);
+	int i = 0;
+	for (pugi::xml_node iterator = layer_data.child("tile"); iterator; iterator = iterator.next_sibling("tile"))
+	{
+		layer->data[i] = iterator.attribute("gid").as_uint();
+		i++;
+	}*/
+
+	bool ret = true;
+	
+	layer->height = node.attribute("height").as_int();
+	layer->width = node.attribute("width").as_int();
+	layer->name = node.attribute("name").as_string();
+	pugi::xml_node layer_data = node.child("data");
+
+	const char* aux = node.child("properties").child("property").attribute("name").as_string();
+
+	if (strcmp(aux, "speed") == 0)
+		layer->speed = node.child("properties").child("property").attribute("value").as_float();
 
 	if (layer_data == NULL)
 	{
@@ -372,13 +400,53 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 	{
 		layer->data = new uint[layer->width*layer->height];
 		memset(layer->data, 0, layer->width*layer->height);
-
 		int i = 0;
 		for (pugi::xml_node tile = layer_data.child("tile"); tile; tile = tile.next_sibling("tile"))
 		{
-			layer->data[i++] = tile.attribute("gid").as_int(0);
+			layer->data[i++] = tile.attribute("gid").as_int();
 		}
+		
 	}
 
-	return ret;
+	return ret = true;
+}
+
+COLLISION_TYPE j1Map::CheckCollision(int x) const
+{
+	p2List_item<MapLayer*>* layer_colliders = data.layers.end;
+
+	switch (layer_colliders->data->data[x])
+	{
+	default:
+		break;
+
+	case 25:
+		return COLLISION_TYPE::GROUND;
+		break;
+
+	case 26:
+		return COLLISION_TYPE::DEATH;
+		break;
+
+	case 34:
+		return COLLISION_TYPE::WIN;
+		break;
+	}
+
+	return COLLISION_TYPE::AIR;
+}
+
+iPoint j1Map::TileToWorld(int gid) const
+{
+	iPoint pos;
+	p2List_item<MapLayer*>* layer = this->data.layers.start;
+
+	float x = (float)gid / layer->data->width;
+	pos.y = x;
+	pos.x = (x - pos.y) * layer->data->width;
+
+	pos.x *= data.tilesets.start->data->tile_width;
+	pos.y *= data.tilesets.start->data->tile_height;
+
+	return pos;
 }

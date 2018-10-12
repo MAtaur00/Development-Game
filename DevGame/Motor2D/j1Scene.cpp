@@ -21,10 +21,19 @@ j1Scene::~j1Scene()
 {}
 
 // Called before render is available
-bool j1Scene::Awake()
+bool j1Scene::Awake(pugi::xml_node& config)
 {
 	LOG("Loading Scene");
 	bool ret = true;
+
+	for (pugi::xml_node map_node = config.child("maps"); map_node != nullptr; map_node = map_node.next_sibling("maps")) {
+
+		p2SString name = map_node.attribute("map").as_string();
+
+		MapsList_String.add(name);
+	}
+
+	CurrentMap = MapsList_String.start;
 
 	return ret;
 }
@@ -32,7 +41,7 @@ bool j1Scene::Awake()
 // Called before the first frame
 bool j1Scene::Start()
 {
-	App->map->Load("level1.tmx");
+	App->map->Load(CurrentMap->data);
 	return true;
 }
 
@@ -70,19 +79,27 @@ bool j1Scene::Update(float dt)
 	}
 	
 
+	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
+		LoadScene(1);
+	}
 
+	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN) {
+		LoadScene();
 
-	//FadeToBlack
+	}
 
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
-	{
-		App->fade->FadeToBlack(App->map, App->map,1.5f);
+	if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) {
+		App->SaveGame();
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) {
+		App->LoadGame();
 	}
 
 	//App->render->Blit(img, 0, 0);
 	App->map->Draw();
 
-	// TODO 7: Set the window title like
+	// Window title
 	// "Map:%dx%d Tiles:%dx%d Tilesets:%d"
 	p2SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d",
 		App->map->data.width, App->map->data.height,
@@ -109,5 +126,66 @@ bool j1Scene::CleanUp()
 {
 	LOG("Freeing scene");
 
+	return true;
+}
+
+bool j1Scene::LoadScene(int map) {
+
+	App->map->CleanUp();
+	App->tex->FreeTextures();
+	App->player->LoadTexture();
+
+	if (map == -1) {
+
+		if (CurrentMap->next != nullptr)
+			CurrentMap = CurrentMap->next;
+		else
+			CurrentMap = MapsList_String.start;
+	}
+	else {
+		CurrentMap = MapsList_String.start;
+		for (int i = 1; i < map; i++) {
+			if (CurrentMap->next != nullptr)
+				CurrentMap = CurrentMap->next;
+
+			else
+				break;
+		}
+
+	}
+	App->map->Load(CurrentMap->data.GetString());
+
+	App->player->FindPlayerSpawn();
+	App->player->SpawnPlayer();
+
+	return true;
+}
+
+// Load
+bool j1Scene::Load(pugi::xml_node&  savegame) {
+	currmap = savegame.child("Map").attribute("CurrentMap").as_int();
+
+	App->map->CleanUp();
+
+	switch (currmap)
+	{
+	case 1:
+		App->map->Load("Map1.tmx");
+		break;
+	case 2:
+		App->map->Load("Map2.tmx");
+		break;
+	default:
+		break;
+	}
+	return true;
+}
+
+//Save
+bool j1Scene::Save(pugi::xml_node& data) const {
+
+	pugi::xml_node cam = data.append_child("Map");
+
+	cam.append_attribute("CurrentMap") = currmap;
 	return true;
 }
