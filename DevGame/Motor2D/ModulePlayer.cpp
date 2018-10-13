@@ -5,6 +5,7 @@
 #include "j1Input.h"
 #include "j1Map.h"
 #include "j1Scene.h"
+#include "j1Audio.h"
 
 
 ModulePlayer::ModulePlayer()
