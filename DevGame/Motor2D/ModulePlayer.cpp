@@ -77,7 +77,7 @@ ModulePlayer::ModulePlayer()
 	slide_right.PushBack({ 221,130,34,17 });
 	slide_right.PushBack({ 271,130,34,17 });
 	slide_right.PushBack({ 325,130,30,17 });
-	slide_right.speed = 0.1f;
+	slide_right.speed = 0.01f;
 	slide_right.loop = true;
 
 	//slide left animation
@@ -89,6 +89,19 @@ ModulePlayer::ModulePlayer()
 	slide_left.speed = 0.1f;
 	slide_left.loop = true;
 
+	//fall right animation
+	
+	fall_right.PushBack({ 84,112,17,31 });
+	fall_right.PushBack({ 134,112,17,31 });
+	fall_right.speed = 0.1f;
+	fall_right.loop = true;
+
+	//fall left animation
+
+	fall_left.PushBack({ 281,1094,17,31 });
+	fall_left.PushBack({ 247,1094,17,31 });
+	fall_left.speed = 0.1f;
+	fall_left.loop = true;
 
 
 	////jumping right animation
@@ -206,6 +219,23 @@ bool ModulePlayer::Update(float dt)
 			else if (looking_right)
 				animation = &running_right;
 		}
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_C) == KEY_REPEAT)
+	{
+		tempPos = playerData.pos;
+
+		tempPos.x += playerData.speed;
+
+		if (CheckCollision(GetPlayerTile({ tempPos.x + playerData.player_width, tempPos.y })) == COLLISION_TYPE::AIR
+			&& CheckCollision(GetPlayerTile({ tempPos.x + playerData.player_width, tempPos.y + playerData.player_height })) == COLLISION_TYPE::AIR)
+		{
+			playerData.pos.x = tempPos.x;
+			animation = &slide_right;
+		}
+
+		looking_left = false;
+		looking_right = true;
 	}
 
 	App->render->Blit(texture, playerData.pos.x, playerData.pos.y, &animation->GetCurrentFrame());

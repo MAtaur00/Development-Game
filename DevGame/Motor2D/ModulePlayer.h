@@ -79,6 +79,8 @@ public:
 	Animation die_left = Animation();
 	Animation slide_right = Animation();
 	Animation slide_left = Animation();
+	Animation fall_right = Animation();
+	Animation fall_left = Animation();
 
 	PlayerData playerData;
 
