@@ -75,6 +75,12 @@ public:
 	Animation running_left = Animation();
 	Animation jumping_right = Animation();
 	Animation jumping_left = Animation();
+	Animation die_right = Animation();
+	Animation die_left = Animation();
+	Animation slide_right = Animation();
+	Animation slide_left = Animation();
+	Animation fall_right = Animation();
+	Animation fall_left = Animation();
 
 	PlayerData playerData;
 
