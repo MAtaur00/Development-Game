@@ -33,7 +33,7 @@ struct PlayerData
 
 	fPoint pos;
 
-	float speed = 350.0f;
+	float speed = 600.0f;
 	float jumpSpeed = 800.0f;
 
 	ANIMATION_STATE anim_state;

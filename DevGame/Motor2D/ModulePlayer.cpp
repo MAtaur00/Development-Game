@@ -16,7 +16,7 @@ ModulePlayer::ModulePlayer()
 	idle_right.PushBack({ 79, 6, 21, 30 });
 	idle_right.PushBack({ 129, 6, 21, 30 });
 	idle_right.PushBack({ 179, 6, 21, 30 });
-	idle_right.speed = 0.05f;
+	idle_right.speed = 0.1f;
 	idle_right.loop = true;
 
 	//idle left animation
@@ -24,7 +24,7 @@ ModulePlayer::ModulePlayer()
 	idle_left.PushBack({ 282, 988, 21, 30 });
 	idle_left.PushBack({ 232, 988, 21, 30 });
 	idle_left.PushBack({ 182, 988, 21, 30 });
-	idle_left.speed = 0.05f;
+	idle_left.speed = 0.1f;
 	idle_left.loop = true;
 
 	//running right animation
@@ -34,7 +34,7 @@ ModulePlayer::ModulePlayer()
 	running_right.PushBack({ 231, 45, 25, 28 });
 	running_right.PushBack({ 281, 45, 25, 28 });
 	running_right.PushBack({ 332, 45, 25, 28 });
-	running_right.speed = 0.05f;
+	running_right.speed = 0.1f;
 	running_right.loop = true;
 
 	//running left animation
@@ -44,7 +44,7 @@ ModulePlayer::ModulePlayer()
 	running_left.PushBack({ 126, 1027, 25, 28 });
 	running_left.PushBack({ 76, 1027, 25, 28 });
 	running_left.PushBack({ 25, 1027, 25, 28 });
-	running_left.speed = 0.05f;
+	running_left.speed = 0.1f;
 	running_left.loop = true;
 
 	////jumping right animation
