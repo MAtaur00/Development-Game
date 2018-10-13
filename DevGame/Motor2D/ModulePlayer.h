@@ -33,8 +33,9 @@ struct PlayerData
 
 	fPoint pos;
 
-	float speed = 600.0f;
-	float jumpSpeed = 800.0f;
+	float speed = 2.0f;
+	float jumpSpeed = 3.0f;
+	float gravity = 3.0f;
 
 	ANIMATION_STATE anim_state;
 };
@@ -50,8 +51,6 @@ public:
 	bool Update(float dt);
 	bool CleanUp();
 
-	void SpawnPLayer();
-
 	int GetPlayerTile(fPoint pos) const;
 
 	COLLISION_TYPE CheckCollision(int x) const;
@@ -59,6 +58,12 @@ public:
 	bool Load(pugi::xml_node& data);
 
 	bool Save(pugi::xml_node& data) const;
+
+	void LoadTexture();
+
+	void FindPlayerSpawn();
+
+	void SpawnPLayer();
 
 public:
 
@@ -81,6 +86,8 @@ public:
 
 	bool looking_right = false;
 	bool looking_left = false;
+
+	p2Point<int> spawn;
 
 	SDL_Texture* texture = nullptr;
 

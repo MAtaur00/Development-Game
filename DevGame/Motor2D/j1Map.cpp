@@ -382,3 +382,18 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 
 	return ret;
 }
+
+iPoint j1Map::TileToWorld(int gid) const
+{
+	iPoint pos;
+	p2List_item<MapLayer*>* layer = this->data.layers.start;
+
+	float x = (float)gid / layer->data->width;
+	pos.y = x;
+	pos.x = (x - pos.y) * layer->data->width;
+
+	pos.x *= data.tilesets.start->data->tile_width;
+	pos.y *= data.tilesets.start->data->tile_height;
+
+	return pos;
+}
