@@ -47,6 +47,50 @@ ModulePlayer::ModulePlayer()
 	running_left.speed = 0.1f;
 	running_left.loop = true;
 
+	//die right animation
+	
+	die_right.PushBack({ 33,334,19,24 });
+	die_right.PushBack({ 81,345,19,24 });
+	die_right.PushBack({ 132,345,22,24 });
+	die_right.PushBack({ 184,345,18,24 });
+	die_right.PushBack({ 237,345,15,24 });
+	die_right.PushBack({ 284,345,18,24 });
+	die_right.speed = 0.1f;
+	die_right.loop = false;
+
+
+	//die left animation
+
+	die_left.PushBack({ 330,1327,19,24 });
+	die_left.PushBack({ 282,1326,19,24 });
+	die_left.PushBack({ 249,1327,22,24 });
+	die_left.PushBack({ 180,1327,18,24 });
+	die_left.PushBack({ 130,1327,15,24 });
+	die_left.PushBack({ 80,1327,18,24 });
+	die_left.speed = 0.1f;
+	die_left.loop = false;
+
+
+	//slide right animation
+
+	slide_right.PushBack({ 171,130,34,17 });
+	slide_right.PushBack({ 221,130,34,17 });
+	slide_right.PushBack({ 271,130,34,17 });
+	slide_right.PushBack({ 325,130,30,17 });
+	slide_right.speed = 0.1f;
+	slide_right.loop = true;
+
+	//slide left animation
+
+	slide_left.PushBack({ 177,1112,34,17 });
+	slide_left.PushBack({ 127,1112,34,17 });
+	slide_left.PushBack({  77,1112,34,17 });
+	slide_left.PushBack({  27,1112,30,17 });
+	slide_left.speed = 0.1f;
+	slide_left.loop = true;
+
+
+
 	////jumping right animation
 	//jumping_right.PushBack({ 17, 126, 36, 38 });
 	//jumping_right.PushBack({ 17, 126, 36, 38 });
