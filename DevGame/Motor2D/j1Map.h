@@ -13,7 +13,6 @@ struct MapLayer
 	int			width;
 	int			height;
 	uint*		data;
-	float		speed;
 
 	MapLayer() : data(NULL)
 	{}
@@ -58,15 +57,6 @@ enum MapTypes
 	MAPTYPE_ISOMETRIC,
 	MAPTYPE_STAGGERED
 };
-
-enum COLLISION_TYPE
-{
-	GROUND,
-	AIR,
-	DEATH,
-	WIN
-};
-
 // ----------------------------------------------------
 struct MapData
 {
@@ -100,14 +90,11 @@ public:
 	bool CleanUp();
 
 	// Load new map
-	bool Load(p2SString path);
+	bool Load(const char* path);
 
 	// Coordinate translation methods
 	iPoint MapToWorld(int x, int y) const;
 	iPoint WorldToMap(int x, int y) const;
-	iPoint TileToWorld(int gid) const;
-
-	COLLISION_TYPE CheckCollision(int x) const;
 
 private:
 

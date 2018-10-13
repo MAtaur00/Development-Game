@@ -2,21 +2,8 @@
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="150" height="20" tilewidth="32" tileheight="32" nextobjectid="1">
  <tileset firstgid="1" name="platformertiles" tilewidth="32" tileheight="32" tilecount="48" columns="8">
   <image source="platformertiles.png" width="256" height="192"/>
-  <tile id="24">
-   <properties>
-    <property name="Wall" type="bool" value="true"/>
-   </properties>
-  </tile>
-  <tile id="25">
-   <properties>
-    <property name="Death" type="bool" value="true"/>
-   </properties>
-  </tile>
  </tileset>
  <layer name="Background" width="150" height="20">
-  <properties>
-   <property name="speed" type="float" value="0.7"/>
-  </properties>
   <data>
    <tile gid="20"/>
    <tile gid="20"/>
@@ -3021,9 +3008,6 @@
   </data>
  </layer>
  <layer name="Map" width="150" height="20">
-  <properties>
-   <property name="speed" type="float" value="1"/>
-  </properties>
   <data>
    <tile gid="11"/>
    <tile gid="0"/>
@@ -6028,9 +6012,6 @@
   </data>
  </layer>
  <layer name="Colliders" width="150" height="20" opacity="0.3">
-  <properties>
-   <property name="speed" type="float" value="1"/>
-  </properties>
   <data>
    <tile gid="25"/>
    <tile gid="0"/>
@@ -7381,7 +7362,7 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="34"/>
+   <tile gid="0"/>
    <tile gid="25"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -7483,6 +7464,7 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="25"/>
+   <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -7531,7 +7513,6 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="34"/>
    <tile gid="25"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -7681,7 +7662,7 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="34"/>
+   <tile gid="0"/>
    <tile gid="25"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -8133,7 +8114,7 @@
    <tile gid="25"/>
    <tile gid="25"/>
    <tile gid="25"/>
-   <tile gid="27"/>
+   <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>

@@ -7,7 +7,7 @@
   </app>
 	
   <renderer>
-    <vsync value="true"/>
+    <vsync value="false"/>
   </renderer>
 
   <window>
@@ -25,10 +25,5 @@
   <map>
     <folder>maps/</folder>
   </map>
-
-  <scene>
-    <maps map ="Map1.tmx"></maps>
-    <maps map ="Map2.tmx"></maps>
-  </scene>
 
 </config>
