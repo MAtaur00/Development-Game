@@ -45,11 +45,13 @@ void j1Map::Draw()
 					SDL_Rect rect = tileset_pointer->data->GetTileRect(layer_pointer->data->Get(x, y));
 					iPoint coordinates = MapToWorld(x, y);
 					if (layer_pointer->data->name == "Background") {
-						App->render->Blit(tileset_pointer->data->texture, coordinates.x, coordinates.y, &rect, 0.7f);
+						App->render->Blit(tileset_pointer->data->texture, coordinates.x, coordinates.y, &rect, layer_pointer->data->speed);
 					}
 					else if (layer_pointer->data->name == "Map") {
-						App->render->Blit(tileset_pointer->data->texture, coordinates.x, coordinates.y, &rect, 1.0f);
+						App->render->Blit(tileset_pointer->data->texture, coordinates.x, coordinates.y, &rect);
 					}
+					else if (layer_pointer->data->name == "Colliders" && draw_logic)
+						App->render->Blit(tileset_pointer->data->texture, coordinates.x, coordinates.y, &rect);
 				}
 			}
 		}
@@ -361,6 +363,11 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 	layer->width = node.attribute("width").as_int();
 	layer->height = node.attribute("height").as_int();
 	pugi::xml_node layer_data = node.child("data");
+
+	const char* aux = node.child("properties").child("property").attribute("name").as_string();
+
+	if (strcmp(aux, "speed") == 0)
+		layer->speed = node.child("properties").child("property").attribute("value").as_float();
 
 	if (layer_data == NULL)
 	{

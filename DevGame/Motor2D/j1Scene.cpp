@@ -77,23 +77,36 @@ bool j1Scene::Update(float dt)
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) {
-		App->SaveGame();
+		App->SaveGame("save_game.xml");
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) {
-		App->LoadGame();
+		App->LoadGame("save_game.xml");
 	}
+
+	if (App->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN) {
+		App->map->draw_logic = !App->map->draw_logic;
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN) {
+		App->player->god_mode = !App->player->god_mode;
+	}
+
+	int camera_speed = 2;
+
+	if (App->player->god_mode)
+		camera_speed = 4;
 
 	if (App->player->playerData.pos.x - (-App->render->camera.x + (1 * App->render->camera.w / 2)) >= 0) 
 	{
 		if (App->render->camera.x - App->render->camera.w > -(App->map->data.width*App->map->data.tile_width))
-			App->render->camera.x -= 2;
+			App->render->camera.x -= camera_speed;
 	}
 
 	if (App->player->playerData.pos.x - (-App->render->camera.x + (1 * App->render->camera.w / 2)) <= 0) 
 	{
 		if (App->render->camera.x < 0)
-			App->render->camera.x += 2;
+			App->render->camera.x += camera_speed;
 	}
 	
 
@@ -145,14 +158,15 @@ bool j1Scene::LoadScene(int map)
 	App->tex->FreeTextures();
 	App->player->LoadTexture();
 
-	/*if (map == -1) {
+	if (map == 3) {
 
 		if (CurrentMap->next != nullptr)
 			CurrentMap = CurrentMap->next;
 		else
 			CurrentMap = MapsList_String.start;
-	}*/
-	if (map != -1) {
+	}
+	else if (map != -1) 
+	{
 		CurrentMap = MapsList_String.start;
 		for (int i = 1; i < map; i++) {
 			if (CurrentMap->next != nullptr)

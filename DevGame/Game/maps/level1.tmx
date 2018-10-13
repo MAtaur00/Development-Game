@@ -4,6 +4,9 @@
   <image source="platformertiles.png" width="256" height="192"/>
  </tileset>
  <layer name="Background" width="150" height="20">
+  <properties>
+   <property name="speed" type="float" value="0.7"/>
+  </properties>
   <data>
    <tile gid="20"/>
    <tile gid="20"/>
@@ -6162,8 +6165,8 @@
    <tile gid="25"/>
    <tile gid="25"/>
    <tile gid="25"/>
+   <tile gid="34"/>
    <tile gid="25"/>
-   <tile gid="25"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -6308,11 +6311,11 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="25"/>
    <tile gid="25"/>
    <tile gid="25"/>
    <tile gid="25"/>
    <tile gid="25"/>
+   <tile gid="34"/>
    <tile gid="25"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -6462,8 +6465,8 @@
    <tile gid="25"/>
    <tile gid="25"/>
    <tile gid="25"/>
+   <tile gid="34"/>
    <tile gid="25"/>
-   <tile gid="25"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -6608,11 +6611,11 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="25"/>
    <tile gid="25"/>
    <tile gid="25"/>
    <tile gid="25"/>
    <tile gid="25"/>
+   <tile gid="34"/>
    <tile gid="25"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -6762,8 +6765,8 @@
    <tile gid="25"/>
    <tile gid="25"/>
    <tile gid="25"/>
+   <tile gid="34"/>
    <tile gid="25"/>
-   <tile gid="25"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -6908,11 +6911,11 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="25"/>
    <tile gid="25"/>
    <tile gid="25"/>
    <tile gid="25"/>
    <tile gid="25"/>
+   <tile gid="34"/>
    <tile gid="25"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -7062,8 +7065,8 @@
    <tile gid="25"/>
    <tile gid="25"/>
    <tile gid="25"/>
+   <tile gid="34"/>
    <tile gid="25"/>
-   <tile gid="25"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -7208,11 +7211,11 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="25"/>
    <tile gid="25"/>
    <tile gid="25"/>
    <tile gid="25"/>
    <tile gid="25"/>
+   <tile gid="34"/>
    <tile gid="25"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -7812,8 +7815,8 @@
    <tile gid="25"/>
    <tile gid="25"/>
    <tile gid="25"/>
+   <tile gid="34"/>
    <tile gid="25"/>
-   <tile gid="25"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -7962,8 +7965,8 @@
    <tile gid="25"/>
    <tile gid="25"/>
    <tile gid="25"/>
+   <tile gid="34"/>
    <tile gid="25"/>
-   <tile gid="25"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -8105,7 +8108,6 @@
    <tile gid="0"/>
    <tile gid="25"/>
    <tile gid="0"/>
-   <tile gid="25"/>
    <tile gid="25"/>
    <tile gid="25"/>
    <tile gid="25"/>
@@ -8113,6 +8115,7 @@
    <tile gid="25"/>
    <tile gid="25"/>
    <tile gid="25"/>
+   <tile gid="34"/>
    <tile gid="25"/>
    <tile gid="27"/>
    <tile gid="0"/>
@@ -8262,6 +8265,7 @@
    <tile gid="25"/>
    <tile gid="25"/>
    <tile gid="25"/>
+   <tile gid="34"/>
    <tile gid="25"/>
    <tile gid="25"/>
    <tile gid="25"/>
@@ -8270,7 +8274,6 @@
    <tile gid="25"/>
    <tile gid="25"/>
    <tile gid="25"/>
-   <tile gid="25"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="25"/>
@@ -8412,6 +8415,7 @@
    <tile gid="25"/>
    <tile gid="25"/>
    <tile gid="25"/>
+   <tile gid="34"/>
    <tile gid="25"/>
    <tile gid="25"/>
    <tile gid="25"/>
@@ -8420,7 +8424,6 @@
    <tile gid="25"/>
    <tile gid="25"/>
    <tile gid="25"/>
-   <tile gid="25"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -8555,7 +8558,6 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="25"/>
    <tile gid="25"/>
    <tile gid="25"/>
    <tile gid="25"/>
@@ -8563,6 +8565,7 @@
    <tile gid="25"/>
    <tile gid="25"/>
    <tile gid="25"/>
+   <tile gid="34"/>
    <tile gid="25"/>
    <tile gid="25"/>
    <tile gid="25"/>
@@ -8712,6 +8715,7 @@
    <tile gid="25"/>
    <tile gid="25"/>
    <tile gid="25"/>
+   <tile gid="34"/>
    <tile gid="25"/>
    <tile gid="25"/>
    <tile gid="25"/>
@@ -8720,7 +8724,6 @@
    <tile gid="25"/>
    <tile gid="25"/>
    <tile gid="25"/>
-   <tile gid="25"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -8862,6 +8865,7 @@
    <tile gid="25"/>
    <tile gid="25"/>
    <tile gid="25"/>
+   <tile gid="34"/>
    <tile gid="25"/>
    <tile gid="25"/>
    <tile gid="25"/>
@@ -8870,7 +8874,6 @@
    <tile gid="25"/>
    <tile gid="25"/>
    <tile gid="25"/>
-   <tile gid="25"/>
    <tile gid="26"/>
    <tile gid="26"/>
    <tile gid="26"/>
@@ -9005,7 +9008,6 @@
    <tile gid="26"/>
    <tile gid="26"/>
    <tile gid="26"/>
-   <tile gid="25"/>
    <tile gid="25"/>
    <tile gid="25"/>
    <tile gid="25"/>
@@ -9013,6 +9015,7 @@
    <tile gid="25"/>
    <tile gid="25"/>
    <tile gid="25"/>
+   <tile gid="34"/>
   </data>
  </layer>
 </map>

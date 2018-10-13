@@ -28,9 +28,6 @@ enum ANIMATION_STATE
 struct PlayerData 
 {
 
-	int player_width = 25;
-	int player_height = 30;
-
 	fPoint pos;
 
 	float speed = 2.0f;
@@ -81,6 +78,8 @@ public:
 	Animation slide_left = Animation();
 	Animation fall_right = Animation();
 	Animation fall_left = Animation();
+	Animation wall_slide_right = Animation();
+	Animation wall_slide_left = Animation();
 
 	PlayerData playerData;
 
@@ -88,9 +87,12 @@ public:
 
 	bool is_jumping;
 	bool is_falling;
+	bool can_jump;
 
 	bool looking_right = false;
 	bool looking_left = false;
+
+	bool god_mode = false;
 
 	p2Point<int> spawn;
 

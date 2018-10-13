@@ -13,6 +13,7 @@ struct MapLayer
 	int			width;
 	int			height;
 	uint*		data;
+	float		speed;
 
 	MapLayer() : data(NULL)
 	{}
@@ -107,6 +108,8 @@ private:
 public:
 
 	MapData data;
+
+	bool draw_logic = false;
 
 private:
 

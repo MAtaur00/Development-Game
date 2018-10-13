@@ -16,7 +16,7 @@ ModulePlayer::ModulePlayer()
 	idle_right.PushBack({ 79, 6, 21, 30 });
 	idle_right.PushBack({ 129, 6, 21, 30 });
 	idle_right.PushBack({ 179, 6, 21, 30 });
-	idle_right.speed = 0.1f;
+	idle_right.speed = 0.05f;
 	idle_right.loop = true;
 
 	//idle left animation
@@ -24,7 +24,7 @@ ModulePlayer::ModulePlayer()
 	idle_left.PushBack({ 282, 988, 21, 30 });
 	idle_left.PushBack({ 232, 988, 21, 30 });
 	idle_left.PushBack({ 182, 988, 21, 30 });
-	idle_left.speed = 0.1f;
+	idle_left.speed = 0.05f;
 	idle_left.loop = true;
 
 	//running right animation
@@ -99,7 +99,7 @@ ModulePlayer::ModulePlayer()
 	//fall left animation
 
 	fall_left.PushBack({ 281,1094,17,31 });
-	fall_left.PushBack({ 247,1094,17,31 });
+	fall_left.PushBack({ 231,1094,17,31 });
 	fall_left.speed = 0.1f;
 	fall_left.loop = true;
 
@@ -113,11 +113,10 @@ ModulePlayer::ModulePlayer()
 	jumping_left.PushBack({  78, 1061, 24, 27 });
 	jumping_left.PushBack({  28, 1061, 18, 27 });
 	jumping_left.PushBack({ 329, 1106, 26, 27 });
-	jumping_left.speed = 0.1f;
-	jumping_left.loop = true;
+	jumping_left.speed = 0.2f;
+	jumping_left.loop = false;
 
 	//jumping right animation
-	
 	jumping_right.PushBack({ 31, 79, 20, 27 });
 	jumping_right.PushBack({ 81, 79, 20, 27 });
 	jumping_right.PushBack({ 133, 79, 19, 27 });
@@ -126,8 +125,17 @@ ModulePlayer::ModulePlayer()
 	jumping_right.PushBack({ 280, 79, 24, 27 });
 	jumping_right.PushBack({ 336, 79, 18, 27 });
 	jumping_right.PushBack({ 27, 124, 26, 27 });
-	jumping_right.speed = 0.1f;
-	jumping_right.loop = true;
+	jumping_right.speed = 0.2f;
+	jumping_right.loop = false;
+
+	//wall slide right animation
+	wall_slide_right.PushBack({ 182, 409, 17, 32 });
+	wall_slide_right.PushBack({ 132, 409, 17, 32 });
+
+	//wall slide left animation
+	wall_slide_left.PushBack({ 183, 1391, 17, 32 });
+	wall_slide_left.PushBack({ 233, 1391, 17, 32 });
+
 
 }
 ModulePlayer::~ModulePlayer() {}
@@ -150,109 +158,164 @@ bool ModulePlayer::Update(float dt)
 	else if (looking_left)
 		animation = &idle_left;
 
+	float falling_speed = playerData.gravity;
+	if (can_jump)
+		falling_speed -= 1.5;
+
 	fPoint tempPos = playerData.pos;
 
-	tempPos.y += playerData.gravity;
-
-	if (CheckCollision(GetPlayerTile({ tempPos.x + 5, tempPos.y + playerData.player_height })) == COLLISION_TYPE::AIR 
-		&& CheckCollision(GetPlayerTile({ tempPos.x + 10, tempPos.y + playerData.player_height })) == COLLISION_TYPE::AIR
-		&& is_jumping == false)
+	tempPos.y += falling_speed;
+	
+	// numbers in CheckCollision calls are there to avoid the character from levitating in a border (collision looks cleaner)
+	if (god_mode == false)
 	{
-		is_falling = true;
-		playerData.pos = tempPos;
-	}
-
-	if (CheckCollision(GetPlayerTile({ tempPos.x + 5, tempPos.y + playerData.player_height })) == COLLISION_TYPE::DEATH
-		&& CheckCollision(GetPlayerTile({ tempPos.x + 10, tempPos.y + playerData.player_height })) == COLLISION_TYPE::DEATH)
-	{
-		SpawnPLayer();
-		App->render->camera.x = 0;
-	}
-	is_falling = false;
-
-
-	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-	{
-		tempPos = playerData.pos;
-
-		tempPos.x += playerData.speed;
-
-		if (CheckCollision(GetPlayerTile({ tempPos.x + playerData.player_width, tempPos.y })) == COLLISION_TYPE::AIR
-			&& CheckCollision(GetPlayerTile({ tempPos.x + playerData.player_width, tempPos.y + playerData.player_height })) == COLLISION_TYPE::AIR)
+		if (CheckCollision(GetPlayerTile({ tempPos.x + 5, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::AIR
+			&& CheckCollision(GetPlayerTile({ tempPos.x + 10, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::AIR
+			&& is_jumping == false)
 		{
-			playerData.pos.x = tempPos.x;
-			if (is_falling == false)
-				animation = &running_right;
-		}	
-
-		looking_left = false;
-		looking_right = true;
-	}
-
-	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
-	{
-		tempPos = playerData.pos;
-
-		tempPos.x -= playerData.speed;
-
-		if (CheckCollision(GetPlayerTile({ tempPos.x, tempPos.y })) == COLLISION_TYPE::AIR
-			&& CheckCollision(GetPlayerTile({ tempPos.x, tempPos.y + playerData.player_height })) == COLLISION_TYPE::AIR)
+			can_jump = false;
+			is_falling = true;
+			playerData.pos = tempPos;
+			if (looking_left && can_jump == false)
+				animation = &fall_left;
+			else if (looking_right && can_jump == false)
+				animation = &fall_right;
+		}
+		else
 		{
-			playerData.pos.x = tempPos.x;
-			if (is_falling == false)
-				animation = &running_left;
+			is_falling = false;
+			can_jump = true;
 		}
 
-		looking_left = true;
-		looking_right = false;
-	}
-
-	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN && is_jumping == false)
-	{
-		is_jumping = true;
-		cont = 0;
-	}
-	if (is_jumping)
-	{
-		tempPos = playerData.pos;
-
-		tempPos.y -= playerData.jumpSpeed;
-
-		if (CheckCollision(GetPlayerTile({ tempPos.x + 5, tempPos.y })) == COLLISION_TYPE::AIR
-			&& CheckCollision(GetPlayerTile({ tempPos.x + 10, tempPos.y })) == COLLISION_TYPE::AIR)
+		if (CheckCollision(GetPlayerTile({ tempPos.x + 5, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::DEATH
+			&& CheckCollision(GetPlayerTile({ tempPos.x + 10, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::DEATH)
 		{
-			playerData.pos.y = tempPos.y;
-			if (looking_left)
-				animation = &jumping_left;
-			else if (looking_right)
-				animation = &jumping_right;
-		}
-	}
-
-	if (App->input->GetKey(SDL_SCANCODE_C) == KEY_REPEAT)
-	{
-		tempPos = playerData.pos;
-
-		tempPos.x += playerData.speed;
-
-		if (CheckCollision(GetPlayerTile({ tempPos.x + playerData.player_width, tempPos.y })) == COLLISION_TYPE::AIR
-			&& CheckCollision(GetPlayerTile({ tempPos.x + playerData.player_width, tempPos.y + playerData.player_height })) == COLLISION_TYPE::AIR)
-		{
-			playerData.pos.x = tempPos.x;
-			animation = &slide_right;
-		}
-		if (cont == 35)
-		{
-			is_jumping = false;
+			SpawnPLayer();
 		}
 
-		looking_left = false;
-		looking_right = true;
-	}
 
+		if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+		{
+			tempPos = playerData.pos;
+
+			tempPos.x += playerData.speed;
+
+			if (CheckCollision(GetPlayerTile({ tempPos.x + animation->GetCurrentFrame().w, tempPos.y })) == COLLISION_TYPE::AIR
+				&& CheckCollision(GetPlayerTile({ tempPos.x + animation->GetCurrentFrame().w, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::AIR)
+			{
+				playerData.pos.x = tempPos.x;
+				if (is_falling == false)
+					animation = &running_right;
+			}
+			else if (CheckCollision(GetPlayerTile({ tempPos.x + animation->GetCurrentFrame().w, tempPos.y })) == COLLISION_TYPE::GROUND
+				&& CheckCollision(GetPlayerTile({ tempPos.x + animation->GetCurrentFrame().w, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::GROUND
+				&& is_falling)
+			{
+				animation = &wall_slide_right;
+				can_jump = true;
+			}
+			else if (CheckCollision(GetPlayerTile({ tempPos.x + animation->GetCurrentFrame().w, tempPos.y })) == COLLISION_TYPE::WIN
+				&& CheckCollision(GetPlayerTile({ tempPos.x + animation->GetCurrentFrame().w, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::WIN)
+			{
+				App->scene->LoadScene(3); //with number 3 LoadScene loads the next map
+			}
+
+			looking_left = false;
+			looking_right = true;
+		}
+
+		if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+		{
+			tempPos = playerData.pos;
+
+			tempPos.x -= playerData.speed;
+
+			if (CheckCollision(GetPlayerTile({ tempPos.x, tempPos.y })) == COLLISION_TYPE::AIR
+				&& CheckCollision(GetPlayerTile({ tempPos.x, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::AIR)
+			{
+				playerData.pos.x = tempPos.x;
+				if (is_falling == false)
+					animation = &running_left;
+			}
+			else if (CheckCollision(GetPlayerTile({ tempPos.x, tempPos.y })) == COLLISION_TYPE::GROUND
+				&& CheckCollision(GetPlayerTile({ tempPos.x, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::GROUND
+				&& is_falling)
+			{
+				animation = &wall_slide_left;
+				can_jump = true;
+			}
+
+			looking_left = true;
+			looking_right = false;
+		}
+
+		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN && is_jumping == false && can_jump)
+		{
+			can_jump = false;
+			jumping_left.Reset();
+			jumping_right.Reset();
+			is_jumping = true;
+			cont = 0;
+		}
+		if (is_jumping)
+		{
+			tempPos = playerData.pos;
+
+			tempPos.y -= playerData.jumpSpeed;
+
+			if (CheckCollision(GetPlayerTile({ tempPos.x + 5, tempPos.y })) == COLLISION_TYPE::AIR
+				&& CheckCollision(GetPlayerTile({ tempPos.x + 10, tempPos.y })) == COLLISION_TYPE::AIR)
+			{
+				playerData.pos.y = tempPos.y;
+				if (looking_left)
+					animation = &jumping_left;
+				else if (looking_right)
+					animation = &jumping_right;
+			}
+			if (cont == 35)
+			{
+				is_jumping = false;
+			}
+		}
+
+		if (App->input->GetKey(SDL_SCANCODE_C) == KEY_REPEAT)
+		{
+			tempPos = playerData.pos;
+
+			tempPos.x += playerData.speed;
+
+			if (CheckCollision(GetPlayerTile({ tempPos.x + animation->GetCurrentFrame().w, tempPos.y })) == COLLISION_TYPE::AIR
+				&& CheckCollision(GetPlayerTile({ tempPos.x + animation->GetCurrentFrame().w, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::AIR)
+			{
+				playerData.pos.x = tempPos.x;
+				animation = &slide_right;
+			}
+
+			looking_left = false;
+			looking_right = true;
+		}
+
+	}
+	else 
+	{
+		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+			playerData.pos.y -= 4;
+		if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+			playerData.pos.y += 4;
+		if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+		{
+			playerData.pos.x += 4;
+			if (CheckCollision(GetPlayerTile({ tempPos.x + animation->GetCurrentFrame().w, tempPos.y })) == COLLISION_TYPE::WIN
+				&& CheckCollision(GetPlayerTile({ tempPos.x + animation->GetCurrentFrame().w, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::WIN)
+			{
+				App->scene->LoadScene(3); //with number 3 LoadScene loads the next map
+			}
+		}
+		if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+			playerData.pos.x -= 4;
+	}
 	App->render->Blit(texture, playerData.pos.x, playerData.pos.y, &animation->GetCurrentFrame());
 	cont++;
-
 	return true;
 }
 
@@ -310,6 +373,10 @@ COLLISION_TYPE ModulePlayer::CheckCollision(int x) const
 	case 26:
 		return COLLISION_TYPE::DEATH;
 		break;
+
+	case 34:
+		return COLLISION_TYPE::WIN;
+		break;
 	}
 	
 
@@ -332,4 +399,5 @@ void ModulePlayer::SpawnPLayer()
 {
 	playerData.pos.x = spawn.x;
 	playerData.pos.y = spawn.y;
+	App->render->camera.x = 0;
 }
