@@ -104,33 +104,30 @@ ModulePlayer::ModulePlayer()
 	fall_left.loop = true;
 
 
-	////jumping right animation
-	//jumping_right.PushBack({ 17, 126, 36, 38 });
-	//jumping_right.PushBack({ 17, 126, 36, 38 });
-	//jumping_right.PushBack({ 17, 126, 36, 38 });
-	//jumping_right.PushBack({ 17, 126, 36, 38 });
-	//jumping_right.PushBack({ 17, 126, 36, 38 });
-	//jumping_right.PushBack({ 17, 126, 36, 38 });
-	//jumping_right.PushBack({ 17, 126, 36, 38 });
-	//jumping_right.PushBack({ 17, 126, 36, 38 });
-	//jumping_right.PushBack({ 17, 126, 36, 38 });
-	//jumping_right.PushBack({ 17, 126, 36, 38 });
-	//jumping_right.speed = 0.05f;
-	//jumping_right.loop = false;
+	//jumping left animation
+	jumping_left.PushBack({ 331, 1061, 20, 27 });
+	jumping_left.PushBack({ 281, 1061, 20, 27 });
+	jumping_left.PushBack({ 230, 1061, 19, 27 });
+	jumping_left.PushBack({ 181, 1061, 21, 27 });
+	jumping_left.PushBack({ 133, 1061, 15, 27 });
+	jumping_left.PushBack({  78, 1061, 24, 27 });
+	jumping_left.PushBack({  28, 1061, 18, 27 });
+	jumping_left.PushBack({ 329, 1106, 26, 27 });
+	jumping_left.speed = 0.1f;
+	jumping_left.loop = true;
 
-	////jumping left animation
-	//jumping_left.PushBack({ 405, 121, 35, 38 });
-	//jumping_left.PushBack({ 405, 121, 35, 38 });
-	//jumping_left.PushBack({ 405, 121, 35, 38 });
-	//jumping_left.PushBack({ 405, 121, 35, 38 });
-	//jumping_left.PushBack({ 405, 121, 35, 38 });
-	//jumping_left.PushBack({ 405, 121, 35, 38 });
-	//jumping_left.PushBack({ 405, 121, 35, 38 });
-	//jumping_left.PushBack({ 405, 121, 35, 38 });
-	//jumping_left.PushBack({ 405, 121, 35, 38 });
-	//jumping_left.PushBack({ 405, 121, 35, 38 });
-	//jumping_left.speed = 0.05f;
-	//jumping_left.loop = false;
+	//jumping right animation
+	
+	jumping_right.PushBack({ 31, 79, 20, 27 });
+	jumping_right.PushBack({ 81, 79, 20, 27 });
+	jumping_right.PushBack({ 133, 79, 19, 27 });
+	jumping_right.PushBack({ 180, 79, 21, 27 });
+	jumping_right.PushBack({ 234, 79, 15, 27 });
+	jumping_right.PushBack({ 280, 79, 24, 27 });
+	jumping_right.PushBack({ 336, 79, 18, 27 });
+	jumping_right.PushBack({ 27, 124, 26, 27 });
+	jumping_right.speed = 0.1f;
+	jumping_right.loop = true;
 
 }
 ModulePlayer::~ModulePlayer() {}
@@ -215,9 +212,9 @@ bool ModulePlayer::Update(float dt)
 		{
 			playerData.pos.y = tempPos.y;
 			if (looking_left)
-				animation = &running_left;
+				animation = &jumping_left;
 			else if (looking_right)
-				animation = &running_right;
+				animation = &jumping_right;
 		}
 	}
 
