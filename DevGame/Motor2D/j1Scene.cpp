@@ -43,6 +43,9 @@ bool j1Scene::Awake(pugi::xml_node& config)
 bool j1Scene::Start()
 {
 	App->map->Load(CurrentMap->data);
+	App->audio->PlayMusic("audio/music/Mushroom_Theme.ogg");
+	
+
 	return true;
 }
 
