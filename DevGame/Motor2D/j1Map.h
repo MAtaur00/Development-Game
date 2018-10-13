@@ -90,7 +90,7 @@ public:
 	bool CleanUp();
 
 	// Load new map
-	bool Load(const char* path);
+	bool Load(const char* file_name);
 
 	// Coordinate translation methods
 	iPoint MapToWorld(int x, int y) const;
@@ -107,8 +107,6 @@ private:
 public:
 
 	MapData data;
-
-	fPoint initial_position = {35, 448};
 
 private:
 

@@ -15,7 +15,7 @@ public:
 	virtual ~j1Scene();
 
 	// Called before render is available
-	bool Awake();
+	bool Awake(pugi::xml_node& config);
 
 	// Called before the first frame
 	bool Start();
@@ -32,7 +32,20 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	// Load
+	bool Load(pugi::xml_node& savegame);
+
+	bool LoadScene(int map = -1);
+
+	//Save
+	bool Save(pugi::xml_node& data) const;
+
+	int currmap = 1;
+
 private:
+
+	p2List<const char*>  MapsList_String;
+	p2List_item<const char*>* CurrentMap = nullptr;
 };
 
 #endif // __j1SCENE_H__

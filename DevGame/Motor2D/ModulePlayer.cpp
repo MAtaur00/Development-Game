@@ -84,6 +84,7 @@ bool ModulePlayer::Start()
 
 	FindPlayerSpawn();
 	SpawnPLayer();
+	is_jumping = false;
 	looking_right = true;
 	return true;
 }
@@ -100,8 +101,10 @@ bool ModulePlayer::Update(float dt)
 	tempPos.y += playerData.gravity;
 
 	if (CheckCollision(GetPlayerTile({ tempPos.x + 5, tempPos.y + playerData.player_height })) == COLLISION_TYPE::AIR 
-		&& CheckCollision(GetPlayerTile({ tempPos.x + 10, tempPos.y + playerData.player_height })) == COLLISION_TYPE::AIR)
+		&& CheckCollision(GetPlayerTile({ tempPos.x + 10, tempPos.y + playerData.player_height })) == COLLISION_TYPE::AIR
+		&& is_jumping == false)
 	{
+		is_falling = true;
 		playerData.pos = tempPos;
 	}
 
@@ -111,6 +114,7 @@ bool ModulePlayer::Update(float dt)
 		SpawnPLayer();
 		App->render->camera.x = 0;
 	}
+	is_falling = false;
 
 
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
@@ -123,7 +127,8 @@ bool ModulePlayer::Update(float dt)
 			&& CheckCollision(GetPlayerTile({ tempPos.x + playerData.player_width, tempPos.y + playerData.player_height })) == COLLISION_TYPE::AIR)
 		{
 			playerData.pos.x = tempPos.x;
-			animation = &running_right;
+			if (is_falling == false)
+				animation = &running_right;
 		}	
 
 		looking_left = false;
@@ -140,21 +145,27 @@ bool ModulePlayer::Update(float dt)
 			&& CheckCollision(GetPlayerTile({ tempPos.x, tempPos.y + playerData.player_height })) == COLLISION_TYPE::AIR)
 		{
 			playerData.pos.x = tempPos.x;
-			animation = &running_left;
+			if (is_falling == false)
+				animation = &running_left;
 		}
 
 		looking_left = true;
 		looking_right = false;
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN && is_jumping == false)
+	{
+		is_jumping = true;
+		cont = 0;
+	}
+	if (is_jumping)
 	{
 		tempPos = playerData.pos;
 
 		tempPos.y -= playerData.jumpSpeed;
 
-		if (CheckCollision(GetPlayerTile({ tempPos.x + 5, tempPos.y})) == COLLISION_TYPE::AIR
-			&& CheckCollision(GetPlayerTile({ tempPos.x + 10, tempPos.y})) == COLLISION_TYPE::AIR)
+		if (CheckCollision(GetPlayerTile({ tempPos.x + 5, tempPos.y })) == COLLISION_TYPE::AIR
+			&& CheckCollision(GetPlayerTile({ tempPos.x + 10, tempPos.y })) == COLLISION_TYPE::AIR)
 		{
 			playerData.pos.y = tempPos.y;
 			if (looking_left)
@@ -162,9 +173,14 @@ bool ModulePlayer::Update(float dt)
 			else if (looking_right)
 				animation = &running_right;
 		}
+		if (cont == 35)
+		{
+			is_jumping = false;
+		}
 	}
 
 	App->render->Blit(texture, playerData.pos.x, playerData.pos.y, &animation->GetCurrentFrame());
+	cont++;
 
 	return true;
 }

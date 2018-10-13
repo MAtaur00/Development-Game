@@ -34,7 +34,7 @@ struct PlayerData
 	fPoint pos;
 
 	float speed = 2.0f;
-	float jumpSpeed = 3.0f;
+	float jumpSpeed = 2.0f;
 	float gravity = 3.0f;
 
 	ANIMATION_STATE anim_state;
@@ -78,7 +78,10 @@ public:
 
 	PlayerData playerData;
 
-	fPoint initial_pos;
+	int cont = 0;
+
+	bool is_jumping;
+	bool is_falling;
 
 	bool looking_right = false;
 	bool looking_left = false;
