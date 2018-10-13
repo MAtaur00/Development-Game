@@ -80,9 +80,10 @@ ModulePlayer::~ModulePlayer() {}
 
 bool ModulePlayer::Start()
 {
-	texture = App->tex->Load("textures/Player/player_spritesheet.png");
+	LoadTexture();
 
-	playerData.pos = App->map->initial_position;
+	FindPlayerSpawn();
+	SpawnPLayer();
 	looking_right = true;
 	return true;
 }
@@ -93,11 +94,10 @@ bool ModulePlayer::Update(float dt)
 		animation = &idle_right;
 	else if (looking_left)
 		animation = &idle_left;
-	dt = float(1) / 60;
 
 	fPoint tempPos = playerData.pos;
 
-	tempPos.y += dt * 80;
+	tempPos.y += playerData.gravity;
 
 	if (CheckCollision(GetPlayerTile({ tempPos.x + 5, tempPos.y + playerData.player_height })) == COLLISION_TYPE::AIR 
 		&& CheckCollision(GetPlayerTile({ tempPos.x + 10, tempPos.y + playerData.player_height })) == COLLISION_TYPE::AIR)
@@ -108,7 +108,7 @@ bool ModulePlayer::Update(float dt)
 	if (CheckCollision(GetPlayerTile({ tempPos.x + 5, tempPos.y + playerData.player_height })) == COLLISION_TYPE::DEATH
 		&& CheckCollision(GetPlayerTile({ tempPos.x + 10, tempPos.y + playerData.player_height })) == COLLISION_TYPE::DEATH)
 	{
-		playerData.pos = App->map->initial_position;
+		SpawnPLayer();
 		App->render->camera.x = 0;
 	}
 
@@ -117,12 +117,12 @@ bool ModulePlayer::Update(float dt)
 	{
 		tempPos = playerData.pos;
 
-		tempPos.x += dt * 75;
+		tempPos.x += playerData.speed;
 
 		if (CheckCollision(GetPlayerTile({ tempPos.x + playerData.player_width, tempPos.y })) == COLLISION_TYPE::AIR
 			&& CheckCollision(GetPlayerTile({ tempPos.x + playerData.player_width, tempPos.y + playerData.player_height })) == COLLISION_TYPE::AIR)
 		{
-			playerData.pos.x += dt * 75;
+			playerData.pos.x = tempPos.x;
 			animation = &running_right;
 		}	
 
@@ -134,12 +134,12 @@ bool ModulePlayer::Update(float dt)
 	{
 		tempPos = playerData.pos;
 
-		tempPos.x -= dt * 75;
+		tempPos.x -= playerData.speed;
 
 		if (CheckCollision(GetPlayerTile({ tempPos.x, tempPos.y })) == COLLISION_TYPE::AIR
 			&& CheckCollision(GetPlayerTile({ tempPos.x, tempPos.y + playerData.player_height })) == COLLISION_TYPE::AIR)
 		{
-			playerData.pos.x -= dt * 75;
+			playerData.pos.x = tempPos.x;
 			animation = &running_left;
 		}
 
@@ -151,12 +151,12 @@ bool ModulePlayer::Update(float dt)
 	{
 		tempPos = playerData.pos;
 
-		tempPos.y -= dt * 200;
+		tempPos.y -= playerData.jumpSpeed;
 
 		if (CheckCollision(GetPlayerTile({ tempPos.x + 5, tempPos.y})) == COLLISION_TYPE::AIR
 			&& CheckCollision(GetPlayerTile({ tempPos.x + 10, tempPos.y})) == COLLISION_TYPE::AIR)
 		{
-			playerData.pos.y -= dt * 200;
+			playerData.pos.y = tempPos.y;
 			if (looking_left)
 				animation = &running_left;
 			else if (looking_right)
@@ -193,6 +193,11 @@ bool ModulePlayer::Save(pugi::xml_node& data) const
 	return true;
 }
 
+void ModulePlayer::LoadTexture()
+{
+	texture = App->tex->Load("textures/Player/player_spritesheet.png");
+}
+
 int ModulePlayer::GetPlayerTile(fPoint pos) const
 {
 	iPoint position = App->map->WorldToMap(pos.x, pos.y);
@@ -222,4 +227,22 @@ COLLISION_TYPE ModulePlayer::CheckCollision(int x) const
 	
 
 	return COLLISION_TYPE::AIR;
+}
+
+void ModulePlayer::FindPlayerSpawn()
+{
+	p2List_item<MapLayer*>* layer = App->map->data.layers.end;
+	for (int i = 0; i < (layer->data->width * layer->data->height); i++)
+	{
+		if (layer->data->data[i] == 27)
+		{
+			spawn = App->map->TileToWorld(i);
+		}
+	}
+}
+
+void ModulePlayer::SpawnPLayer()
+{
+	playerData.pos.x = spawn.x;
+	playerData.pos.y = spawn.y;
 }
