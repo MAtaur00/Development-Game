@@ -220,7 +220,7 @@ bool ModulePlayer::Update(float dt)
 			{
 				App->scene->LoadScene(); //with number 0, LoadScene 
 			}
-
+			
 			looking_left = false;
 			looking_right = true;
 		}
@@ -230,11 +230,11 @@ bool ModulePlayer::Update(float dt)
 			tempPos = playerData.pos;
 
 			tempPos.x -= playerData.speed;
-
 			if (CheckCollision(GetPlayerTile({ tempPos.x, tempPos.y })) == COLLISION_TYPE::AIR
 				&& CheckCollision(GetPlayerTile({ tempPos.x, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::AIR)
 			{
-				playerData.pos.x = tempPos.x;
+				if (tempPos.x >= App->render->camera.x)
+					playerData.pos.x = tempPos.x;
 				if (is_falling == false)
 					animation = &running_left;
 			}
@@ -245,7 +245,6 @@ bool ModulePlayer::Update(float dt)
 				animation = &wall_slide_left;
 				can_jump = true;
 			}
-
 			looking_left = true;
 			looking_right = false;
 		}
@@ -263,11 +262,11 @@ bool ModulePlayer::Update(float dt)
 			tempPos = playerData.pos;
 
 			tempPos.y -= playerData.jumpSpeed;
-
 			if (CheckCollision(GetPlayerTile({ tempPos.x + 5, tempPos.y })) == COLLISION_TYPE::AIR
 				&& CheckCollision(GetPlayerTile({ tempPos.x + 10, tempPos.y })) == COLLISION_TYPE::AIR)
 			{
-				playerData.pos.y = tempPos.y;
+				if (tempPos.y >= App->render->camera.y)
+					playerData.pos.y = tempPos.y;
 				if (looking_left)
 					animation = &jumping_left;
 				else if (looking_right)
