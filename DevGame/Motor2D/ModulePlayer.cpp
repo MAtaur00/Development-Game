@@ -137,14 +137,15 @@ ModulePlayer::ModulePlayer()
 	wall_slide_left.PushBack({ 183, 1391, 17, 32 });
 	wall_slide_left.PushBack({ 233, 1391, 17, 32 });
 
-
+	/*App->audio->fx.add[1] = App->audio->LoadFx("audio/fx/JumpFx.wav");
+	App->audio->fx.add[2] = App->audio->LoadFx("audio/fx/HurtFx.wav");*/
 }
 ModulePlayer::~ModulePlayer() {}
 
 bool ModulePlayer::Start()
 {
 	LoadTexture();
-
+	App->audio->LoadFx("audio/fx/JumpFx.wav");
 	FindPlayerSpawn();
 	SpawnPLayer();
 	is_jumping = false;
@@ -251,6 +252,7 @@ bool ModulePlayer::Update(float dt)
 
 		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN && is_jumping == false && can_jump)
 		{
+			App->audio->PlayFx(1);
 			can_jump = false;
 			jumping_left.Reset();
 			jumping_right.Reset();
@@ -278,7 +280,7 @@ bool ModulePlayer::Update(float dt)
 			}
 		}
 
-		if (App->input->GetKey(SDL_SCANCODE_C) == KEY_REPEAT)
+		/*if (App->input->GetKey(SDL_SCANCODE_C) == KEY_REPEAT)
 		{
 			tempPos = playerData.pos;
 
@@ -294,7 +296,7 @@ bool ModulePlayer::Update(float dt)
 			looking_left = false;
 			looking_right = true;
 		}
-
+		*/
 	}
 	else 
 	{
