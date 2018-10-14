@@ -378,8 +378,7 @@ COLLISION_TYPE ModulePlayer::CheckCollision(int x) const
 	case 34:
 		return COLLISION_TYPE::WIN;
 		break;
-	}
-	
+	}	
 
 	return COLLISION_TYPE::AIR;
 }
