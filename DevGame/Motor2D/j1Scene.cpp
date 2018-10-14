@@ -64,8 +64,11 @@ bool j1Scene::Update(float dt)
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN) {
-		LoadScene();
+		LoadScene(0);
+	}
 
+	if (App->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN) {
+		LoadScene();
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) {
@@ -122,6 +125,7 @@ bool j1Scene::Update(float dt)
 		App->map->data.tilesets.count());
 
 	App->win->SetTitle(title.GetString());
+
 	return true;
 }
 
@@ -149,20 +153,28 @@ bool j1Scene::LoadScene(int map)
 	App->tex->FreeTextures();
 	App->player->LoadTexture();
 
-	if (map == 3) {
+	if (map == -1) {
 
 		if (CurrentMap->next != nullptr)
+		{
 			CurrentMap = CurrentMap->next;
+			currmap++;
+		}
 		else
+		{
 			CurrentMap = MapsList_String.start;
+			currmap = 1;
+		}
 	}
-	else if (map != -1) 
+	else if (map > 0) 
 	{
 		CurrentMap = MapsList_String.start;
 		for (int i = 1; i < map; i++) {
 			if (CurrentMap->next != nullptr)
+			{
 				CurrentMap = CurrentMap->next;
-
+				currmap = map;
+			}
 			else
 				break;
 		}
@@ -184,10 +196,10 @@ bool j1Scene::Load(pugi::xml_node&  savegame) {
 	switch (currmap)
 	{
 	case 1:
-		App->map->Load("Map1.tmx");
+		App->map->Load("level1.tmx");
 		break;
 	case 2:
-		App->map->Load("Map2.tmx");
+		App->map->Load("Level2.tmx");
 		break;
 	default:
 		break;
@@ -198,8 +210,8 @@ bool j1Scene::Load(pugi::xml_node&  savegame) {
 //Save
 bool j1Scene::Save(pugi::xml_node& data) const {
 
-	pugi::xml_node cam = data.append_child("Map");
+	pugi::xml_node map = data.append_child("Map");
 
-	cam.append_attribute("CurrentMap") = currmap;
+	map.append_attribute("CurrentMap") = currmap;
 	return true;
 }

@@ -218,7 +218,7 @@ bool ModulePlayer::Update(float dt)
 			else if (CheckCollision(GetPlayerTile({ tempPos.x + animation->GetCurrentFrame().w, tempPos.y })) == COLLISION_TYPE::WIN
 				&& CheckCollision(GetPlayerTile({ tempPos.x + animation->GetCurrentFrame().w, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::WIN)
 			{
-				App->scene->LoadScene(3); //with number 3 LoadScene loads the next map
+				App->scene->LoadScene(); //with number 0, LoadScene 
 			}
 
 			looking_left = false;
@@ -328,15 +328,15 @@ bool ModulePlayer::CleanUp()
 
 bool ModulePlayer::Load(pugi::xml_node& data)
 {
-	playerData.pos.x = data.child("pos").attribute("x").as_float();
-	playerData.pos.y = data.child("pos").attribute("y").as_float();
+	playerData.pos.x = data.child("position").attribute("x").as_float();
+	playerData.pos.y = data.child("position").attribute("y").as_float();
 
 	return true;
 }
 
 bool ModulePlayer::Save(pugi::xml_node& data) const
 {
-	pugi::xml_node position = data.append_child("pos");
+	pugi::xml_node position = data.append_child("position");
 
 	position.append_attribute("x") = (float)playerData.pos.x;
 	position.append_attribute("y") = (float)playerData.pos.y;

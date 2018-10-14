@@ -298,11 +298,11 @@ bool j1App::LoadGameNow()
 	pugi::xml_document data;
 	pugi::xml_node root;
 
-	pugi::xml_parse_result result = data.load_file(load_game.GetString());
+	pugi::xml_parse_result result = data.load_file("save_file.xml");
 
 	if (result != NULL)
 	{
-		LOG("Loading new Game State from %s...", load_game.GetString());
+		LOG("Loading new Game State from %s...", "save_file.xml");
 
 		root = data.child("game_state");
 
@@ -322,7 +322,7 @@ bool j1App::LoadGameNow()
 			LOG("...loading process interrupted with error on module %s", (item != NULL) ? item->data->name.GetString() : "unknown");
 	}
 	else
-		LOG("Could not parse game state xml file %s. pugi error: %s", load_game.GetString(), result.description());
+		LOG("Could not parse game state xml file %s. pugi error: %s", "save_file.xml", result.description());
 
 	want_to_load = false;
 	return ret;
@@ -332,7 +332,7 @@ bool j1App::SavegameNow() const
 {
 	bool ret = true;
 
-	LOG("Saving Game State to %s...", save_game.GetString());
+	LOG("Saving Game State to %s...", "save_game.xml");
 
 	// xml object were we will store all data
 	pugi::xml_document data;
@@ -350,7 +350,7 @@ bool j1App::SavegameNow() const
 
 	if(ret == true)
 	{
-		data.save_file(save_game.GetString());
+		data.save_file("save_game.xml");
 		LOG("... finished saving", );
 	}
 	else
