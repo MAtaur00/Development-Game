@@ -298,11 +298,11 @@ bool j1App::LoadGameNow()
 	pugi::xml_document data;
 	pugi::xml_node root;
 
-	pugi::xml_parse_result result = data.load_file("save_file.xml");
+	pugi::xml_parse_result result = data.load_file("save_game.xml");
 
 	if (result != NULL)
 	{
-		LOG("Loading new Game State from %s...", "save_file.xml");
+		LOG("Loading new Game State from %s...", "save_game.xml");
 
 		root = data.child("game_state");
 
