@@ -85,6 +85,9 @@ bool j1Scene::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN) {
 		App->player->god_mode = !App->player->god_mode;
+		App->player->is_falling = true;
+		App->player->is_jumping = false;
+
 	}
 
 	int camera_speed = 2;

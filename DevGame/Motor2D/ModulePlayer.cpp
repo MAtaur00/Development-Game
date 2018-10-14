@@ -6,6 +6,7 @@
 #include "j1Map.h"
 #include "j1Scene.h"
 #include "j1Audio.h"
+#include "j1Window.h"
 
 
 ModulePlayer::ModulePlayer()
@@ -169,11 +170,10 @@ bool ModulePlayer::Update(float dt)
 
 	fPoint tempPos = playerData.pos;
 
-	tempPos.y += falling_speed;
-	
 	// numbers in CheckCollision calls are there to avoid the character from levitating in a border (collision looks cleaner)
 	if (god_mode == false)
 	{
+		tempPos.y += falling_speed;
 		if (CheckCollision(GetPlayerTile({ tempPos.x + 5, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::AIR
 			&& CheckCollision(GetPlayerTile({ tempPos.x + 10, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::AIR
 			&& is_jumping == false)
@@ -305,20 +305,33 @@ bool ModulePlayer::Update(float dt)
 	else 
 	{
 		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
-			playerData.pos.y -= 4;
+		{
+			tempPos.y -= 4;
+			if (tempPos.y >= App->render->camera.y)
+				playerData.pos.y -= 4;
+		}
 		if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
-			playerData.pos.y += 4;
+		{
+			tempPos.y += 4;
+			if (tempPos.y + animation->GetCurrentFrame().h <= App->render->camera.y + App->win->height)
+				playerData.pos.y += 4;
+		}
 		if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		{
 			playerData.pos.x += 4;
+			animation = &running_right;
 			if (CheckCollision(GetPlayerTile({ tempPos.x + animation->GetCurrentFrame().w, tempPos.y })) == COLLISION_TYPE::WIN
 				&& CheckCollision(GetPlayerTile({ tempPos.x + animation->GetCurrentFrame().w, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::WIN)
 			{
-				App->scene->LoadScene(3); //with number 3 LoadScene loads the next map
+				App->scene->LoadScene(); //with number 3 LoadScene loads the next map
 			}
 		}
 		if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
-			playerData.pos.x -= 4;
+		{
+			if (tempPos.x >= App->render->camera.x)
+				playerData.pos.x -= 4;
+			animation = &running_left;
+		}
 	}
 	App->render->Blit(texture, playerData.pos.x, playerData.pos.y, &animation->GetCurrentFrame());
 	cont++;

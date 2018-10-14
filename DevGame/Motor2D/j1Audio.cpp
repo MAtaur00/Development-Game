@@ -2,6 +2,7 @@
 #include "p2Log.h"
 #include "j1Audio.h"
 #include "p2List.h"
+#include "j1App.h"
 
 #include "SDL/include/SDL.h"
 #include "SDL_mixer\include\SDL_mixer.h"
@@ -83,6 +84,8 @@ bool j1Audio::CleanUp()
 bool j1Audio::PlayMusic(const char* path, float fade_time)
 {
 	bool ret = true;
+
+	Mix_VolumeMusic(App->config.child("audio").child("volume_music").attribute("value").as_int());
 
 	if(!active)
 		return false;
@@ -166,7 +169,9 @@ bool j1Audio::PlayFx(unsigned int id, int repeat)
 
 	if(id > 0 && id <= fx.count())
 	{
+		
 		Mix_PlayChannel(-1, fx[id - 1], repeat);
+		Mix_VolumeChunk(Mix_GetChunk(id - 1), App->config.child("audio").child("volume_fx").attribute("value").as_int());
 	}
 
 	return ret;

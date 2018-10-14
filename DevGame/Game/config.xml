@@ -5,7 +5,12 @@
     <title>Game Development Testbed</title>
     <organization>UPC</organization>
   </app>
-	
+
+  <audio>
+    <volume_fx value ="30"/>
+    <volume_music value ="20"/>
+  </audio>
+  
   <renderer>
     <vsync value="true"/>
   </renderer>
