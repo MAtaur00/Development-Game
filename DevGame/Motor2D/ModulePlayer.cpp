@@ -137,6 +137,7 @@ ModulePlayer::ModulePlayer()
 	wall_slide_left.PushBack({ 183, 1391, 17, 32 });
 	wall_slide_left.PushBack({ 233, 1391, 17, 32 });
 
+
 	/*App->audio->fx.add[1] = App->audio->LoadFx("audio/fx/JumpFx.wav");
 	App->audio->fx.add[2] = App->audio->LoadFx("audio/fx/HurtFx.wav");*/
 }
@@ -146,6 +147,8 @@ bool ModulePlayer::Start()
 {
 	LoadTexture();
 	App->audio->LoadFx("audio/fx/JumpFx.wav");
+	App->audio->LoadFx("audio/fx/HurtFx.wav");
+
 	FindPlayerSpawn();
 	SpawnPLayer();
 	is_jumping = false;
@@ -192,6 +195,7 @@ bool ModulePlayer::Update(float dt)
 		if (CheckCollision(GetPlayerTile({ tempPos.x + 5, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::DEATH
 			&& CheckCollision(GetPlayerTile({ tempPos.x + 10, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::DEATH)
 		{
+			App->audio->PlayFx(2);
 			SpawnPLayer();
 		}
 
