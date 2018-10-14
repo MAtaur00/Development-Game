@@ -23,6 +23,10 @@ This game is a platformer game where you will have to reach the end of the two l
 
 * F10 God Mode
 
+## Innovation
+
+* Player can slide down walls while falling and he can jump again while sliding.
+
 ## Controls
 
 * Left and Right arrows to move.
@@ -37,6 +41,9 @@ This game is a platformer game where you will have to reach the end of the two l
 **Aitor Vélez Tolosa:** [AitorVelez](https://github.com/AitorVelez)
  
 ## Credits
+
+* Map art: https://opengameart.org/content/dirt-platformer-tiles
+* Character art: https://rvros.itch.io/animated-pixel-hero
 
 ## License
 
