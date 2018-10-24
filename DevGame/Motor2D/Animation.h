@@ -41,7 +41,7 @@ public:
 		return loops > 0;
 	}
 	bool ResetLoops() {
-		loops = true;
+		loops = 0;
 		return loops;
 	}
 

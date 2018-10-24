@@ -80,14 +80,27 @@ public:
 	Animation fall_left = Animation();
 	Animation wall_slide_right = Animation();
 	Animation wall_slide_left = Animation();
+	Animation punch_right = Animation();
+	Animation punch_barrage_right = Animation();
+	Animation kick_right = Animation();
+	Animation double_kick_right = Animation();
+	Animation punch_left = Animation();
+	Animation punch_barrage_left = Animation();
+	Animation kick_left = Animation();
+	Animation double_kick_left = Animation();
 
 	PlayerData playerData;
 
 	int cont = 0;
-
+	int timer_second_punch = 0;
+	
+	bool is_punching = false;
+	bool is_kicking = false;
 	bool is_jumping;
 	bool is_falling;
 	bool can_jump;
+
+	bool ability_boost = false;
 
 	bool looking_right = false;
 	bool looking_left = false;

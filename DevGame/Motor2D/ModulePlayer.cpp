@@ -133,10 +133,97 @@ ModulePlayer::ModulePlayer()
 	//wall slide right animation
 	wall_slide_right.PushBack({ 182, 409, 17, 32 });
 	wall_slide_right.PushBack({ 132, 409, 17, 32 });
+	wall_slide_right.speed = 0.2f;
+	wall_slide_left.loop = true;
 
 	//wall slide left animation
 	wall_slide_left.PushBack({ 183, 1391, 17, 32 });
 	wall_slide_left.PushBack({ 233, 1391, 17, 32 });
+	wall_slide_left.speed = 0.2f;
+	wall_slide_left.loop = true;
+
+	//punch right animation
+	punch_right.PushBack({ 275, 614, 34, 24 });
+	punch_right.PushBack({ 326, 614, 34, 24 });
+	punch_right.speed = 0.15f;
+	punch_right.loop = false;
+
+	//punch barrage right animation
+	punch_barrage_right.PushBack({ 25, 613, 34, 25 });
+	punch_barrage_right.PushBack({ 75, 613, 34, 25 });
+	punch_barrage_right.PushBack({ 127, 613, 34, 25 });
+	punch_barrage_right.PushBack({ 177, 613, 34, 25 });
+	punch_barrage_right.PushBack({ 225, 613, 34, 25 });
+	punch_barrage_right.PushBack({ 275, 613, 34, 25 });
+	punch_barrage_right.PushBack({ 326, 613, 34, 25 });
+	punch_barrage_right.PushBack({ 25, 613, 34, 25 });
+	punch_barrage_right.PushBack({ 75, 613, 34, 25 });
+	punch_barrage_right.PushBack({ 127, 613, 34, 25 });
+	/*punch_barrage_right.PushBack({ 26, 650, 34, 25 });
+	punch_barrage_right.PushBack({ 75, 650, 34, 25 });
+	punch_barrage_right.PushBack({ 125, 650, 34, 25 });
+	punch_barrage_right.PushBack({ 177, 650, 34, 25 });*/
+	punch_barrage_right.speed = 0.15f;
+	punch_barrage_right.loop = false;
+
+	//kick right animation
+	kick_right.PushBack({ 29, 725, 30, 24 });
+	kick_right.PushBack({ 79, 725, 30, 24 });
+	kick_right.speed = 0.15f;
+	kick_right.loop = false;
+
+	//double kick right animation
+	double_kick_right.PushBack({ 29, 723, 35, 26 });
+	double_kick_right.PushBack({ 79, 723, 35, 26 });
+	double_kick_right.PushBack({ 129, 723, 35, 26 });
+	double_kick_right.PushBack({ 174, 723, 35, 26 });
+	double_kick_right.PushBack({ 225, 723, 35, 26 });
+	double_kick_right.PushBack({ 274, 723, 35, 26 });
+	double_kick_right.PushBack({ 323, 723, 35, 26 });
+	double_kick_right.speed = 0.15f;
+	double_kick_right.loop = false;
+
+	//punch left animation
+	punch_left.PushBack({ 73, 1596, 34, 24 });
+	punch_left.PushBack({ 22, 1596, 34, 24 });
+	punch_left.speed = 0.15f;
+	punch_left.loop = false;
+
+	//punch barrage left animation
+	punch_barrage_left.PushBack({ 318, 1595, 34, 25 });
+	punch_barrage_left.PushBack({ 273, 1595, 34, 25 });
+	punch_barrage_left.PushBack({ 221, 1595, 34, 25 });
+	punch_barrage_left.PushBack({ 171, 1595, 34, 25 });
+	punch_barrage_left.PushBack({ 123, 1595, 34, 25 });
+	punch_barrage_left.PushBack({ 73, 1595, 34, 25 });
+	punch_barrage_left.PushBack({ 22, 1595, 34, 25 });
+	punch_barrage_left.PushBack({ 318, 1595, 34, 25 });
+	punch_barrage_left.PushBack({ 273, 1595, 34, 25 });
+	punch_barrage_left.PushBack({ 221, 1595, 34, 25 });
+	/*punch_barrage_left.PushBack({ 322, 1632, 34, 25 });
+	punch_barrage_left.PushBack({ 273, 1595, 34, 25 });
+	punch_barrage_left.PushBack({ 223, 1595, 34, 25 });
+	punch_barrage_left.PushBack({ 171, 1595, 34, 25 });*/
+	punch_barrage_left.speed = 0.15f;
+	punch_barrage_left.loop = false;
+
+	//kick left animation
+	kick_left.PushBack({ 317, 1707, 35, 24 });
+	kick_left.PushBack({ 268, 1707, 35, 24 });
+	kick_left.speed = 0.15f;
+	kick_left.loop = false;
+
+	//double kick left animation
+	double_kick_left.PushBack({ 317, 1705, 35, 26 });
+	double_kick_left.PushBack({ 268, 1705, 35, 26 });
+	double_kick_left.PushBack({ 218, 1705, 35, 26 });
+	double_kick_left.PushBack({ 169, 1705, 35, 26 });
+	double_kick_left.PushBack({ 122, 1705, 35, 26 });
+	double_kick_left.PushBack({ 73, 1705, 35, 26 });
+	double_kick_left.PushBack({ 23, 1705, 35, 26 });
+	double_kick_left.speed = 0.15f;
+	double_kick_left.loop = false;
+
 
 
 	/*App->audio->fx.add[1] = App->audio->LoadFx("audio/fx/JumpFx.wav");
@@ -159,6 +246,7 @@ bool ModulePlayer::Start()
 
 bool ModulePlayer::Update(float dt)
 {
+
 	if (looking_right)
 		animation = &idle_right;
 	else if (looking_left)
@@ -173,6 +261,7 @@ bool ModulePlayer::Update(float dt)
 	// numbers in CheckCollision calls are there to avoid the character from levitating in a border (collision looks cleaner)
 	if (god_mode == false)
 	{
+		// GRAVITY
 		tempPos.y += falling_speed;
 		if (CheckCollision(GetPlayerTile({ tempPos.x + 5, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::AIR
 			&& CheckCollision(GetPlayerTile({ tempPos.x + 10, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::AIR
@@ -198,9 +287,10 @@ bool ModulePlayer::Update(float dt)
 			App->audio->PlayFx(2);
 			SpawnPLayer();
 		}
+		//--------------------------------
 
-
-		if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+		// MOVEMENT RIGHT
+		if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT && !is_punching && !is_kicking)
 		{
 			tempPos = playerData.pos;
 
@@ -229,8 +319,10 @@ bool ModulePlayer::Update(float dt)
 			looking_left = false;
 			looking_right = true;
 		}
+		//--------------------------------
 
-		if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+		// MOVEMENT LEFT
+		if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT && !is_punching && !is_kicking)
 		{
 			tempPos = playerData.pos;
 
@@ -253,8 +345,10 @@ bool ModulePlayer::Update(float dt)
 			looking_left = true;
 			looking_right = false;
 		}
+		//--------------------------------
 
-		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN && is_jumping == false && can_jump)
+		// JUMP
+		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN && is_jumping == false && can_jump && !is_punching && !is_kicking)
 		{
 			App->audio->PlayFx(1);
 			can_jump = false;
@@ -283,6 +377,7 @@ bool ModulePlayer::Update(float dt)
 				is_jumping = false;
 			}
 		}
+		//--------------------------------
 
 		/*if (App->input->GetKey(SDL_SCANCODE_C) == KEY_REPEAT)
 		{
@@ -304,18 +399,25 @@ bool ModulePlayer::Update(float dt)
 	}
 	else 
 	{
+		// MOVEMENT UP
 		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 		{
 			tempPos.y -= 4;
 			if (tempPos.y >= App->render->camera.y)
 				playerData.pos.y -= 4;
 		}
+		//--------------------------------
+
+		// MOVEMENT DOWN
 		if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
 		{
 			tempPos.y += 4;
 			if (tempPos.y + animation->GetCurrentFrame().h <= App->render->camera.y + App->win->height)
 				playerData.pos.y += 4;
 		}
+		//--------------------------------
+
+		// MOVEMENT RIGHT
 		if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		{
 			playerData.pos.x += 4;
@@ -326,13 +428,96 @@ bool ModulePlayer::Update(float dt)
 				App->scene->LoadScene(); //with number 3 LoadScene loads the next map
 			}
 		}
+		//--------------------------------
+
+		// MOVEMENT LEFT
 		if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 		{
 			if (tempPos.x >= App->render->camera.x)
 				playerData.pos.x -= 4;
 			animation = &running_left;
 		}
+		//--------------------------------
 	}
+	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
+		ability_boost = true;
+
+	// PUNCHES
+	if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN && is_punching == false)
+	{
+		is_punching = true;	
+		punch_right.Reset();
+		punch_right.ResetLoops();
+		punch_left.Reset();
+		punch_left.ResetLoops();
+		punch_barrage_right.Reset();
+		punch_barrage_right.ResetLoops();
+		punch_barrage_left.Reset();
+		punch_barrage_left.ResetLoops();
+	}
+	if (is_punching)
+	{
+		if (ability_boost)
+		{
+			if (looking_right && !looking_left)
+				animation = &punch_barrage_right;
+			else if (looking_left && !looking_right)
+				animation = &punch_barrage_left;
+		}
+		else
+		{ 
+			if (looking_right && !looking_left)
+				animation = &punch_right;
+			else if (looking_left && !looking_right)
+				animation = &punch_left;
+		}	
+
+		if (animation->Finished())
+		{
+			is_punching = false;	
+			ability_boost = false;
+		}
+	}
+	//--------------------------------
+
+	// KICKS
+	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && is_kicking == false)
+	{
+		is_kicking = true;
+		kick_right.Reset();
+		kick_right.ResetLoops();
+		kick_left.Reset();
+		kick_left.ResetLoops();
+		double_kick_right.Reset();
+		double_kick_right.ResetLoops();
+		double_kick_left.Reset();
+		double_kick_left.ResetLoops();
+	}
+	if (is_kicking)
+	{
+		if (ability_boost)
+		{
+			if (looking_right && !looking_left)
+				animation = &double_kick_right;
+			else if (looking_left && !looking_right)
+				animation = &double_kick_left;
+		}
+		else
+		{
+			if (looking_right && !looking_left)
+				animation = &kick_right;
+			else if (looking_left && !looking_right)
+				animation = &kick_left;
+		}
+
+		if (animation->Finished())
+		{
+			is_kicking = false;
+			ability_boost = false;
+		}
+	}
+	//--------------------------------
+
 	App->render->Blit(texture, playerData.pos.x, playerData.pos.y, &animation->GetCurrentFrame());
 	cont++;
 	return true;
