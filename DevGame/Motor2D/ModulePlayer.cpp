@@ -13,216 +13,267 @@ ModulePlayer::ModulePlayer()
 {
 	name.create("player");
 
-	//idle right animation
-	idle_right.PushBack({ 29, 6, 21, 30 });
-	idle_right.PushBack({ 79, 6, 21, 30 });
-	idle_right.PushBack({ 129, 6, 21, 30 });
-	idle_right.PushBack({ 179, 6, 21, 30 });
-	idle_right.speed = 0.05f;
-	idle_right.loop = true;
+	pugi::xml_document	config_file;
+	pugi::xml_node* node = &App->LoadEntities(config_file);
+	node = &node->child("player");
 
-	//idle left animation
-	idle_left.PushBack({ 332, 988, 21, 30 });
-	idle_left.PushBack({ 282, 988, 21, 30 });
-	idle_left.PushBack({ 232, 988, 21, 30 });
-	idle_left.PushBack({ 182, 988, 21, 30 });
-	idle_left.speed = 0.05f;
-	idle_left.loop = true;
+	for (pugi::xml_node animations = node->child("animations").child("animation"); animations; animations = animations.next_sibling("animation"))
+	{
+		std::string tmp(animations.attribute("name").as_string());
 
-	//running right animation
-	running_right.PushBack({ 82, 45, 25, 28 });
-	running_right.PushBack({ 132, 45, 25, 28 });
-	running_right.PushBack({ 182, 45, 25, 28 });
-	running_right.PushBack({ 231, 45, 25, 28 });
-	running_right.PushBack({ 281, 45, 25, 28 });
-	running_right.PushBack({ 332, 45, 25, 28 });
-	running_right.speed = 0.1f;
-	running_right.loop = true;
+		if (tmp == "idle_right")
+			LoadAnimation(animations, &idle_right);
+		else if (tmp == "idle_left")
+			LoadAnimation(animations, &idle_left);
+		else if (tmp == "running_right")
+			LoadAnimation(animations, &running_right);
+		else if (tmp == "running_left")
+			LoadAnimation(animations, &running_left);
+		else if (tmp == "die_right")
+			LoadAnimation(animations, &die_right);
+		else if (tmp == "die_left")
+			LoadAnimation(animations, &die_left);
+		else if (tmp == "slide_right")
+			LoadAnimation(animations, &slide_right);
+		else if (tmp == "slide_left")
+			LoadAnimation(animations, &slide_left);
+		else if (tmp == "fall_right")
+			LoadAnimation(animations, &fall_right);
+		else if (tmp == "fall_left")
+			LoadAnimation(animations, &fall_left);
+		else if (tmp == "jumping_right")
+			LoadAnimation(animations, &jumping_right);
+		else if (tmp == "jumping_left")
+			LoadAnimation(animations, &jumping_left);
+		else if (tmp == "wall_slide_right")
+			LoadAnimation(animations, &wall_slide_right);
+		else if (tmp == "wall_slide_left")
+			LoadAnimation(animations, &wall_slide_left);
+		else if (tmp == "punch_right")
+			LoadAnimation(animations, &punch_right);
+		else if (tmp == "punch_left")
+			LoadAnimation(animations, &punch_left);
+		else if (tmp == "punch_barrage_right")
+			LoadAnimation(animations, &punch_barrage_right);
+		else if (tmp == "punch_barrage_left")
+			LoadAnimation(animations, &punch_barrage_left);
+		else if (tmp == "kick_right")
+			LoadAnimation(animations, &kick_right);
+		else if (tmp == "kick_left")
+			LoadAnimation(animations, &kick_left);
+		else if (tmp == "double_kick_right")
+			LoadAnimation(animations, &double_kick_right);
+		else if (tmp == "double_kick_left")
+			LoadAnimation(animations, &double_kick_left);
+	}
 
-	//running left animation
-	running_left.PushBack({ 275, 1027, 25, 28 });
-	running_left.PushBack({ 225, 1027, 25, 28 });
-	running_left.PushBack({ 175, 1027, 25, 28 });
-	running_left.PushBack({ 126, 1027, 25, 28 });
-	running_left.PushBack({ 76, 1027, 25, 28 });
-	running_left.PushBack({ 25, 1027, 25, 28 });
-	running_left.speed = 0.1f;
-	running_left.loop = true;
+	////idle right animation
+	//idle_right.PushBack({ 29, 6, 21, 30 });
+	//idle_right.PushBack({ 79, 6, 21, 30 });
+	//idle_right.PushBack({ 129, 6, 21, 30 });
+	//idle_right.PushBack({ 179, 6, 21, 30 });
+	//idle_right.speed = 0.05f;
+	//idle_right.loop = true;
 
-	//die right animation
-	
-	die_right.PushBack({ 33,334,19,24 });
-	die_right.PushBack({ 81,345,19,24 });
-	die_right.PushBack({ 132,345,22,24 });
-	die_right.PushBack({ 184,345,18,24 });
-	die_right.PushBack({ 237,345,15,24 });
-	die_right.PushBack({ 284,345,18,24 });
-	die_right.speed = 0.1f;
-	die_right.loop = false;
+	////idle left animation
+	//idle_left.PushBack({ 332, 988, 21, 30 });
+	//idle_left.PushBack({ 282, 988, 21, 30 });
+	//idle_left.PushBack({ 232, 988, 21, 30 });
+	//idle_left.PushBack({ 182, 988, 21, 30 });
+	//idle_left.speed = 0.05f;
+	//idle_left.loop = true;
 
+	////running right animation
+	//running_right.PushBack({ 82, 45, 25, 28 });
+	//running_right.PushBack({ 132, 45, 25, 28 });
+	//running_right.PushBack({ 182, 45, 25, 28 });
+	//running_right.PushBack({ 231, 45, 25, 28 });
+	//running_right.PushBack({ 281, 45, 25, 28 });
+	//running_right.PushBack({ 332, 45, 25, 28 });
+	//running_right.speed = 0.1f;
+	//running_right.loop = true;
 
-	//die left animation
+	////running left animation
+	//running_left.PushBack({ 275, 1027, 25, 28 });
+	//running_left.PushBack({ 225, 1027, 25, 28 });
+	//running_left.PushBack({ 175, 1027, 25, 28 });
+	//running_left.PushBack({ 126, 1027, 25, 28 });
+	//running_left.PushBack({ 76, 1027, 25, 28 });
+	//running_left.PushBack({ 25, 1027, 25, 28 });
+	//running_left.speed = 0.1f;
+	//running_left.loop = true;
 
-	die_left.PushBack({ 330,1327,19,24 });
-	die_left.PushBack({ 282,1326,19,24 });
-	die_left.PushBack({ 249,1327,22,24 });
-	die_left.PushBack({ 180,1327,18,24 });
-	die_left.PushBack({ 130,1327,15,24 });
-	die_left.PushBack({ 80,1327,18,24 });
-	die_left.speed = 0.1f;
-	die_left.loop = false;
-
-
-	//slide right animation
-
-	slide_right.PushBack({ 171,130,34,17 });
-	slide_right.PushBack({ 221,130,34,17 });
-	slide_right.PushBack({ 271,130,34,17 });
-	slide_right.PushBack({ 325,130,30,17 });
-	slide_right.speed = 0.01f;
-	slide_right.loop = true;
-
-	//slide left animation
-
-	slide_left.PushBack({ 177,1112,34,17 });
-	slide_left.PushBack({ 127,1112,34,17 });
-	slide_left.PushBack({  77,1112,34,17 });
-	slide_left.PushBack({  27,1112,30,17 });
-	slide_left.speed = 0.1f;
-	slide_left.loop = true;
-
-	//fall right animation
-	
-	fall_right.PushBack({ 84,112,17,31 });
-	fall_right.PushBack({ 134,112,17,31 });
-	fall_right.speed = 0.1f;
-	fall_right.loop = true;
-
-	//fall left animation
-
-	fall_left.PushBack({ 281,1094,17,31 });
-	fall_left.PushBack({ 231,1094,17,31 });
-	fall_left.speed = 0.1f;
-	fall_left.loop = true;
+	////die right animation
+	//
+	//die_right.PushBack({ 33,334,19,24 });
+	//die_right.PushBack({ 81,345,19,24 });
+	//die_right.PushBack({ 132,345,22,24 });
+	//die_right.PushBack({ 184,345,18,24 });
+	//die_right.PushBack({ 237,345,15,24 });
+	//die_right.PushBack({ 284,345,18,24 });
+	//die_right.speed = 0.1f;
+	//die_right.loop = false;
 
 
-	//jumping left animation
-	jumping_left.PushBack({ 331, 1061, 20, 27 });
-	jumping_left.PushBack({ 281, 1061, 20, 27 });
-	jumping_left.PushBack({ 230, 1061, 19, 27 });
-	jumping_left.PushBack({ 181, 1061, 21, 27 });
-	jumping_left.PushBack({ 133, 1061, 15, 27 });
-	jumping_left.PushBack({  78, 1061, 24, 27 });
-	jumping_left.PushBack({  28, 1061, 18, 27 });
-	jumping_left.PushBack({ 329, 1106, 26, 27 });
-	jumping_left.speed = 0.2f;
-	jumping_left.loop = false;
+	////die left animation
 
-	//jumping right animation
-	jumping_right.PushBack({ 31, 79, 20, 27 });
-	jumping_right.PushBack({ 81, 79, 20, 27 });
-	jumping_right.PushBack({ 133, 79, 19, 27 });
-	jumping_right.PushBack({ 180, 79, 21, 27 });
-	jumping_right.PushBack({ 234, 79, 15, 27 });
-	jumping_right.PushBack({ 280, 79, 24, 27 });
-	jumping_right.PushBack({ 336, 79, 18, 27 });
-	jumping_right.PushBack({ 27, 124, 26, 27 });
-	jumping_right.speed = 0.2f;
-	jumping_right.loop = false;
+	//die_left.PushBack({ 330,1327,19,24 });
+	//die_left.PushBack({ 282,1326,19,24 });
+	//die_left.PushBack({ 249,1327,22,24 });
+	//die_left.PushBack({ 180,1327,18,24 });
+	//die_left.PushBack({ 130,1327,15,24 });
+	//die_left.PushBack({ 80,1327,18,24 });
+	//die_left.speed = 0.1f;
+	//die_left.loop = false;
 
-	//wall slide right animation
-	wall_slide_right.PushBack({ 182, 409, 17, 32 });
-	wall_slide_right.PushBack({ 132, 409, 17, 32 });
-	wall_slide_right.speed = 0.2f;
-	wall_slide_left.loop = true;
 
-	//wall slide left animation
-	wall_slide_left.PushBack({ 183, 1391, 17, 32 });
-	wall_slide_left.PushBack({ 233, 1391, 17, 32 });
-	wall_slide_left.speed = 0.2f;
-	wall_slide_left.loop = true;
+	////slide right animation
 
-	//punch right animation
-	punch_right.PushBack({ 275, 614, 34, 24 });
-	punch_right.PushBack({ 326, 614, 34, 24 });
-	punch_right.speed = 0.15f;
-	punch_right.loop = false;
+	//slide_right.PushBack({ 171,130,34,17 });
+	//slide_right.PushBack({ 221,130,34,17 });
+	//slide_right.PushBack({ 271,130,34,17 });
+	//slide_right.PushBack({ 325,130,30,17 });
+	//slide_right.speed = 0.01f;
+	//slide_right.loop = true;
 
-	//punch barrage right animation
-	punch_barrage_right.PushBack({ 25, 613, 34, 25 });
-	punch_barrage_right.PushBack({ 75, 613, 34, 25 });
-	punch_barrage_right.PushBack({ 127, 613, 34, 25 });
-	punch_barrage_right.PushBack({ 177, 613, 34, 25 });
-	punch_barrage_right.PushBack({ 225, 613, 34, 25 });
-	punch_barrage_right.PushBack({ 275, 613, 34, 25 });
-	punch_barrage_right.PushBack({ 326, 613, 34, 25 });
-	punch_barrage_right.PushBack({ 25, 613, 34, 25 });
-	punch_barrage_right.PushBack({ 75, 613, 34, 25 });
-	punch_barrage_right.PushBack({ 127, 613, 34, 25 });
-	/*punch_barrage_right.PushBack({ 26, 650, 34, 25 });
-	punch_barrage_right.PushBack({ 75, 650, 34, 25 });
-	punch_barrage_right.PushBack({ 125, 650, 34, 25 });
-	punch_barrage_right.PushBack({ 177, 650, 34, 25 });*/
-	punch_barrage_right.speed = 0.15f;
-	punch_barrage_right.loop = false;
+	////slide left animation
 
-	//kick right animation
-	kick_right.PushBack({ 29, 725, 30, 24 });
-	kick_right.PushBack({ 79, 725, 30, 24 });
-	kick_right.speed = 0.15f;
-	kick_right.loop = false;
+	//slide_left.PushBack({ 177,1112,34,17 });
+	//slide_left.PushBack({ 127,1112,34,17 });
+	//slide_left.PushBack({  77,1112,34,17 });
+	//slide_left.PushBack({  27,1112,30,17 });
+	//slide_left.speed = 0.1f;
+	//slide_left.loop = true;
 
-	//double kick right animation
-	double_kick_right.PushBack({ 29, 723, 35, 26 });
-	double_kick_right.PushBack({ 79, 723, 35, 26 });
-	double_kick_right.PushBack({ 129, 723, 35, 26 });
-	double_kick_right.PushBack({ 174, 723, 35, 26 });
-	double_kick_right.PushBack({ 225, 723, 35, 26 });
-	double_kick_right.PushBack({ 274, 723, 35, 26 });
-	double_kick_right.PushBack({ 323, 723, 35, 26 });
-	double_kick_right.speed = 0.15f;
-	double_kick_right.loop = false;
+	////fall right animation
+	//
+	//fall_right.PushBack({ 84,112,17,31 });
+	//fall_right.PushBack({ 134,112,17,31 });
+	//fall_right.speed = 0.1f;
+	//fall_right.loop = true;
 
-	//punch left animation
-	punch_left.PushBack({ 73, 1596, 34, 24 });
-	punch_left.PushBack({ 22, 1596, 34, 24 });
-	punch_left.speed = 0.15f;
-	punch_left.loop = false;
+	////fall left animation
 
-	//punch barrage left animation
-	punch_barrage_left.PushBack({ 318, 1595, 34, 25 });
-	punch_barrage_left.PushBack({ 273, 1595, 34, 25 });
-	punch_barrage_left.PushBack({ 221, 1595, 34, 25 });
-	punch_barrage_left.PushBack({ 171, 1595, 34, 25 });
-	punch_barrage_left.PushBack({ 123, 1595, 34, 25 });
-	punch_barrage_left.PushBack({ 73, 1595, 34, 25 });
-	punch_barrage_left.PushBack({ 22, 1595, 34, 25 });
-	punch_barrage_left.PushBack({ 318, 1595, 34, 25 });
-	punch_barrage_left.PushBack({ 273, 1595, 34, 25 });
-	punch_barrage_left.PushBack({ 221, 1595, 34, 25 });
-	/*punch_barrage_left.PushBack({ 322, 1632, 34, 25 });
-	punch_barrage_left.PushBack({ 273, 1595, 34, 25 });
-	punch_barrage_left.PushBack({ 223, 1595, 34, 25 });
-	punch_barrage_left.PushBack({ 171, 1595, 34, 25 });*/
-	punch_barrage_left.speed = 0.15f;
-	punch_barrage_left.loop = false;
+	//fall_left.PushBack({ 281,1094,17,31 });
+	//fall_left.PushBack({ 231,1094,17,31 });
+	//fall_left.speed = 0.1f;
+	//fall_left.loop = true;
 
-	//kick left animation
-	kick_left.PushBack({ 317, 1707, 35, 24 });
-	kick_left.PushBack({ 268, 1707, 35, 24 });
-	kick_left.speed = 0.15f;
-	kick_left.loop = false;
 
-	//double kick left animation
-	double_kick_left.PushBack({ 317, 1705, 35, 26 });
-	double_kick_left.PushBack({ 268, 1705, 35, 26 });
-	double_kick_left.PushBack({ 218, 1705, 35, 26 });
-	double_kick_left.PushBack({ 169, 1705, 35, 26 });
-	double_kick_left.PushBack({ 122, 1705, 35, 26 });
-	double_kick_left.PushBack({ 73, 1705, 35, 26 });
-	double_kick_left.PushBack({ 23, 1705, 35, 26 });
-	double_kick_left.speed = 0.15f;
-	double_kick_left.loop = false;
+	////jumping left animation
+	//jumping_left.PushBack({ 331, 1061, 20, 27 });
+	//jumping_left.PushBack({ 281, 1061, 20, 27 });
+	//jumping_left.PushBack({ 230, 1061, 19, 27 });
+	//jumping_left.PushBack({ 181, 1061, 21, 27 });
+	//jumping_left.PushBack({ 133, 1061, 15, 27 });
+	//jumping_left.PushBack({  78, 1061, 24, 27 });
+	//jumping_left.PushBack({  28, 1061, 18, 27 });
+	//jumping_left.PushBack({ 329, 1106, 26, 27 });
+	//jumping_left.speed = 0.2f;
+	//jumping_left.loop = false;
+
+	////jumping right animation
+	//jumping_right.PushBack({ 31, 79, 20, 27 });
+	//jumping_right.PushBack({ 81, 79, 20, 27 });
+	//jumping_right.PushBack({ 133, 79, 19, 27 });
+	//jumping_right.PushBack({ 180, 79, 21, 27 });
+	//jumping_right.PushBack({ 234, 79, 15, 27 });
+	//jumping_right.PushBack({ 280, 79, 24, 27 });
+	//jumping_right.PushBack({ 336, 79, 18, 27 });
+	//jumping_right.PushBack({ 27, 124, 26, 27 });
+	//jumping_right.speed = 0.2f;
+	//jumping_right.loop = false;
+
+	////wall slide right animation
+	//wall_slide_right.PushBack({ 182, 409, 17, 32 });
+	//wall_slide_right.PushBack({ 132, 409, 17, 32 });
+	//wall_slide_right.speed = 0.2f;
+	//wall_slide_left.loop = true;
+
+	////wall slide left animation
+	//wall_slide_left.PushBack({ 183, 1391, 17, 32 });
+	//wall_slide_left.PushBack({ 233, 1391, 17, 32 });
+	//wall_slide_left.speed = 0.2f;
+	//wall_slide_left.loop = true;
+
+	////punch right animation
+	//punch_right.PushBack({ 275, 614, 34, 24 });
+	//punch_right.PushBack({ 326, 614, 34, 24 });
+	//punch_right.speed = 0.15f;
+	//punch_right.loop = false;
+
+	////punch barrage right animation
+	//punch_barrage_right.PushBack({ 25, 613, 34, 25 });
+	//punch_barrage_right.PushBack({ 75, 613, 34, 25 });
+	//punch_barrage_right.PushBack({ 127, 613, 34, 25 });
+	//punch_barrage_right.PushBack({ 177, 613, 34, 25 });
+	//punch_barrage_right.PushBack({ 225, 613, 34, 25 });
+	//punch_barrage_right.PushBack({ 275, 613, 34, 25 });
+	//punch_barrage_right.PushBack({ 326, 613, 34, 25 });
+	//punch_barrage_right.PushBack({ 26, 650, 34, 25 });
+	//punch_barrage_right.PushBack({ 75, 650, 34, 25 });
+	//punch_barrage_right.PushBack({ 125, 650, 34, 25 });
+	//punch_barrage_right.PushBack({ 177, 650, 34, 25 });
+	//punch_barrage_right.speed = 0.15f;
+	//punch_barrage_right.loop = false;
+
+	////kick right animation
+	//kick_right.PushBack({ 29, 725, 30, 24 });
+	//kick_right.PushBack({ 79, 725, 30, 24 });
+	//kick_right.speed = 0.15f;
+	//kick_right.loop = false;
+
+	////double kick right animation
+	//double_kick_right.PushBack({ 29, 723, 35, 26 });
+	//double_kick_right.PushBack({ 79, 723, 35, 26 });
+	//double_kick_right.PushBack({ 129, 723, 35, 26 });
+	//double_kick_right.PushBack({ 174, 723, 35, 26 });
+	//double_kick_right.PushBack({ 225, 723, 35, 26 });
+	//double_kick_right.PushBack({ 274, 723, 35, 26 });
+	//double_kick_right.PushBack({ 323, 723, 35, 26 });
+	//double_kick_right.speed = 0.15f;
+	//double_kick_right.loop = false;
+
+	////punch left animation
+	//punch_left.PushBack({ 73, 1596, 34, 24 });
+	//punch_left.PushBack({ 22, 1596, 34, 24 });
+	//punch_left.speed = 0.15f;
+	//punch_left.loop = false;
+
+	////punch barrage left animation
+	//punch_barrage_left.PushBack({ 318, 1595, 34, 25 });
+	//punch_barrage_left.PushBack({ 273, 1595, 34, 25 });
+	//punch_barrage_left.PushBack({ 221, 1595, 34, 25 });
+	//punch_barrage_left.PushBack({ 171, 1595, 34, 25 });
+	//punch_barrage_left.PushBack({ 123, 1595, 34, 25 });
+	//punch_barrage_left.PushBack({ 73, 1595, 34, 25 });
+	//punch_barrage_left.PushBack({ 22, 1595, 34, 25 });
+	//punch_barrage_left.PushBack({ 318, 1595, 34, 25 });
+	//punch_barrage_left.PushBack({ 273, 1595, 34, 25 });
+	//punch_barrage_left.PushBack({ 221, 1595, 34, 25 });
+	///*punch_barrage_left.PushBack({ 322, 1632, 34, 25 });
+	//punch_barrage_left.PushBack({ 273, 1595, 34, 25 });
+	//punch_barrage_left.PushBack({ 223, 1595, 34, 25 });
+	//punch_barrage_left.PushBack({ 171, 1595, 34, 25 });*/
+	//punch_barrage_left.speed = 0.15f;
+	//punch_barrage_left.loop = false;
+
+	////kick left animation
+	//kick_left.PushBack({ 317, 1707, 35, 24 });
+	//kick_left.PushBack({ 268, 1707, 35, 24 });
+	//kick_left.speed = 0.15f;
+	//kick_left.loop = false;
+
+	////double kick left animation
+	//double_kick_left.PushBack({ 317, 1705, 35, 26 });
+	//double_kick_left.PushBack({ 268, 1705, 35, 26 });
+	//double_kick_left.PushBack({ 218, 1705, 35, 26 });
+	//double_kick_left.PushBack({ 169, 1705, 35, 26 });
+	//double_kick_left.PushBack({ 122, 1705, 35, 26 });
+	//double_kick_left.PushBack({ 73, 1705, 35, 26 });
+	//double_kick_left.PushBack({ 23, 1705, 35, 26 });
+	//double_kick_left.speed = 0.15f;
+	//double_kick_left.loop = false;
 
 
 
@@ -462,20 +513,39 @@ bool ModulePlayer::Update(float dt)
 			if (looking_right && !looking_left)
 				animation = &punch_barrage_right;
 			else if (looking_left && !looking_right)
+			{
 				animation = &punch_barrage_left;
+				if (offset_added == false)
+				{
+					playerData.pos.x -= animation->offset;
+					offset_added = true;
+				}
+			}
+
 		}
 		else
 		{ 
 			if (looking_right && !looking_left)
 				animation = &punch_right;
 			else if (looking_left && !looking_right)
+			{
 				animation = &punch_left;
+				if (offset_added == false)
+				{
+					playerData.pos.x -= animation->offset;
+					offset_added = true;
+				}
+			}
 		}	
 
 		if (animation->Finished())
 		{
+			playerData.pos.x += animation->offset;
+			offset_added = false;
 			is_punching = false;	
 			ability_boost = false;
+			if (looking_left && !looking_right)
+				animation = &idle_left;
 		}
 	}
 	//--------------------------------
@@ -500,20 +570,38 @@ bool ModulePlayer::Update(float dt)
 			if (looking_right && !looking_left)
 				animation = &double_kick_right;
 			else if (looking_left && !looking_right)
+			{
 				animation = &double_kick_left;
+				if (offset_added == false)
+				{
+					playerData.pos.x -= animation->offset;
+					offset_added = true;
+				}
+			}	
 		}
 		else
 		{
 			if (looking_right && !looking_left)
 				animation = &kick_right;
 			else if (looking_left && !looking_right)
+			{
 				animation = &kick_left;
+				if (offset_added == false)
+				{
+					playerData.pos.x -= animation->offset;
+					offset_added = true;
+				}
+			}
 		}
 
 		if (animation->Finished())
 		{
+			playerData.pos.x += animation->offset;
+			offset_added = false;
 			is_kicking = false;
 			ability_boost = false;
+			if (looking_left && !looking_right)
+				animation = &idle_left;
 		}
 	}
 	//--------------------------------
@@ -550,6 +638,18 @@ bool ModulePlayer::Save(pugi::xml_node& data) const
 void ModulePlayer::LoadTexture()
 {
 	texture = App->tex->Load("textures/Player/player_spritesheet.png");
+}
+
+void ModulePlayer::LoadAnimation(pugi::xml_node animation_node, Animation* animation)
+{
+	bool ret = true;
+
+	for (pugi::xml_node frame = animation_node.child("frame"); frame && ret; frame = frame.next_sibling("frame"))
+		animation->PushBack({ frame.attribute("x").as_int() , frame.attribute("y").as_int(), frame.attribute("w").as_int(), frame.attribute("h").as_int() });
+
+	animation->speed = animation_node.attribute("speed").as_float();
+	animation->loop = animation_node.attribute("loop").as_bool();
+	animation->offset = animation_node.attribute("offset").as_int();
 }
 
 int ModulePlayer::GetPlayerTile(fPoint pos) const

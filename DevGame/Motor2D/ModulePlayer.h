@@ -58,6 +58,8 @@ public:
 
 	void LoadTexture();
 
+	void LoadAnimation(pugi::xml_node animation_node, Animation* animation);
+
 	void FindPlayerSpawn();
 
 	void SpawnPLayer();
@@ -106,6 +108,8 @@ public:
 	bool looking_left = false;
 
 	bool god_mode = false;
+
+	bool offset_added = false;
 
 	p2Point<int> spawn;
 
