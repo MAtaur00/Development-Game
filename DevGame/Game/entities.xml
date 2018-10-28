@@ -60,9 +60,24 @@
         <frame x="132" y="409" w="17" h="32"/>
       </animation>
 
-      <animation name="punch" speed="0.15" loop="false" offset_x ="13" offset_y ="6">
-        <frame x="275" y="614" w="34" h="24"/>
-        <frame x="326" y="614" w="34" h="24"/>
+      <animation name="punch1" speed="0.15" loop="false" offset_x ="13" offset_y ="6">
+        <frame x="25" y="613" w="34" h="25"/>
+        <frame x="75" y="613" w="34" h="25"/>
+        <frame x="127" y="613" w="34" h="25"/>
+        <frame x="177" y="613" w="34" h="25"/>
+      </animation>
+
+      <animation name="punch2" speed="0.15" loop="false" offset_x ="13" offset_y ="6">
+        <frame x="225" y="613" w="34" h="25"/>
+        <frame x="275" y="613" w="34" h="25"/>
+        <frame x="326" y="613" w="34" h="25"/>
+      </animation>
+
+      <animation name="punch3" speed="0.15" loop="false" offset_x ="13" offset_y ="6">
+        <frame x="26" y="650" w="34" h="25"/>
+        <frame x="75" y="650" w="34" h="25"/>
+        <frame x="125" y="650" w="34" h="25"/>
+        <frame x="177" y="650" w="34" h="25"/>
       </animation>
 
       <animation name="punch_barrage" speed="0.15" loop="false" offset_x ="13" offset_y ="5">
@@ -73,21 +88,26 @@
         <frame x="225" y="613" w="34" h="25"/>
         <frame x="275" y="613" w="34" h="25"/>
         <frame x="326" y="613" w="34" h="25"/>
-        <!--<frame x="25" y="613" w="34" h="25"/>
-        <frame x="75" y="613" w="34" h="25"/>
-        <frame x="127" y="613" w="34" h="25"/>-->
-        <!--<frame x="26" y="650" w="34" h="25"/>-->
+        <frame x="26" y="650" w="34" h="25"/>
         <frame x="75" y="650" w="34" h="25"/>
         <frame x="125" y="650" w="34" h="25"/>
         <frame x="177" y="650" w="34" h="25"/>
       </animation>
 
-      <animation name="kick" speed="0.15" loop="false" offset_x ="9" offset_y ="6">
+      <animation name="kick1" speed="0.13" loop="false" offset_x ="9" offset_y ="6">
         <frame x="29" y="725" w="30" h="24"/>
         <frame x="79" y="725" w="30" h="24"/>
+        <frame x="129" y="723" w="35" h="26"/>
       </animation>
 
-      <animation name="double_kick" speed="0.15" loop="false" offset_x ="14" offset_y ="4">
+      <animation name="kick2" speed="0.13" loop="false" offset_x ="9" offset_y ="6">
+        <frame x="174" y="723" w="35" h="26"/>
+        <frame x="225" y="723" w="35" h="26"/>
+        <frame x="274" y="723" w="35" h="26"/>
+        <frame x="323" y="723" w="35" h="26"/>
+      </animation>
+
+      <animation name="double_kick" speed="0.13" loop="false" offset_x ="14" offset_y ="4">
         <frame x="29" y="723" w="35" h="26"/>
         <frame x="79" y="723" w="35" h="26"/>
         <frame x="129" y="723" w="35" h="26"/>
@@ -98,17 +118,75 @@
       </animation>
 
       <animation name="unsheathe" speed="0.15" loop="false" offset_x ="0" offset_y ="1">
-        <frame x="325" y="340" w="24" h="29"/>
-        <frame x="25" y="377" w="24" h="29"/>
-        <frame x="73" y="377" w="24" h="29"/>
-        <frame x="124" y="377" w="24" h="29"/>
+        <frame x="324" y="340" w="25" h="29"/>
+        <frame x="24" y="377" w="25" h="29"/>
+        <frame x="74" y="377" w="25" h="29"/>
+        <frame x="124" y="377" w="25" h="29"/>
       </animation>
 
-      <animation name="idle_sword" speed="0.05" loop="true" offset_x ="0" offset_y ="1">
+      <animation name="sheathe" speed="0.15" loop="false" offset_x ="0" offset_y ="1">
+        <frame x="174" y="377" w="25" h="29"/>
+        <frame x="224" y="377" w="25" h="29"/>
+        <frame x="274" y="377" w="25" h="29"/>
+        <frame x="324" y="377" w="25" h="29"/>
+      </animation>
+
+      <animation name="idle_sword" speed="0.05" loop="true" offset_x ="0" offset_y ="0">
         <frame x="175" y="193" w="25" h="28"/>
         <frame x="225" y="193" w="25" h="28"/>
         <frame x="275" y="193" w="25" h="28"/>
         <frame x="325" y="193" w="25" h="28"/>
+      </animation>
+
+      <animation name="running_sword" speed="0.1" loop="true" offset_x ="0" offset_y ="0">
+        <frame x="27" y="987" w="28" h="28"/>
+        <frame x="77" y="987" w="28" h="28"/>
+        <frame x="127" y="987" w="28" h="28"/>
+        <frame x="177" y="987" w="28" h="28"/>
+        <frame x="226" y="987" w="28" h="28"/>
+        <frame x="277" y="987" w="28" h="28"/>
+      </animation>
+
+      <animation name="slash1" speed="0.17" loop="false" offset_x ="15" offset_y ="-8">
+        <frame x="18" y="222" w="48" h="36"/>
+        <frame x="68" y="222" w="48" h="36"/>
+        <frame x="118" y="222" w="48" h="36"/>
+        <frame x="168" y="222" w="48" h="36"/>
+        <frame x="218" y="222" w="48" h="36"/>
+      </animation>
+
+      <animation name="slash2" speed="0.17" loop="false" offset_x ="15" offset_y ="-8">
+        <frame x="268" y="222" w="48" h="36"/>
+        <frame x="318" y="222" w="48" h="36"/>
+        <frame x="18" y="259" w="48" h="36"/>
+        <frame x="68" y="259" w="48" h="36"/>
+        <frame x="118" y="259" w="48" h="36"/>
+        <frame x="168" y="259" w="48" h="36"/>
+      </animation>
+
+      <animation name="slash3" speed="0.17" loop="false" offset_x ="15" offset_y ="-8">
+        <frame x="218" y="259" w="48" h="36"/>
+        <frame x="268" y="259" w="48" h="36"/>
+        <frame x="318" y="259" w="48" h="36"/>
+        <frame x="18" y="296" w="48" h="36"/>
+      </animation>
+
+      <animation name="triple_slash" speed="0.17" loop="false" offset_x ="15" offset_y ="-8">
+        <frame x="18" y="222" w="48" h="36"/>
+        <frame x="68" y="222" w="48" h="36"/>
+        <frame x="118" y="222" w="48" h="36"/>
+        <frame x="168" y="222" w="48" h="36"/>
+        <frame x="218" y="222" w="48" h="36"/>
+        <frame x="268" y="222" w="48" h="36"/>
+        <frame x="318" y="222" w="48" h="36"/>
+        <frame x="18" y="259" w="48" h="36"/>
+        <frame x="68" y="259" w="48" h="36"/>
+        <frame x="118" y="259" w="48" h="36"/>
+        <frame x="168" y="259" w="48" h="36"/>
+        <frame x="218" y="259" w="48" h="36"/>
+        <frame x="268" y="259" w="48" h="36"/>
+        <frame x="318" y="259" w="48" h="36"/>
+        <frame x="18" y="296" w="48" h="36"/>
       </animation>
 
     </animations>

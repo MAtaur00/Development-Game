@@ -76,12 +76,19 @@ public:
 	Animation slide = Animation();
 	Animation fall = Animation();
 	Animation wall_slide = Animation();
-	Animation punch = Animation();
+	Animation punch1 = Animation();
+	Animation punch2 = Animation();
+	Animation punch3 = Animation();
 	Animation punch_barrage = Animation();
-	Animation kick = Animation();
+	Animation kick1 = Animation();
+	Animation kick2 = Animation();
 	Animation double_kick = Animation();
 	Animation unsheathe = Animation();
+	Animation sheathe = Animation();
 	Animation idle_sword = Animation();
+	Animation running_sword = Animation();
+	Animation slash1 = Animation();
+	Animation triple_slash = Animation();
 
 	PlayerData playerData;
 
@@ -90,11 +97,14 @@ public:
 	
 	bool sword = false;
 	bool unsheathing = false;
+	bool sheathing = false;
 	bool is_punching = false;
 	bool is_kicking = false;
+	bool is_slashing = false;
 	bool is_jumping;
 	bool is_falling;
 	bool can_jump;
+	bool on_the_floor;
 
 	SDL_RendererFlip flip = SDL_FLIP_NONE;
 
