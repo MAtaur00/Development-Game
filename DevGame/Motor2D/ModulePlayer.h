@@ -4,6 +4,7 @@
 #include "j1Module.h"
 #include "p2Point.h"
 #include "Animation.h"
+#include "j1Render.h"
 
 struct SDL_Texture;
 
@@ -68,39 +69,34 @@ public:
 
 	Animation* animation = nullptr;
 
-	Animation idle_right = Animation();
-	Animation idle_left = Animation();
-	Animation running_right = Animation();
-	Animation running_left = Animation();
-	Animation jumping_right = Animation();
-	Animation jumping_left = Animation();
-	Animation die_right = Animation();
-	Animation die_left = Animation();
-	Animation slide_right = Animation();
-	Animation slide_left = Animation();
-	Animation fall_right = Animation();
-	Animation fall_left = Animation();
-	Animation wall_slide_right = Animation();
-	Animation wall_slide_left = Animation();
-	Animation punch_right = Animation();
-	Animation punch_barrage_right = Animation();
-	Animation kick_right = Animation();
-	Animation double_kick_right = Animation();
-	Animation punch_left = Animation();
-	Animation punch_barrage_left = Animation();
-	Animation kick_left = Animation();
-	Animation double_kick_left = Animation();
+	Animation idle = Animation();
+	Animation running = Animation();
+	Animation jumping = Animation();
+	Animation die = Animation();
+	Animation slide = Animation();
+	Animation fall = Animation();
+	Animation wall_slide = Animation();
+	Animation punch = Animation();
+	Animation punch_barrage = Animation();
+	Animation kick = Animation();
+	Animation double_kick = Animation();
+	Animation unsheathe = Animation();
+	Animation idle_sword = Animation();
 
 	PlayerData playerData;
 
 	int cont = 0;
 	int timer_second_punch = 0;
 	
+	bool sword = false;
+	bool unsheathing = false;
 	bool is_punching = false;
 	bool is_kicking = false;
 	bool is_jumping;
 	bool is_falling;
 	bool can_jump;
+
+	SDL_RendererFlip flip = SDL_FLIP_NONE;
 
 	bool ability_boost = false;
 
@@ -109,7 +105,8 @@ public:
 
 	bool god_mode = false;
 
-	bool offset_added = false;
+	bool offset_x_added = false;
+	bool offset_y_added = false;
 
 	p2Point<int> spawn;
 

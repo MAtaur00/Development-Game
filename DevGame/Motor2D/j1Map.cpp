@@ -51,7 +51,7 @@ void j1Map::Draw()
 						App->render->Blit(tileset_pointer->data->texture, coordinates.x, coordinates.y, &rect);
 					}
 					else if (layer_pointer->data->name == "Colliders" && draw_logic)
-						App->render->Blit(tileset_pointer->data->texture, coordinates.x, coordinates.y, &rect, 1.0f, 50.0f);
+						App->render->Blit(tileset_pointer->data->texture, coordinates.x, coordinates.y, &rect, 1.0f, SDL_FLIP_NONE, 50.0f);
 				}
 			}
 		}
