@@ -196,7 +196,7 @@ bool ModulePlayer::Update(float dt)
 		//--------------------------------
 
 		// JUMP
-		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN && is_jumping == false && can_jump && !is_punching && !is_kicking && is_slashing)
+		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN && is_jumping == false && can_jump && !is_punching && !is_kicking && !is_slashing)
 		{
 			App->audio->PlayFx(1);
 			can_jump = false;
@@ -399,7 +399,7 @@ bool ModulePlayer::Update(float dt)
 	//--------------------------------
 
 	// KICKS
-	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && is_kicking == false)
+	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && is_kicking == false && !sword)
 	{
 		is_kicking = true;
 		kick1.Reset();
@@ -448,7 +448,7 @@ bool ModulePlayer::Update(float dt)
 	//--------------------------------
 
 	//UNSHEATHE AND SHEATHE SWORD
-	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN && can_jump && !is_jumping && !is_falling)
+	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN && can_jump && !is_jumping && !is_falling && !unsheathing && !sheathing)
 	{
 		sword = !sword;
 		if (sword)
