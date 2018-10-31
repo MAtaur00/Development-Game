@@ -165,7 +165,7 @@ bool ModulePlayer::Update(float dt)
 		//--------------------------------
 
 		// MOVEMENT LEFT
-		if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT && !is_punching && !is_kicking && !unsheathing && !sheathing  && !is_slashing)
+		if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT && !is_punching && !is_kicking && !unsheathing && !sheathing && !is_slashing)
 		{
 			looking_left = true;
 			looking_right = false;
@@ -196,7 +196,7 @@ bool ModulePlayer::Update(float dt)
 		//--------------------------------
 
 		// JUMP
-		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN && is_jumping == false && can_jump && !is_punching && !is_kicking && !is_slashing)
+		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN && !is_punching && !is_slashing && !is_kicking && !is_jumping && !is_falling && can_jump && !unsheathing && !sheathing)
 		{
 			App->audio->PlayFx(1);
 			can_jump = false;
@@ -300,7 +300,7 @@ bool ModulePlayer::Update(float dt)
 		ability_boost = true;
 
 	// PUNCHES AND SLASHES
-	if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN && !is_punching && !is_slashing)
+	if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN && !is_punching && !is_slashing && !is_kicking && !is_jumping && !is_falling)
 	{
 		if (!sword)
 		{
@@ -399,7 +399,7 @@ bool ModulePlayer::Update(float dt)
 	//--------------------------------
 
 	// KICKS
-	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && is_kicking == false && !sword)
+	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && !is_punching && !is_slashing && !is_kicking && !is_jumping && !is_falling && !sword)
 	{
 		is_kicking = true;
 		kick1.Reset();
@@ -448,7 +448,7 @@ bool ModulePlayer::Update(float dt)
 	//--------------------------------
 
 	//UNSHEATHE AND SHEATHE SWORD
-	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN && can_jump && !is_jumping && !is_falling && !unsheathing && !sheathing)
+	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN && can_jump && !is_jumping && !is_falling && !unsheathing && !sheathing && !is_punching && !is_kicking && !is_slashing)
 	{
 		sword = !sword;
 		if (sword)
