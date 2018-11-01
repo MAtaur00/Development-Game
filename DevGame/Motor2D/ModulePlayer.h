@@ -16,16 +16,6 @@ enum COLLISION_TYPE
 	WIN
 };
 
-enum ANIMATION_STATE 
-{
-	IDLE_LEFT,
-	IDLE_RIGHT,
-	RUNNING_LEFT,
-	RUNNING_RIGHT,
-	JUMPING_LEFT,
-	JUMPING_RIGHT
-};
-
 struct PlayerData 
 {
 
@@ -35,7 +25,6 @@ struct PlayerData
 	float jumpSpeed = 2.0f;
 	float gravity = 3.0f;
 
-	ANIMATION_STATE anim_state;
 };
 
 class ModulePlayer : public j1Module
