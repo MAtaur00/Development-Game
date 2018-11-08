@@ -199,7 +199,7 @@ bool ModulePlayer::Update(float dt)
 		//--------------------------------
 
 		// JUMP
-		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN && !is_punching && !is_slashing && !is_kicking && !is_jumping && !is_falling && can_jump && !unsheathing && !sheathing)
+		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN && !is_punching && !is_slashing && !is_kicking && can_jump && !unsheathing && !sheathing)
 		{
 			App->audio->PlayFx(1);
 			can_jump = false;
