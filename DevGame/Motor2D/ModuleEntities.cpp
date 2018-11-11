@@ -28,11 +28,12 @@ bool ModuleEntities::Start()
 
 bool ModuleEntities::PreUpdate()
 {
-	for (p2List_item<Entity*>* item = entities.start; item != nullptr; item = item->next)
+	p2List_item<Entity*>* item;
+	for (item = entities.start; item != NULL; item = item->next)
 	{
 		if (item->data->to_destroy)
 		{
-			delete(item);
+			item->data->~Entity();
 			entities.del(item);
 		}
 	}
@@ -43,16 +44,16 @@ bool ModuleEntities::Update(float dt)
 {
 	for (int i = 0; i < entities.count(); ++i)
 	{
-		if (entities[i] != nullptr)
+		if (entities.At(i) != nullptr)
 		{
-			entities[i]->Update(dt);
+			entities.At(i)->data->Update(dt);
 		}
 	}
 	for (int i = 0; i < entities.count(); ++i)
 	{
-		if (entities[i] != nullptr)
+		if (entities.At(i) != nullptr)
 		{
-			entities[i]->Draw();
+			entities.At(i)->data->Draw();
 		}	
 	}
 	return true;
@@ -60,9 +61,10 @@ bool ModuleEntities::Update(float dt)
 
 bool ModuleEntities::CleanUp()
 {
-	for (p2List_item<Entity*>* item = entities.start; item != nullptr; item = item->next)
+	p2List_item<Entity*>* item;
+	for (item = entities.start; item != NULL; item = item->next)
 	{
-		delete(item);
+		item->data->~Entity();
 		entities.del(item);
 	}
 	return true;
@@ -75,12 +77,18 @@ bool ModuleEntities::SpawnEntity(int x, int y, ENTITY_TYPE type)
 	switch (type)
 	{
 	case ENTITY_TYPE::PLAYER:
-		Player* player = new Player(x, y, PLAYER);
+	{
+		player = new Player(x, y, PLAYER);
 		entities.add(player);
+		ret = true;
 		break;
+	}
 
 	default:
+	{ 
 		break;
+	}
+		
 	}
 
 	return ret;
@@ -90,11 +98,11 @@ Player* ModuleEntities::GetPlayer() const
 {
 	for (uint i = 0; i < entities.count(); ++i)
 	{
-		if (entities[i] != nullptr)
+		if (entities.At(i) != nullptr)
 		{
-			if (entities[i]->type == PLAYER)
+			if (entities.At(i)->data->type == PLAYER)
 			{
-				return (Player*)entities[i];
+				return (Player*)entities.At(i);
 			}
 		}
 	}

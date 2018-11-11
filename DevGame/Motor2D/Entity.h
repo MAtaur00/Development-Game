@@ -57,7 +57,7 @@ public:
 
 	SDL_Texture* texture = nullptr;
 
-	bool flip = false;
+	SDL_RendererFlip flip = SDL_FLIP_NONE;
 
 	fPoint pos = { 0.0f, 0.0f };
 
