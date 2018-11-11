@@ -82,7 +82,9 @@
     <ClCompile Include="j1Audio.cpp" />
     <ClCompile Include="j1Input.cpp" />
     <ClCompile Include="j1Map.cpp" />
+    <ClCompile Include="j1PerfTimer.cpp" />
     <ClCompile Include="j1Scene.cpp" />
+    <ClCompile Include="j1Timer.cpp" />
     <ClCompile Include="ModuleEntities.cpp" />
     <ClCompile Include="ModuleFadeToBlack.cpp" />
     <ClCompile Include="ModulePlayer.cpp" />
@@ -97,7 +99,9 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="j1Map.h" />
+    <ClInclude Include="j1PerfTimer.h" />
     <ClInclude Include="j1Scene.h" />
+    <ClInclude Include="j1Timer.h" />
     <ClInclude Include="ModuleEntities.h" />
     <ClInclude Include="ModuleFadeToBlack.h" />
     <ClInclude Include="ModulePlayer.h" />
