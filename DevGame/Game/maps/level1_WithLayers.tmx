@@ -7,6 +7,9 @@
   <image source="BackgroundTiles.png" width="2175" height="1280"/>
  </tileset>
  <layer name="Sky" width="150" height="20">
+   <properties>
+     <property name="speed" type="float" value="0.5"/>
+   </properties>
   <data>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -3011,6 +3014,9 @@
   </data>
  </layer>
  <layer name="Clouds" width="150" height="20">
+   <properties>
+     <property name="speed" type="float" value="0.65"/>
+   </properties>
   <data>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -6015,6 +6021,9 @@
   </data>
  </layer>
  <layer name="Mountains" width="150" height="20">
+   <properties>
+     <property name="speed" type="float" value="0.8"/>
+   </properties>
   <data>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -9019,6 +9028,9 @@
   </data>
  </layer>
  <layer name="trees" width="150" height="20">
+   <properties>
+     <property name="speed" type="float" value="0.9"/>
+   </properties>
   <data>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -12023,6 +12035,9 @@
   </data>
  </layer>
  <layer name="Map" width="150" height="20">
+   <properties>
+     <property name="speed" type="float" value="1.0"/>
+   </properties>
   <data>
    <tile gid="11"/>
    <tile gid="0"/>
@@ -15027,6 +15042,9 @@
   </data>
  </layer>
  <layer name="Colliders" width="150" height="20" visible="0" opacity="0.3">
+   <properties>
+     <property name="speed" type="float" value="1.0"/>
+   </properties>
   <data>
    <tile gid="25"/>
    <tile gid="0"/>

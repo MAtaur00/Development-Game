@@ -48,19 +48,19 @@ void j1Map::Draw()
 						App->render->Blit(tileset_pointer->data->texture, coordinates.x, coordinates.y, &rect, layer_pointer->data->speed);
 					}
 					else if (layer_pointer->data->name == "Clouds") {
-						App->render->Blit(tileset_pointer->data->texture, coordinates.x, coordinates.y, &rect);
+						App->render->Blit(tileset_pointer->data->texture, coordinates.x, coordinates.y, &rect, layer_pointer->data->speed);
 					}
 					else if (layer_pointer->data->name == "Mountains") {
-						App->render->Blit(tileset_pointer->data->texture, coordinates.x, coordinates.y, &rect);
+						App->render->Blit(tileset_pointer->data->texture, coordinates.x, coordinates.y, &rect, layer_pointer->data->speed);
 					}
 					else if (layer_pointer->data->name == "trees") {
-						App->render->Blit(tileset_pointer->data->texture, coordinates.x, coordinates.y, &rect);
+						App->render->Blit(tileset_pointer->data->texture, coordinates.x, coordinates.y, &rect, layer_pointer->data->speed);
 					}
 					else if (layer_pointer->data->name == "Map") {
-						App->render->Blit(tileset_pointer->data->texture, coordinates.x, coordinates.y, &rect);
+						App->render->Blit(tileset_pointer->data->texture, coordinates.x, coordinates.y, &rect, layer_pointer->data->speed);
 					}
 					else if (layer_pointer->data->name == "Colliders" && draw_logic)
-						App->render->Blit(tileset_pointer->data->texture, coordinates.x, coordinates.y, &rect, 1.0f, SDL_FLIP_NONE, 50.0f);
+						App->render->Blit(tileset_pointer->data->texture, coordinates.x, coordinates.y, &rect, layer_pointer->data->speed, SDL_FLIP_NONE, 50.0f);
 				}
 			}
 		}
