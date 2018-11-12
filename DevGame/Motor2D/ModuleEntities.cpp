@@ -33,7 +33,7 @@ bool ModuleEntities::PreUpdate()
 	{
 		if (item->data->to_destroy)
 		{
-			item->data->~Entity();
+		//	item->data->~Entity();
 			entities.del(item);
 		}
 	}
@@ -64,7 +64,7 @@ bool ModuleEntities::CleanUp()
 	p2List_item<Entity*>* item;
 	for (item = entities.start; item != NULL; item = item->next)
 	{
-		item->data->~Entity();
+		//item->data->~Entity();
 		entities.del(item);
 	}
 	return true;
