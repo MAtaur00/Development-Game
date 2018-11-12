@@ -23,15 +23,15 @@ COLLISION_TYPE Entity::CheckCollision(int x) const
 	default:
 		break;
 
-	case 25:
+	case 202:
 		return COLLISION_TYPE::GROUND;
 		break;
 
-	case 26:
+	case 203:
 		return COLLISION_TYPE::DEATH;
 		break;
 
-	case 34:
+	case 204:
 		return COLLISION_TYPE::WIN;
 		break;
 	}

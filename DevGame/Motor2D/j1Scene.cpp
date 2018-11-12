@@ -192,7 +192,7 @@ bool j1Scene::Load(pugi::xml_node&  savegame) {
 	switch (currmap)
 	{
 	case 1:
-		App->map->Load("level1.tmx");
+		App->map->Load("level1_WithLayers.tmx");
 		break;
 	case 2:
 		App->map->Load("Level2.tmx");
