@@ -47,13 +47,16 @@ void j1Map::Draw()
 					if (layer_pointer->data->name == "Sky") {
 						App->render->Blit(tileset_pointer->data->texture, coordinates.x, coordinates.y, &rect, layer_pointer->data->speed);
 					}
-					else if (layer_pointer->data->name == "Clouds") {
+					else if (layer_pointer->data->name == "Clouds_near") {
+						App->render->Blit(tileset_pointer->data->texture, coordinates.x, coordinates.y, &rect, layer_pointer->data->speed);
+					}
+					else if (layer_pointer->data->name == "Clouds_far") {
 						App->render->Blit(tileset_pointer->data->texture, coordinates.x, coordinates.y, &rect, layer_pointer->data->speed);
 					}
 					else if (layer_pointer->data->name == "Mountains") {
 						App->render->Blit(tileset_pointer->data->texture, coordinates.x, coordinates.y, &rect, layer_pointer->data->speed);
 					}
-					else if (layer_pointer->data->name == "trees") {
+					else if (layer_pointer->data->name == "Trees") {
 						App->render->Blit(tileset_pointer->data->texture, coordinates.x, coordinates.y, &rect, layer_pointer->data->speed);
 					}
 					else if (layer_pointer->data->name == "Map") {
