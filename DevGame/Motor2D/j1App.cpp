@@ -1,4 +1,5 @@
 #include <iostream> 
+#include <sstream> 
 
 #include "p2Defs.h"
 #include "p2Log.h"
@@ -168,6 +169,10 @@ pugi::xml_node j1App::LoadConfig(pugi::xml_document& config_file) const
 // ---------------------------------------------
 void j1App::PrepareUpdate()
 {
+
+	frame_count++;
+	last_sec_frame_count++;
+	frame_time.Start();
 }
 
 // ---------------------------------------------
@@ -271,6 +276,7 @@ bool j1App::PostUpdate()
 // Called before quitting
 bool j1App::CleanUp()
 {
+	PERF_START(ptimer);
 	bool ret = true;
 	p2List_item<j1Module*>* item;
 	item = modules.end;
@@ -280,7 +286,7 @@ bool j1App::CleanUp()
 		ret = item->data->CleanUp();
 		item = item->prev;
 	}
-
+	PERF_PEEK(ptimer);
 	return ret;
 }
 
