@@ -55,35 +55,22 @@
    
     <blackBandit>
       
-      <animation name ="idleLeft" speed ="0.05" loop ="true" offset_x ="0" offset_y="0">
+      <animation name ="idle" speed ="0.05" loop ="true" offset_x ="0" offset_y="0">
         <frame x="16" y="18" w="26" h="38"/>
         <frame x="64" y="18" w="26" h="38"/>
         <frame x="112" y="18" w="26" h="38"/>
         <frame x="160" y="18" w="26" h="38"/>
       </animation>
 
-      <animation name ="idleRight" speed ="0.05" loop ="true" offset_x ="0" offset_y="0">
-        <frame x="345" y="18" w="26" h="38"/>
-        <frame x="297" y="18" w="26" h="38"/>
-        <frame x="249" y="18" w="26" h="38"/>
-        <frame x="201" y="18" w="26" h="38"/>
-      </animation>
 
-      <animation name ="idleLeftSwordUp" speed ="0.05" loop ="true" offset_x ="0" offset_y="0">
-        <frame x="200" y="10" w="33" h="36"/>
-        <frame x="248" y="10" w="33" h="36"/>
-        <frame x="296" y="10" w="33" h="36"/>
-        <frame x="344" y="10" w="33" h="36"/>
-      </animation>
-
-      <animation name ="idleRightSwordUp" speed ="0.05" loop ="true" offset_x ="0" offset_y="0">
+      <animation name ="idleSwordUp" speed ="0.05" loop ="true" offset_x ="0" offset_y="0">
         <frame x="154" y="10" w="33" h="37"/>
         <frame x="106" y="10" w="33" h="37"/>
         <frame x="58" y="10" w="33" h="37"/>
         <frame x="10" y="10" w="33" h="37"/>
       </animation>
 
-      <animation name ="RunLeft" speed ="0.05" loop ="true" offset_x ="0" offset_y="0">
+      <animation name ="running" speed ="0.05" loop ="true" offset_x ="0" offset_y="0">
         <frame x="12" y="58" w="31" h="37"/>
         <frame x="59" y="58" w="31" h="37"/>
         <frame x="107" y="58" w="31" h="37"/>
@@ -91,38 +78,14 @@
         <frame x="203" y="58" w="31" h="37"/>
       </animation>
 
-      <animation name ="RunRight" speed ="0.05" loop ="true" offset_x ="0" offset_y="0">
-        <frame x="344" y="58" w="31" h="37"/>
-        <frame x="297" y="58" w="31" h="37"/>
-        <frame x="249" y="58" w="31" h="37"/>
-        <frame x="201" y="58" w="31" h="37"/>
-        <frame x="153" y="58" w="31" h="37"/>
-      </animation>
-
-      <animation name ="AttackLeft" speed ="0.05" loop ="true" offset_x ="0" offset_y="0">
-        <frame x="194" y="98" w="38" h="44"/>
-        <frame x="243" y="98" w="38" h="44"/>
-        <frame x="291" y="98" w="38" h="44"/>
-        <frame x="334" y="98" w="38" h="44"/>
-      </animation>
-
-      <animation name ="AttackRight" speed ="0.05" loop ="true" offset_x ="0" offset_y="0">
+      <animation name ="attack" speed ="0.05" loop ="true" offset_x ="0" offset_y="0">
         <frame x="155" y="98" w="38" h="44"/>
         <frame x="107" y="98" w="38" h="44"/>
         <frame x="59" y="98" w="38" h="44"/>
         <frame x="11" y="98" w="38" h="44"/>
       </animation>
 
-
-      <animation name ="DieLeft" speed ="0.05" loop ="true" offset_x ="0" offset_y="0">
-        <frame x="302" y="156" w="27" h="34"/>
-        <frame x="254" y="156" w="27" h="34"/>
-        <frame x="206" y="156" w="27" h="34"/>
-        <frame x="158" y="156" w="27" h="34"/>
-        <frame x="109" y="156" w="27" h="34"/>
-      </animation>
-
-      <animation name ="DieLeft" speed ="0.05" loop ="true" offset_x ="0" offset_y="0">
+      <animation name ="death" speed ="0.05" loop ="true" offset_x ="0" offset_y="0">
         <frame x="12" y="156" w="27" h="34"/>
         <frame x="59" y="156" w="27" h="34"/>
         <frame x="107" y="156" w="27" h="34"/>
@@ -152,7 +115,7 @@
         <frame x="332" y="45" w="25" h="28"/>
       </animation>
 
-      <animation name="die" speed="0.1" loop="false" offset_x ="0" offset_y ="6">
+      <animation name="death" speed="0.1" loop="false" offset_x ="0" offset_y ="6">
         <frame x="33" y="334" w="25" h="24"/>
         <frame x="81" y="335" w="25" h="24"/>
         <frame x="132" y="335" w="25" h="24"/>

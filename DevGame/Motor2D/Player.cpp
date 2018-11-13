@@ -22,8 +22,8 @@ Player::Player(int x, int y, ENTITY_TYPE type) : Entity(x, y, type)
 			LoadAnimation(animations, &idle);
 		else if (tmp == "running")
 			LoadAnimation(animations, &running);
-		else if (tmp == "die")
-			LoadAnimation(animations, &die);
+		else if (tmp == "death")
+			LoadAnimation(animations, &death);
 		else if (tmp == "slide")
 			LoadAnimation(animations, &slide);
 		else if (tmp == "fall")
@@ -102,7 +102,7 @@ bool Player::Update(float dt)
 		tempPos.y += falling_speed;
 		if (CheckCollision(GetPlayerTile({ tempPos.x + 5, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::AIR
 			&& CheckCollision(GetPlayerTile({ tempPos.x + 10, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::AIR
-			&& !is_jumping && !is_slashing)
+			&& !is_jumping)
 		{
 			can_jump = false;
 			is_falling = true;
@@ -195,7 +195,7 @@ bool Player::Update(float dt)
 		//--------------------------------
 
 		// JUMP
-		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN && !is_punching && !is_slashing && !is_kicking && can_jump && !unsheathing && !sheathing)
+		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN && !is_punching && !is_slashing && !is_kicking && can_jump && !unsheathing && !sheathing && !is_jumping)
 		{
 			App->audio->PlayFx(1);
 			can_jump = false;
@@ -528,7 +528,7 @@ bool Player::CleanUp()
 	delete &idle;
 	delete &running;
 	delete &jumping;
-	delete &die;
+	delete &death;
 	delete &slide;
 	delete &fall;
 	delete &wall_slide;
@@ -575,9 +575,7 @@ void Player::LoadTexture()
 
 void Player::LoadAnimation(pugi::xml_node animation_node, Animation* animation)
 {
-	bool ret = true;
-
-	for (pugi::xml_node frame = animation_node.child("frame"); frame && ret; frame = frame.next_sibling("frame"))
+	for (pugi::xml_node frame = animation_node.child("frame"); frame; frame = frame.next_sibling("frame"))
 		animation->PushBack({ frame.attribute("x").as_int() , frame.attribute("y").as_int(), frame.attribute("w").as_int(), frame.attribute("h").as_int() });
 
 	animation->speed = animation_node.attribute("speed").as_float();
@@ -600,7 +598,7 @@ void Player::FindPlayerSpawn()
 	p2List_item<MapLayer*>* layer = App->map->data.layers.end;
 	for (int i = 0; i < (layer->data->width * layer->data->height); i++)
 	{
-		if (layer->data->data[i] == 27)
+		if (layer->data->data[i] == 204)
 		{
 			spawn = App->map->TileToWorld(i);
 		}

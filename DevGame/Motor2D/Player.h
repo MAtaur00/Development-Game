@@ -39,7 +39,7 @@ public:
 	Animation idle = Animation();
 	Animation running = Animation();
 	Animation jumping = Animation();
-	Animation die = Animation();
+	Animation death = Animation();
 	Animation slide = Animation();
 	Animation fall = Animation();
 	Animation wall_slide = Animation();

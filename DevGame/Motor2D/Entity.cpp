@@ -31,7 +31,7 @@ COLLISION_TYPE Entity::CheckCollision(int x) const
 		return COLLISION_TYPE::DEATH;
 		break;
 
-	case 204:
+	case 270:
 		return COLLISION_TYPE::WIN;
 		break;
 	}
