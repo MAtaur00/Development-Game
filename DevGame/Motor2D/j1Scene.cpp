@@ -48,6 +48,7 @@ bool j1Scene::Start()
 	App->audio->PlayMusic("audio/music/Mushroom_Theme.ogg");
 	
 	App->entities->SpawnEntity(0, 0, PLAYER);
+	//App->entities->SpawnEntity(0, 0, BLACKBANDIT);
 
 	return true;
 }

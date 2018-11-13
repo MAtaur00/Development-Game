@@ -29,12 +29,18 @@ public:
 
 	void LoadAnimation(pugi::xml_node animation_node, Animation* animation);
 
+	void FindSpawn();
+
+	void Spawn();
+
 public:
 	Animation idle = Animation();
 	Animation idleSwordUp = Animation();
 	Animation running = Animation();
 	Animation attack = Animation();
 	Animation death = Animation();
+
+	p2Point<int> spawn;
 
 };
 

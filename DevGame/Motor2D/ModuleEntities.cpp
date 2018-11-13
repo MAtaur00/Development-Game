@@ -1,12 +1,14 @@
 #include "ModuleEntities.h"
 #include "Entity.h"
 #include "Player.h"
+#include "BlackBandit.h"
 #include "j1Textures.h"
 #include "j1Render.h"
 #include "j1Map.h"
 #include "p2Log.h"
 #include "j1Window.h"
 #include "j1Audio.h"
+#include "j1App.h"
 
 ModuleEntities::ModuleEntities() 
 {
@@ -28,15 +30,25 @@ bool ModuleEntities::Start()
 
 bool ModuleEntities::PreUpdate()
 {
-	p2List_item<Entity*>* item;
-	for (item = entities.start; item != NULL; item = item->next)
+	/*p2List_item<MapLayer*>* layer = App->map->data.layers.end;
+	for (int i = 0; i < (layer->data->width * layer->data->height); i++)
+		
 	{
-		if (item->data->to_destroy)
+		if (layer->data->data[i] == 336)
 		{
-		//	item->data->~Entity();
-			entities.del(item);
+			iPoint coords = App->map->TileToWorld(i);
+			Entity* entity = new BlackBandit(coords.x, coords.y, ENTITY_TYPE::BLACKBANDIT);
+			entities.add(entity);
 		}
-	}
+	}*/
+	//p2List_item<Entity*>* item = entities.start;
+	//while (item != nullptr)
+	//{
+	//	//item->data->~Entity();
+	//	//entities.del(item);
+	//	item = item->next;
+
+	//}
 	return true;
 }
 
@@ -61,11 +73,13 @@ bool ModuleEntities::Update(float dt)
 
 bool ModuleEntities::CleanUp()
 {
-	p2List_item<Entity*>* item;
-	for (item = entities.start; item != NULL; item = item->next)
+	p2List_item<Entity*>* item = entities.start;
+	while (item != nullptr)
 	{
-		//item->data->~Entity();
+		delete item->data;
 		entities.del(item);
+		item = item->next;
+
 	}
 	return true;
 }
@@ -76,10 +90,18 @@ bool ModuleEntities::SpawnEntity(int x, int y, ENTITY_TYPE type)
 
 	switch (type)
 	{
-	case ENTITY_TYPE::PLAYER:
+	case PLAYER:
 	{
 		player = new Player(x, y, PLAYER);
 		entities.add(player);
+		ret = true;
+		break;
+	}
+
+	case BLACKBANDIT:
+	{
+		entity = new BlackBandit(x, y, BLACKBANDIT);
+		entities.add(entity);
 		ret = true;
 		break;
 	}

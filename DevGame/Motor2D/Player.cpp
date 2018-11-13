@@ -525,7 +525,7 @@ bool Player::Update(float dt)
 bool Player::CleanUp()
 {
 	App->tex->UnLoad(texture);
-	delete &idle;
+	/*delete &idle;
 	delete &running;
 	delete &jumping;
 	delete &death;
@@ -544,7 +544,7 @@ bool Player::CleanUp()
 	delete &idle_sword;
 	delete &running_sword;
 	delete &slash1;
-	delete &triple_slash;
+	delete &triple_slash;*/
 	animation = nullptr;
 	texture = nullptr;
 	return true;
