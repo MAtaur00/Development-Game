@@ -46,9 +46,22 @@ bool j1Scene::Start()
 {
 	App->map->Load(CurrentMap->data);
 	App->audio->PlayMusic("audio/music/Mushroom_Theme.ogg");
-	
-	App->entities->SpawnEntity(0, 0, PLAYER);
-	//App->entities->SpawnEntity(0, 0, BLACKBANDIT);
+
+	iPoint spawnEntity;
+	p2List_item<MapLayer*>* layer = App->map->data.layers.end;
+	for (int i = 0; i < (layer->data->width * layer->data->height); i++)
+	{
+		if (layer->data->data[i] == 204)
+		{
+			spawnEntity = App->map->TileToWorld(i);
+			App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, PLAYER);
+		}
+		if (layer->data->data[i] == 336)
+		{
+			spawnEntity = App->map->TileToWorld(i);
+			App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, BLACKBANDIT);
+		}
+	}
 
 	return true;
 }
@@ -148,8 +161,15 @@ bool j1Scene::LoadScene(int map)
 {
 	App->map->CleanUp();
 	App->tex->FreeTextures();
-	App->entities->player->LoadTexture();
-
+	/*App->entities->player->LoadTexture();*/
+	
+	p2List_item<Entity*>* item = App->entities->entities.start;
+	while (item != nullptr)
+	{
+		delete item->data;
+		App->entities->entities.del(item);
+		item = item->next;
+	}
 	if (map == -1) {
 
 		if (CurrentMap->next != nullptr)
@@ -178,8 +198,23 @@ bool j1Scene::LoadScene(int map)
 
 	}
 	App->map->Load(CurrentMap->data);
-	App->entities->player->FindPlayerSpawn();
-	App->entities->player->SpawnPLayer();
+	iPoint spawnEntity;
+	p2List_item<MapLayer*>* layer = App->map->data.layers.end;
+	for (int i = 0; i < (layer->data->width * layer->data->height); i++)
+	{
+		if (layer->data->data[i] == 204)
+		{
+			spawnEntity = App->map->TileToWorld(i);
+			App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, PLAYER);
+		}
+		if (layer->data->data[i] == 336)
+		{
+			spawnEntity = App->map->TileToWorld(i);
+			App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, BLACKBANDIT);
+		}
+	}
+	/*App->entities->player->FindPlayerSpawn();
+	App->entities->player->SpawnPLayer();*/
 
 	return true;
 }
@@ -196,7 +231,7 @@ bool j1Scene::Load(pugi::xml_node&  savegame) {
 		App->map->Load("level1_WithLayers.tmx");
 		break;
 	case 2:
-		App->map->Load("Level2.tmx");
+		App->map->Load("level2_WithLayers.tmx");
 		break;
 	default:
 		break;

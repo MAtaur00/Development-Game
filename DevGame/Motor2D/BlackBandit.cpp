@@ -34,6 +34,7 @@ BlackBandit::BlackBandit(int x, int y, ENTITY_TYPE type) : Entity(x, y, type)
 
 		animation = &idle;
 	}
+	Start();
 }
 
 BlackBandit::~BlackBandit() { CleanUp(); }
@@ -41,8 +42,6 @@ BlackBandit::~BlackBandit() { CleanUp(); }
 bool BlackBandit::Start()
 {
 	LoadTexture();
-	FindSpawn();
-	Spawn();
 	return true;
 }
 
@@ -54,11 +53,11 @@ bool BlackBandit::Update(float dt)
 bool BlackBandit::CleanUp()
 {
 	App->tex->UnLoad(texture);
-	delete &idle;
+	/*delete &idle;
 	delete &idleSwordUp;
 	delete &running;
 	delete &attack;
-	delete &death;
+	delete &death;*/
 	animation = nullptr;
 	texture = nullptr;
 	return true;
@@ -96,23 +95,4 @@ void BlackBandit::LoadAnimation(pugi::xml_node animation_node, Animation* animat
 	animation->loop = animation_node.attribute("loop").as_bool();
 	animation->offset_x = animation_node.attribute("offset_x").as_int();
 	animation->offset_y = animation_node.attribute("offset_y").as_int();
-}
-
-void BlackBandit::FindSpawn()
-{
-	p2List_item<MapLayer*>* layer = App->map->data.layers.end;
-	for (int i = 0; i < (layer->data->width * layer->data->height); i++)
-	{
-		if (layer->data->data[i] == 336)
-		{
-			spawn = App->map->TileToWorld(i);
-		}
-	}
-}
-
-void BlackBandit::Spawn()
-{
-	pos.x = spawn.x;
-	pos.y = spawn.y;
-	App->render->camera.x = 0;
 }

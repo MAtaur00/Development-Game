@@ -73,6 +73,7 @@ bool Player::Start()
 
 	FindPlayerSpawn();
 	SpawnPLayer();
+	animation = &idle;
 	is_jumping = false;
 	looking_right = true;
 	return true;
@@ -120,7 +121,7 @@ bool Player::Update(float dt)
 			&& CheckCollision(GetPlayerTile({ tempPos.x + 10, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::DEATH)
 		{
 			App->audio->PlayFx(2);
-			App->fade->FadeToBlack(App->scene, App->scene, 0.5f);
+			//App->fade->FadeToBlack(App->scene, App->scene, 0.5f);
 			SpawnPLayer();
 		}
 		//--------------------------------
@@ -157,7 +158,7 @@ bool Player::Update(float dt)
 			else if (CheckCollision(GetPlayerTile({ tempPos.x + animation->GetCurrentFrame().w, tempPos.y })) == COLLISION_TYPE::WIN
 				&& CheckCollision(GetPlayerTile({ tempPos.x + animation->GetCurrentFrame().w, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::WIN)
 			{
-				App->fade->FadeToBlack(App->scene, App->scene, 0.5f);
+				//App->fade->FadeToBlack(App->scene, App->scene, 0.5f);
 				App->scene->LoadScene();
 			}
 		}
@@ -562,8 +563,8 @@ bool Player::Save(pugi::xml_node& data) const
 {
 	pugi::xml_node position = data.append_child("position");
 
-	position.append_attribute("x") = (float)pos.x;
-	position.append_attribute("y") = (float)pos.y;
+	position.append_attribute("x") = pos.x;
+	position.append_attribute("y") = pos.y;
 
 	return true;
 }

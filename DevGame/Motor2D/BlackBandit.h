@@ -29,10 +29,6 @@ public:
 
 	void LoadAnimation(pugi::xml_node animation_node, Animation* animation);
 
-	void FindSpawn();
-
-	void Spawn();
-
 public:
 	Animation idle = Animation();
 	Animation idleSwordUp = Animation();

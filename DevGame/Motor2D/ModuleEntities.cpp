@@ -30,25 +30,16 @@ bool ModuleEntities::Start()
 
 bool ModuleEntities::PreUpdate()
 {
-	/*p2List_item<MapLayer*>* layer = App->map->data.layers.end;
-	for (int i = 0; i < (layer->data->width * layer->data->height); i++)
-		
+	p2List_item<Entity*>* item = entities.start;
+	while (item != nullptr)
 	{
-		if (layer->data->data[i] == 336)
+		if (item->data->to_destroy)
 		{
-			iPoint coords = App->map->TileToWorld(i);
-			Entity* entity = new BlackBandit(coords.x, coords.y, ENTITY_TYPE::BLACKBANDIT);
-			entities.add(entity);
+			delete item->data;
+			entities.del(item);
 		}
-	}*/
-	//p2List_item<Entity*>* item = entities.start;
-	//while (item != nullptr)
-	//{
-	//	//item->data->~Entity();
-	//	//entities.del(item);
-	//	item = item->next;
-
-	//}
+		item = item->next;
+	}
 	return true;
 }
 
@@ -100,8 +91,8 @@ bool ModuleEntities::SpawnEntity(int x, int y, ENTITY_TYPE type)
 
 	case BLACKBANDIT:
 	{
-		entity = new BlackBandit(x, y, BLACKBANDIT);
-		entities.add(entity);
+		BlackBandit* bandit = new BlackBandit(x, y, BLACKBANDIT);
+		entities.add(bandit);
 		ret = true;
 		break;
 	}

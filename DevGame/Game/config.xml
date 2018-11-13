@@ -33,7 +33,7 @@
 
   <scene>
     <maps map ="level1_WithLayers.tmx"></maps>
-    <maps map ="Level2.tmx"></maps>
+    <maps map ="level2_WithLayers.tmx"></maps>
   </scene>
 
 </config>
