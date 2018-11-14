@@ -4,18 +4,18 @@
 #include "j1Render.h"
 #include "j1Textures.h"
 #include "j1Map.h"
-#include "BlackBandit.h"
+#include "Skeleton.h"
 #include "j1Window.h"
 #include "ModuleEntities.h"
 #include "j1Scene.h"
 
-BlackBandit::BlackBandit(int x, int y, ENTITY_TYPE type) : Entity(x, y, type)
+Skeleton::Skeleton(int x, int y, ENTITY_TYPE type) : Entity(x, y, type)
 {
 	pos.x = x;
 	pos.y = y;
 	pugi::xml_document	config_file;
 	pugi::xml_node* node = &App->LoadEntities(config_file);
-	node = &node->child("enemies").child("blackBandit");
+	node = &node->child("enemies").child("skeleton");
 
 	for (pugi::xml_node animations = node->child("animations").child("animation"); animations; animations = animations.next_sibling("animation"))
 	{
@@ -23,47 +23,44 @@ BlackBandit::BlackBandit(int x, int y, ENTITY_TYPE type) : Entity(x, y, type)
 
 		if (tmp == "idle")
 			LoadAnimation(animations, &idle);
-		else if (tmp == "idleSwordUp")
-			LoadAnimation(animations, &idleSwordUp);
-		else if (tmp == "running")
-			LoadAnimation(animations, &running);
-		else if (tmp == "attack")
-			LoadAnimation(animations, &attack);
+		else if (tmp == "notice")
+			LoadAnimation(animations, &notice);
+		else if (tmp == "hit")
+			LoadAnimation(animations, &hit);
+		else if (tmp == "walk")
+			LoadAnimation(animations, &walk);
 		else if (tmp == "death")
 			LoadAnimation(animations, &death);
-		else if (tmp == "falling")
-			LoadAnimation(animations, &falling);
 
 		animation = &idle;
 	}
 	Start();
 }
 
-BlackBandit::~BlackBandit() { CleanUp(); }
+Skeleton::~Skeleton() { CleanUp(); }
 
-bool BlackBandit::Start()
+bool Skeleton::Start()
 {
 	LoadTexture();
 	return true;
 }
 
-bool BlackBandit::Update(float dt)
+bool Skeleton::Update(float dt)
 {
 	animation = &idle;
 	fPoint tempPos = pos;
 
 	// GRAVITY
-	tempPos.y += banditData.gravity;
+	tempPos.y += skeletonData.gravity;
 	if (CheckCollision(GetEntityTile({ tempPos.x, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::AIR
 		&& CheckCollision(GetEntityTile({ tempPos.x, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::AIR)
 	{
 		pos = tempPos;
-		animation = &falling;
 	}
 	return true;
 }
 
-bool BlackBandit::CleanUp()
+bool Skeleton::CleanUp()
 {
 	App->tex->UnLoad(texture);
 	/*delete &idle;
@@ -76,7 +73,7 @@ bool BlackBandit::CleanUp()
 	return true;
 }
 
-bool BlackBandit::Load(pugi::xml_node& data)
+bool Skeleton::Load(pugi::xml_node& data)
 {
 	pos.x = data.child("position").attribute("x").as_float();
 	pos.y = data.child("position").attribute("y").as_float();
@@ -84,7 +81,7 @@ bool BlackBandit::Load(pugi::xml_node& data)
 	return true;
 }
 
-bool BlackBandit::Save(pugi::xml_node& data) const
+bool Skeleton::Save(pugi::xml_node& data) const
 {
 	pugi::xml_node position = data.append_child("position");
 
@@ -94,12 +91,12 @@ bool BlackBandit::Save(pugi::xml_node& data) const
 	return true;
 }
 
-void BlackBandit::LoadTexture()
+void Skeleton::LoadTexture()
 {
-	texture = App->tex->Load("textures/Enemies/HeavyBandits_spritesheet.png");
+	texture = App->tex->Load("textures/Enemies/skeleton_spritesheet.png");
 }
 
-void BlackBandit::LoadAnimation(pugi::xml_node animation_node, Animation* animation)
+void Skeleton::LoadAnimation(pugi::xml_node animation_node, Animation* animation)
 {
 	for (pugi::xml_node frame = animation_node.child("frame"); frame; frame = frame.next_sibling("frame"))
 		animation->PushBack({ frame.attribute("x").as_int() , frame.attribute("y").as_int(), frame.attribute("w").as_int(), frame.attribute("h").as_int() });

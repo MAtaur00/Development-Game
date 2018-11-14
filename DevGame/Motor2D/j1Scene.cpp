@@ -61,6 +61,11 @@ bool j1Scene::Start()
 			spawnEntity = App->map->TileToWorld(i);
 			App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, BLACKBANDIT);
 		}
+		if (layer->data->data[i] == 269)
+		{
+			spawnEntity = App->map->TileToWorld(i);
+			App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, SKELETON);
+		}
 	}
 
 	return true;
@@ -211,6 +216,11 @@ bool j1Scene::LoadScene(int map)
 		{
 			spawnEntity = App->map->TileToWorld(i);
 			App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, BLACKBANDIT);
+		}
+		if (layer->data->data[i] == 269)
+		{
+			spawnEntity = App->map->TileToWorld(i);
+			App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, SKELETON);
 		}
 	}
 	/*App->entities->player->FindPlayerSpawn();

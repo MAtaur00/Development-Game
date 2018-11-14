@@ -43,7 +43,7 @@ public:
 
 	virtual void SpawnEntity() {};
 
-	virtual int GetEntityTile(fPoint pos) const { return 0; };
+	int GetEntityTile(fPoint pos) const;
 
 	virtual void Draw();
 

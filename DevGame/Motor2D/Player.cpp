@@ -90,21 +90,18 @@ bool Player::Update(float dt)
 	else if (looking_left)
 		flip = SDL_FLIP_HORIZONTAL;
 
-	float falling_speed = playerData.gravity;
-	if (can_jump)
-		falling_speed -= 1.5;
-
 	fPoint tempPos = pos;
 
 	// numbers in CheckCollision calls are there to avoid the character from levitating in a border (collision looks cleaner)
 	if (god_mode == false)
 	{
 		// GRAVITY
-		tempPos.y += falling_speed;
+		tempPos.y += playerData.gravity;
 		if (CheckCollision(GetPlayerTile({ tempPos.x + 5, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::AIR
 			&& CheckCollision(GetPlayerTile({ tempPos.x + 10, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::AIR
 			&& !is_jumping)
 		{
+			on_the_floor = false;
 			can_jump = false;
 			is_falling = true;
 			pos = tempPos;
@@ -116,7 +113,6 @@ bool Player::Update(float dt)
 			is_falling = false;
 			can_jump = true;
 		}
-
 		if (CheckCollision(GetPlayerTile({ tempPos.x + 5, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::DEATH
 			&& CheckCollision(GetPlayerTile({ tempPos.x + 10, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::DEATH)
 		{

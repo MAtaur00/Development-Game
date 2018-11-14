@@ -1,5 +1,5 @@
-#ifndef _BLACKBANDIT_H__
-#define _BLACKBANDIT_H__
+#ifndef _SKELETON_H__
+#define _SKELETON_H__
 
 #include "Entity.h"
 #include "ModuleEntities.h"
@@ -10,12 +10,12 @@
 
 struct SDL_Texture;
 
-class BlackBandit : public Entity
+class Skeleton : public Entity
 {
 public:
 
-	BlackBandit(int x, int y, ENTITY_TYPE type);
-	~BlackBandit();
+	Skeleton(int x, int y, ENTITY_TYPE type);
+	~Skeleton();
 
 	bool Start();
 	bool Update(float dt);
@@ -31,16 +31,15 @@ public:
 
 public:
 	Animation idle = Animation();
-	Animation idleSwordUp = Animation();
-	Animation running = Animation();
-	Animation attack = Animation();
+	Animation notice = Animation();
+	Animation hit = Animation();
+	Animation walk = Animation();
 	Animation death = Animation();
-	Animation falling = Animation();
 
 	p2Point<int> spawn;
 
-	EntityData banditData;
+	EntityData skeletonData;
 
 };
 
-#endif // !_BLACKBANDIT_H_
+#endif // !_SKELETON_H_

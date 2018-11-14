@@ -47,3 +47,12 @@ void Entity::Draw()
 		App->render->Blit(texture, pos.x, pos.y, &anim_rect, 1, flip);
 	}
 }
+
+int Entity::GetEntityTile(fPoint pos) const
+{
+	iPoint position = App->map->WorldToMap(pos.x, pos.y);
+
+	int tile_number = position.y * App->map->data.width + position.x;
+
+	return tile_number;
+}

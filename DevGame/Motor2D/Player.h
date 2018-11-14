@@ -69,7 +69,7 @@ public:
 	bool is_jumping;
 	bool is_falling;
 	bool can_jump;
-	bool on_the_floor;
+	bool on_the_floor = false;
 
 	bool ability_boost = false;
 

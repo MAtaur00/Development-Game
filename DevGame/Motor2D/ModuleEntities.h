@@ -12,7 +12,8 @@ enum ENTITY_TYPE
 {
 	NONE,
 	PLAYER,
-	BLACKBANDIT
+	BLACKBANDIT,
+	SKELETON
 };
 
 class ModuleEntities : public j1Module
