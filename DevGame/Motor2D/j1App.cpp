@@ -91,6 +91,7 @@ bool j1App::Awake()
 		app_config = config.child("app");
 		title.create(app_config.child("title").child_value());
 		organization.create(app_config.child("organization").child_value());
+		framelimit = app_config.attribute("framerate_cap").as_int();
 	}
 
 	if(ret == true)
@@ -204,8 +205,11 @@ void j1App::FinishUpdate()
 		avg_fps, last_frame_ms, frames_on_last_update, seconds_since_startup, frame_count);
 	App->win->SetTitle(title);
 
-	uint32 cap = 1 / (float)framelimit;
-	SDL_Delay(cap);
+	//Fps 
+	float ms_frame = 1 / (float)framelimit* 1000;
+	if (last_frame_ms <= ms_frame) {
+		SDL_Delay(ms_frame - last_frame_ms);
+	}
 }
 
 // Call modules before each loop iteration
