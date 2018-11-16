@@ -13,7 +13,8 @@ enum ENTITY_TYPE
 	NONE,
 	PLAYER,
 	BLACKBANDIT,
-	SKELETON
+	SKELETON,
+	BIGBAT
 };
 
 class ModuleEntities : public j1Module

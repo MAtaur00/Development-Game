@@ -100,6 +100,18 @@
         </animation>
       </animations>
     </blackBandit>
+
+    <bigBat>
+      <animations>
+        <animation name="fly" speed="0.2" loop="true" offset_x ="0" offset_y ="0">
+          <frame x="2" y="5" w="53" h="57"/>
+          <frame x="2" y="79" w="53" h="57"/>
+          <frame x="2" y="153" w="53" h="57"/>
+          <frame x="2" y="79" w="53" h="57"/>
+          <frame x="2" y="5" w="53" h="57"/>
+        </animation>
+      </animations>
+    </bigBat>
     
   </enemies>
 

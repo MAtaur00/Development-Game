@@ -76,6 +76,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BigBat.cpp" />
     <ClCompile Include="BlackBandit.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="j1Main.cpp" />
@@ -99,6 +100,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="BigBat.h" />
     <ClInclude Include="BlackBandit.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="j1Map.h" />

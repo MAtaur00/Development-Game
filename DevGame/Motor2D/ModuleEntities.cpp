@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "BlackBandit.h"
 #include "Skeleton.h"
+#include "BigBat.h"
 #include "j1Textures.h"
 #include "j1Render.h"
 #include "j1Map.h"
@@ -101,6 +102,14 @@ bool ModuleEntities::SpawnEntity(int x, int y, ENTITY_TYPE type)
 	{
 		Skeleton* skeleton = new Skeleton(x, y, SKELETON);
 		entities.add(skeleton);
+		ret = true;
+		break;
+	}
+
+	case BIGBAT:
+	{
+		BigBat* bat = new BigBat(x, y, BIGBAT);
+		entities.add(bat);
 		ret = true;
 		break;
 	}
