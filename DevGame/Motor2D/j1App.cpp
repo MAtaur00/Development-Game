@@ -207,9 +207,15 @@ void j1App::FinishUpdate()
 	uint32 last_frame_ms = frame_time.Read();
 	uint32 frames_on_last_update = prev_last_sec_frame_count;
 
-	static char title[256];
-	sprintf_s(title, 256, "Av.FPS: %.2f Last Frame Ms: %02u Last sec frames: %i  Time since startup: %.3f Frame Count: %lu ",
-		avg_fps, last_frame_ms, frames_on_last_update, seconds_since_startup, frame_count);
+	/*if (config.child("vsync").attribute("value").as_bool() == false)
+	{
+		vsyncState = "Off";
+	}*/
+	
+
+	static char title[300];
+	sprintf_s(title, 300, "Av.FPS: %.2f Last Frame Ms: %02u Last sec frames: %i  Time since startup: %.3f Frame Count: %lu Cap: VSYNC: %c ",
+		avg_fps, last_frame_ms, frames_on_last_update, seconds_since_startup, frame_count,vsyncState);
 	App->win->SetTitle(title);
 
 	//Fps 

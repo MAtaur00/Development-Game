@@ -95,6 +95,7 @@ public:
 	j1Map*				map;
 	ModuleFadeToBlack*  fade;
 	ModuleEntities*		entities;
+	uint32	framelimit;
 
 	float				dt = 0;
 
@@ -107,6 +108,7 @@ private:
 
 	p2SString			title;
 	p2SString			organization;
+	p2SString			vsyncState;
 
 	mutable bool		want_to_save;
 	bool				want_to_load;
@@ -121,7 +123,7 @@ private:
 	j1Timer				last_sec_frame_time;
 	uint32				last_sec_frame_count = 0;
 	uint32				prev_last_sec_frame_count = 0;
-	uint32	framelimit;
+	
 
 };
 

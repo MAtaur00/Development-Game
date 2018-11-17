@@ -116,6 +116,27 @@ bool j1Scene::Update(float dt)
 
 	}
 
+
+	
+
+
+	if (App->input->GetKey(SDL_SCANCODE_F11)==KEY_DOWN ) {
+		if (fpshigh == false) {
+			fpshigh == true;
+			App->framelimit = 60;
+		
+		}
+		else if (fpshigh == true) {
+			App->framelimit = 30;
+			fpshigh == false;
+		}
+	}
+
+	
+
+
+
+
 	float camera_speed = 125.0f;
 
 	if (App->entities->player->god_mode)
