@@ -53,7 +53,7 @@ bool BigBat::Update(float dt)
 	fPoint tempPos = pos;
 
 	// GRAVITY
-	tempPos.y += batData.gravity;
+	tempPos.y += batData.gravity * dt;
 	/*if (CheckCollision(GetEntityTile({ tempPos.x, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::AIR
 		&& CheckCollision(GetEntityTile({ tempPos.x, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::AIR)
 	{

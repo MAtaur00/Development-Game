@@ -51,7 +51,7 @@ bool Skeleton::Update(float dt)
 	fPoint tempPos = pos;
 
 	// GRAVITY
-	tempPos.y += skeletonData.gravity;
+	tempPos.y += skeletonData.gravity * dt;
 	if (CheckCollision(GetEntityTile({ tempPos.x, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::AIR
 		&& CheckCollision(GetEntityTile({ tempPos.x, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::AIR)
 	{

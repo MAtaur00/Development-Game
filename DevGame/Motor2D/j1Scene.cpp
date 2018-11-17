@@ -116,7 +116,7 @@ bool j1Scene::Update(float dt)
 
 	}
 
-	int camera_speed = 2;
+	float camera_speed = 125.0f;
 
 	if (App->entities->player->god_mode)
 		camera_speed = 4;
@@ -124,26 +124,17 @@ bool j1Scene::Update(float dt)
 	if (App->entities->player->pos.x - (-App->render->camera.x + (1 * App->render->camera.w / 2)) >= 0)
 	{
 		if (App->render->camera.x - App->render->camera.w > -(App->map->data.width*App->map->data.tile_width))
-			App->render->camera.x -= camera_speed;
+			App->render->camera.x -= camera_speed * dt;
 	}
 
 	if (App->entities->player->pos.x - (-App->render->camera.x + (1 * App->render->camera.w / 2)) <= 0)
 	{
 		if (App->render->camera.x < 0)
-			App->render->camera.x += camera_speed;
+			App->render->camera.x += camera_speed * dt;
 	}
 	
 	//App->render->Blit(img, 0, 0);
 	App->map->Draw();
-
-
-	// "Map:%dx%d Tiles:%dx%d Tilesets:%d"
-	/*	p2SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d",
-		App->map->data.width, App->map->data.height,
-		App->map->data.tile_width, App->map->data.tile_height,
-		App->map->data.tilesets.count());
-	
-	App->win->SetTitle(title.GetString());*/
 
 	return true;
 }

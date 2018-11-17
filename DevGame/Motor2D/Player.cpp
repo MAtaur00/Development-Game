@@ -96,7 +96,7 @@ bool Player::Update(float dt)
 	if (god_mode == false)
 	{
 		// GRAVITY
-		tempPos.y += playerData.gravity;
+		tempPos.y += playerData.gravity * dt;
 		if (CheckCollision(GetPlayerTile({ tempPos.x + 5, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::AIR
 			&& CheckCollision(GetPlayerTile({ tempPos.x + 10, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::AIR
 			&& !is_jumping)
@@ -129,7 +129,7 @@ bool Player::Update(float dt)
 			looking_right = true;
 			tempPos = pos;
 
-			tempPos.x += playerData.speed;
+			tempPos.x += playerData.speed * dt;
 
 			if (CheckCollision(GetPlayerTile({ tempPos.x + animation->GetCurrentFrame().w, tempPos.y })) == COLLISION_TYPE::AIR
 				&& CheckCollision(GetPlayerTile({ tempPos.x + animation->GetCurrentFrame().w, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::AIR)
@@ -167,7 +167,7 @@ bool Player::Update(float dt)
 			looking_right = false;
 			tempPos = pos;
 
-			tempPos.x -= playerData.speed;
+			tempPos.x -= playerData.speed * dt;
 			if (CheckCollision(GetPlayerTile({ tempPos.x, tempPos.y })) == COLLISION_TYPE::AIR
 				&& CheckCollision(GetPlayerTile({ tempPos.x, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::AIR)
 			{
@@ -204,7 +204,7 @@ bool Player::Update(float dt)
 		{
 			tempPos = pos;
 
-			tempPos.y -= playerData.jumpSpeed;
+			tempPos.y -= playerData.jumpSpeed * dt;
 			if (CheckCollision(GetPlayerTile({ tempPos.x + 5, tempPos.y })) == COLLISION_TYPE::AIR
 				&& CheckCollision(GetPlayerTile({ tempPos.x + 10, tempPos.y })) == COLLISION_TYPE::AIR)
 			{

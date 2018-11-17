@@ -134,7 +134,7 @@ bool j1App::Start()
 // Called each loop iteration
 bool j1App::Update()
 {
-	BROFILER_CATEGORY("Update", Profiler::Color::Orchid)
+	BROFILER_CATEGORY("Update", Profiler::Color::Orchid);
 	bool ret = true;
 	PrepareUpdate();
 
@@ -172,7 +172,11 @@ pugi::xml_node j1App::LoadConfig(pugi::xml_document& config_file) const
 // ---------------------------------------------
 void j1App::PrepareUpdate()
 {
-	BROFILER_CATEGORY("PrepareUpdate", Profiler::Color::DarkBlue)
+	BROFILER_CATEGORY("PrepareUpdate", Profiler::Color::DarkBlue);
+
+	dt = dttimer.ReadMs() / 1000;
+
+	dttimer.Start();
 	frame_count++;
 	last_sec_frame_count++;
 	frame_time.Start();
@@ -181,7 +185,7 @@ void j1App::PrepareUpdate()
 // ---------------------------------------------
 void j1App::FinishUpdate()
 {
-	BROFILER_CATEGORY("FinishUpdate", Profiler::Color::Ivory)
+	BROFILER_CATEGORY("FinishUpdate", Profiler::Color::Ivory);
 	if(want_to_save == true)
 		SavegameNow();
 

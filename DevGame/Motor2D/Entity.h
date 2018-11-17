@@ -17,9 +17,9 @@ enum COLLISION_TYPE
 
 struct EntityData
 {
-	float speed = 2.0f;
-	float jumpSpeed = 2.0f;
-	float gravity = 3.0f;
+	float speed = 125.0f;
+	float jumpSpeed = 125.0f;
+	float gravity = 150.0f;
 };
 
 class Entity 
