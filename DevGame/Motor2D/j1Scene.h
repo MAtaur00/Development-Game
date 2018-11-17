@@ -46,7 +46,7 @@ private:
 
 	p2List<const char*>  MapsList_String;
 	p2List_item<const char*>* CurrentMap = nullptr;
-	bool fpshigh=false;
+	bool vsyncCont;
 };
 
 #endif // __j1SCENE_H__

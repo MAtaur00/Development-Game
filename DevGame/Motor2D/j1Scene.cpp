@@ -28,6 +28,7 @@ bool j1Scene::Awake(pugi::xml_node& config)
 	LOG("Loading Scene");
 	bool ret = true;
 
+
 	for (pugi::xml_node map_node = config.child("maps"); map_node != nullptr; map_node = map_node.next_sibling("maps")) 
 	{
 
@@ -116,23 +117,15 @@ bool j1Scene::Update(float dt)
 
 	}
 
-
 	
 
-
-	if (App->input->GetKey(SDL_SCANCODE_F11)==KEY_DOWN ) {
-		if (fpshigh == false) {
-			fpshigh == true;
-			App->framelimit = 60;
-		
-		}
-		else if (fpshigh == true) {
-			App->framelimit = 30;
-			fpshigh == false;
-		}
+	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN) {
+		LOG("1");
+		vsyncCont = App->config.child("vsync").append_attribute("value").as_bool();
+		vsyncCont =true;
+	
 	}
 
-	
 
 
 
