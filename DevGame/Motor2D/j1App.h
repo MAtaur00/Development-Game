@@ -17,6 +17,8 @@ class j1Scene;
 class j1Map;
 class ModuleFadeToBlack;
 class ModuleEntities;
+class ModulePathfinding;
+class ModulePathfindingWalker;
 
 class j1App
 {
@@ -95,6 +97,8 @@ public:
 	j1Map*				map;
 	ModuleFadeToBlack*  fade;
 	ModuleEntities*		entities;
+	ModulePathfinding*	pathfinding;
+	ModulePathfindingWalker* pathfindingWalker;
 	uint32	framelimit;
 
 	float				dt = 0;

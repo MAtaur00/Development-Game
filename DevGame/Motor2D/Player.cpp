@@ -81,6 +81,14 @@ bool Player::Start()
 
 bool Player::Update(float dt)
 {
+	if (is_punching || is_kicking || is_slashing)
+		playerAttacking = true;
+	else playerAttacking = false;
+
+	if (animation == &wall_slide)
+		playerData.gravity = 100.0f;
+	else playerData.gravity = 150.0f;
+
 	if (!sword)
 		animation = &idle;
 	else if (sword)
@@ -198,7 +206,7 @@ bool Player::Update(float dt)
 			can_jump = false;
 			jumping.Reset();
 			is_jumping = true;
-			cont = 0;
+			jump_time = SDL_GetTicks();
 		}
 		if (is_jumping)
 		{
@@ -212,7 +220,7 @@ bool Player::Update(float dt)
 					pos.y = tempPos.y;
 				animation = &jumping;
 			}
-			if (cont == 35)
+			if (stop_jump > jump_time + 600)
 			{
 				is_jumping = false;
 			}
@@ -255,25 +263,27 @@ bool Player::Update(float dt)
 		// MOVEMENT UP
 		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 		{
-			tempPos.y -= 4;
+			tempPos.y -= 300 * dt;
 			if (tempPos.y >= App->render->camera.y)
-				pos.y -= 4;
+				pos.y -= 300 * dt;
 		}
 		//--------------------------------
 
 		// MOVEMENT DOWN
 		if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
 		{
-			tempPos.y += 4;
+			tempPos.y += 300 * dt;
 			if (tempPos.y + animation->GetCurrentFrame().h <= App->render->camera.y + App->win->height)
-				pos.y += 4;
+				pos.y += 300 * dt;
 		}
 		//--------------------------------
 
 		// MOVEMENT RIGHT
 		if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		{
-			pos.x += 4;
+			looking_right = true;
+			looking_left = false;
+			pos.x += 300 * dt;
 			animation = &running;
 			if (CheckCollision(GetPlayerTile({ tempPos.x + animation->GetCurrentFrame().w, tempPos.y })) == COLLISION_TYPE::WIN
 				&& CheckCollision(GetPlayerTile({ tempPos.x + animation->GetCurrentFrame().w, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::WIN)
@@ -286,8 +296,10 @@ bool Player::Update(float dt)
 		// MOVEMENT LEFT
 		if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 		{
+			looking_right = false;
+			looking_left = true;
 			if (tempPos.x >= App->render->camera.x)
-				pos.x -= 4;
+				pos.x -= 300 * dt;
 			animation = &running;
 		}
 		//--------------------------------
@@ -444,78 +456,78 @@ bool Player::Update(float dt)
 	//--------------------------------
 
 	//UNSHEATHE AND SHEATHE SWORD
-	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN && can_jump && !is_jumping && !is_falling && !unsheathing && !sheathing && !is_punching && !is_kicking && !is_slashing)
-	{
-		sword = !sword;
-		if (sword)
-			unsheathing = true;
-		else if (!sword)
-			sheathing = true;
-		unsheathe.Reset();
-		unsheathe.ResetLoops();
-		sheathe.Reset();
-		sheathe.ResetLoops();
-	}
+	//if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN && can_jump && !is_jumping && !is_falling && !unsheathing && !sheathing && !is_punching && !is_kicking && !is_slashing)
+	//{
+	//	sword = !sword;
+	//	if (sword)
+	//		unsheathing = true;
+	//	else if (!sword)
+	//		sheathing = true;
+	//	unsheathe.Reset();
+	//	unsheathe.ResetLoops();
+	//	sheathe.Reset();
+	//	sheathe.ResetLoops();
+	//}
 
-	if (sword && unsheathing)
-	{
-		animation = &unsheathe;
-		if (animation->Finished())
-		{
-			unsheathing = false;
-			if (!offset_x_added && looking_left)
-			{
-				pos.x -= animation->offset_x;
-				offset_x_added = true;
-			}
-			if (!offset_y_added)
-			{
-				pos.y += animation->offset_y;
-				offset_y_added = true;
-			}
-			if (offset_x_added)
-			{
-				pos.x += animation->offset_x;
-				offset_x_added = false;
-			}
-			if (offset_y_added)
-			{
-				pos.y -= animation->offset_y;
-				offset_y_added = false;
-			}
-		}
-	}
-	else if (!sword && sheathing)
-	{
-		animation = &sheathe;
-		if (animation->Finished())
-		{
-			sheathing = false;
-			if (!offset_x_added && looking_left)
-			{
-				pos.x -= animation->offset_x;
-				offset_x_added = true;
-			}
-			if (!offset_y_added)
-			{
-				pos.y += animation->offset_y;
-				offset_y_added = true;
-			}
-			if (offset_x_added)
-			{
-				pos.x += animation->offset_x;
-				offset_x_added = false;
-			}
-			if (offset_y_added)
-			{
-				pos.y -= animation->offset_y + 2;
-				offset_y_added = false;
-			}
-		}
-	}
-	//--------------------------------
+	//if (sword && unsheathing)
+	//{
+	//	animation = &unsheathe;
+	//	if (animation->Finished())
+	//	{
+	//		unsheathing = false;
+	//		if (!offset_x_added && looking_left)
+	//		{
+	//			pos.x -= animation->offset_x;
+	//			offset_x_added = true;
+	//		}
+	//		if (!offset_y_added)
+	//		{
+	//			pos.y += animation->offset_y;
+	//			offset_y_added = true;
+	//		}
+	//		if (offset_x_added)
+	//		{
+	//			pos.x += animation->offset_x;
+	//			offset_x_added = false;
+	//		}
+	//		if (offset_y_added)
+	//		{
+	//			pos.y -= animation->offset_y;
+	//			offset_y_added = false;
+	//		}
+	//	}
+	//}
+	//else if (!sword && sheathing)
+	//{
+	//	animation = &sheathe;
+	//	if (animation->Finished())
+	//	{
+	//		sheathing = false;
+	//		if (!offset_x_added && looking_left)
+	//		{
+	//			pos.x -= animation->offset_x;
+	//			offset_x_added = true;
+	//		}
+	//		if (!offset_y_added)
+	//		{
+	//			pos.y += animation->offset_y;
+	//			offset_y_added = true;
+	//		}
+	//		if (offset_x_added)
+	//		{
+	//			pos.x += animation->offset_x;
+	//			offset_x_added = false;
+	//		}
+	//		if (offset_y_added)
+	//		{
+	//			pos.y -= animation->offset_y + 2;
+	//			offset_y_added = false;
+	//		}
+	//	}
+	//}
+	////--------------------------------
 
-	cont++;
+	stop_jump = SDL_GetTicks();
 	return true;
 }
 

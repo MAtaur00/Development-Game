@@ -6,6 +6,32 @@
 #include "p2Point.h"
 #include "j1Module.h"
 
+struct Properties
+{
+	struct Property
+	{
+		p2SString name;
+		int value;
+	};
+
+	~Properties()
+	{
+		p2List_item<Property*>* item;
+		item = list.start;
+
+		while (item != NULL)
+		{
+			RELEASE(item->data);
+			item = item->next;
+		}
+
+		list.clear();
+	}
+
+	int Get(const char* name, int default_value = 0) const;
+
+	p2List<Property*>	list;
+};
 // ----------------------------------------------------
 struct MapLayer
 {
@@ -14,6 +40,7 @@ struct MapLayer
 	int			height;
 	uint*		data;
 	float		speed;
+	Properties	properties;
 
 	MapLayer() : data(NULL)
 	{}
@@ -98,12 +125,17 @@ public:
 	iPoint WorldToMap(int x, int y) const;
 	iPoint TileToWorld(int gid) const;
 
+	bool CreateWalkabilityMap(int& width, int& height, uchar** buffer, bool can_fly) const;
+
+	TileSet* GetTilesetFromTileId(int id) const;
+
 private:
 
 	bool LoadMap();
 	bool LoadTilesetDetails(pugi::xml_node& tileset_node, TileSet* set);
 	bool LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set);
 	bool LoadLayer(pugi::xml_node& node, MapLayer* layer);
+	bool LoadProperties(pugi::xml_node& node, Properties& properties);
 
 public:
 

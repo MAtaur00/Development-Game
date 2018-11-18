@@ -29,18 +29,23 @@ public:
 
 	void LoadAnimation(pugi::xml_node animation_node, Animation* animation);
 
+	bool CollisionWithPlayer();
+
 public:
 	Animation fly = Animation();
 	//Animation idleSwordUp = Animation();
 	//Animation running = Animation();
 	//Animation attack = Animation();
-	//Animation death = Animation();
+	Animation death = Animation();
 	//Animation falling = Animation();
-
-	p2Point<int> spawn;
 
 	EntityData batData;
 
+	iPoint batPos;
+	iPoint playerPos;
+	fPoint playerPosition;
+	iPoint nextPoint;
+	iPoint spawnPos;
 };
 
 #endif // !_BIGBAT_H__

@@ -103,12 +103,16 @@
 
     <bigBat>
       <animations>
-        <animation name="fly" speed="0.2" loop="true" offset_x ="0" offset_y ="0">
+        <animation name="fly" speed="0.02" loop="true" offset_x ="0" offset_y ="0">
           <frame x="2" y="5" w="53" h="57"/>
-          <frame x="2" y="79" w="53" h="57"/>
-          <frame x="2" y="153" w="53" h="57"/>
-          <frame x="2" y="79" w="53" h="57"/>
+          <frame x="2" y="86" w="53" h="57"/>
+          <frame x="2" y="167" w="53" h="57"/>
+          <frame x="2" y="86" w="53" h="57"/>
           <frame x="2" y="5" w="53" h="57"/>
+        </animation>
+
+        <animation name="death" speed="0.02" loop="true" offset_x ="0" offset_y ="0">
+          <frame x="246" y="15" w="46" h="41"/>
         </animation>
       </animations>
     </bigBat>
@@ -117,7 +121,7 @@
 
   <player>
     <animations>
-      <animation name="idle" speed="0.05" loop="true" offset_x ="0" offset_y ="0">
+      <animation name="idle" speed="0.1" loop="true" offset_x ="0" offset_y ="0">
         <frame x="29" y="6" w="21" h="30"/>
         <frame x="79" y="6" w="21" h="30"/>
         <frame x="129" y="6" w="21" h="30"/>

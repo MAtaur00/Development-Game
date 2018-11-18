@@ -12,6 +12,8 @@
 #include "ModuleEntities.h"
 #include "Entity.h"
 #include "Player.h"
+#include "ModulePathfinding.h"
+#include "ModulePathfindingWalker.h"
 
 j1Scene::j1Scene() : j1Module()
 {
@@ -46,6 +48,19 @@ bool j1Scene::Awake(pugi::xml_node& config)
 bool j1Scene::Start()
 {
 	App->map->Load(CurrentMap->data);
+
+	int w, h;
+	uchar* data = NULL;
+	if (App->map->CreateWalkabilityMap(w, h, &data, true))
+		App->pathfinding->SetMap(w, h, data);
+	int w2, h2;
+	uchar* data2 = NULL;
+	if (App->map->CreateWalkabilityMap(w2, h2, &data2, false))
+		App->pathfindingWalker->SetMap(w2, h2, data2);
+
+	RELEASE_ARRAY(data);
+	RELEASE_ARRAY(data2);
+
 	App->audio->PlayMusic("audio/music/Mushroom_Theme.ogg");
 
 	iPoint spawnEntity;
@@ -62,11 +77,11 @@ bool j1Scene::Start()
 			spawnEntity = App->map->TileToWorld(i);
 			App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, BLACKBANDIT);
 		}
-		if (layer->data->data[i] == 269)
+		/*if (layer->data->data[i] == 269)
 		{
 			spawnEntity = App->map->TileToWorld(i);
 			App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, SKELETON);
-		}
+		}*/
 		if (layer->data->data[i] == 338)
 		{
 			spawnEntity = App->map->TileToWorld(i);
@@ -141,7 +156,7 @@ bool j1Scene::Update(float dt)
 			App->render->camera.x -= camera_speed * dt;
 	}
 
-	if (App->entities->player->pos.x - (-App->render->camera.x + (1 * App->render->camera.w / 2)) <= 0)
+	if (App->entities->player->pos.x - (-App->render->camera.x + (1 * App->render->camera.w / 3)) <= 0)
 	{
 		if (App->render->camera.x < 0)
 			App->render->camera.x += camera_speed * dt;

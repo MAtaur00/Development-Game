@@ -57,7 +57,8 @@ public:
 	Animation slash1 = Animation();
 	Animation triple_slash = Animation();
 
-	int cont = 0;
+	uint jump_time = 0;
+	uint stop_jump = 0;
 	int timer_second_punch = 0;
 
 	bool sword = false;
@@ -68,6 +69,7 @@ public:
 	bool is_slashing = false;
 	bool is_jumping;
 	bool is_falling;
+	bool playerAttacking = false;
 	bool can_jump;
 	bool on_the_floor = false;
 

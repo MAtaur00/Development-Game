@@ -6,11 +6,12 @@
 	<audio />
 	<map />
 	<scene>
-		<Map CurrentMap="2" />
+		<Map CurrentMap="1" />
 	</scene>
 	<entities />
 	<:anonymous />
+	<pathfinding />
 	<renderer>
-		<camera x="-802" y="0" />
+		<camera x="0" y="0" />
 	</renderer>
 </game_state>

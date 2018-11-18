@@ -8,6 +8,7 @@
 #include "j1Window.h"
 #include "ModuleEntities.h"
 #include "j1Scene.h"
+#include "Player.h"
 
 BlackBandit::BlackBandit(int x, int y, ENTITY_TYPE type) : Entity(x, y, type)
 {
@@ -60,6 +61,8 @@ bool BlackBandit::Update(float dt)
 		pos = tempPos;
 		animation = &falling;
 	}
+
+	
 	return true;
 }
 

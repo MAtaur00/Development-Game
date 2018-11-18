@@ -57,9 +57,12 @@ public:
 
 	SDL_Texture* texture = nullptr;
 
+	SDL_Texture* path_texture = nullptr;
+
 	SDL_RendererFlip flip = SDL_FLIP_NONE;
 
 	fPoint pos = { 0.0f, 0.0f };
+	fPoint previousPos = { 0.0f, 0.0f };
 
 	bool to_destroy = false;
 };

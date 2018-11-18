@@ -14,6 +14,8 @@
 #include "j1App.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleEntities.h"
+#include "ModulePathfinding.h"
+#include "ModulePathfindingWalker.h"
 #include "Brofiler/Brofiler.h"
 
 // Constructor
@@ -36,6 +38,8 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	map = new j1Map();
 	fade = new ModuleFadeToBlack();
 	entities = new ModuleEntities();
+	pathfinding = new ModulePathfinding();
+	pathfindingWalker = new ModulePathfindingWalker();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -47,6 +51,8 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(scene);
 	AddModule(entities);
 	AddModule(fade);
+	AddModule(pathfinding);
+	AddModule(pathfindingWalker);
 
 	// render last to swap buffer
 	AddModule(render);
