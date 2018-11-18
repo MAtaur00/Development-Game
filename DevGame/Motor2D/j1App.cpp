@@ -210,7 +210,7 @@ void j1App::FinishUpdate()
 	if (App->input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN) {
 	
 		if (fpshigh == false) {
-			framelimit = 100;
+			framelimit = 60;
 			fpshigh = true;
 
 		}
@@ -241,7 +241,7 @@ void j1App::FinishUpdate()
 // Call modules before each loop iteration
 bool j1App::PreUpdate()
 {
-	BROFILER_CATEGORY("PreUpdate", Profiler::Color::Orchid)
+	BROFILER_CATEGORY("PreUpdate", Profiler::Color::LavenderBlush)
 	bool ret = true;
 	p2List_item<j1Module*>* item;
 	item = modules.start;
