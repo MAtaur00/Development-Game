@@ -16,6 +16,8 @@ BigBat::BigBat(int x, int y, ENTITY_TYPE type) : Entity(x, y, type)
 {
 	pos.x = x;
 	pos.y = y;
+	spawn.x = x;
+	spawn.y = y;
 	spawnPos = App->map->WorldToMap(x, y);
 	pugi::xml_document	config_file;
 	pugi::xml_node* node = &App->LoadEntities(config_file);
@@ -134,17 +136,37 @@ bool BigBat::Update(float dt)
 	pos.x += batData.speed;
 	pos.y += batData.jumpSpeed;
 
+
+	/*if ((animation->GetCurrentFrame().x >= App->entities->player->animation->GetCurrentFrame().x && App->entities->player->animation->GetCurrentFrame().x <= App->entities->player->animation->GetCurrentFrame().x + App->entities->player->animation->GetCurrentFrame().w && animation->GetCurrentFrame().y >= App->entities->player->animation->GetCurrentFrame().y && App->entities->player->animation->GetCurrentFrame().y <= App->entities->player->animation->GetCurrentFrame().y + App->entities->player->animation->GetCurrentFrame().h)
+		&& (animation->GetCurrentFrame().x + animation->GetCurrentFrame().w >= App->entities->player->animation->GetCurrentFrame().x && animation->GetCurrentFrame().x + animation->GetCurrentFrame().w <= App->entities->player->animation->GetCurrentFrame().x + App->entities->player->animation->GetCurrentFrame().w && animation->GetCurrentFrame().y >= App->entities->player->animation->GetCurrentFrame().y && animation->GetCurrentFrame().y <= App->entities->player->animation->GetCurrentFrame().y + App->entities->player->animation->GetCurrentFrame().h)
+		&& (animation->GetCurrentFrame().x >= App->entities->player->animation->GetCurrentFrame().x && animation->GetCurrentFrame().x <= App->entities->player->animation->GetCurrentFrame().x + App->entities->player->animation->GetCurrentFrame().w && animation->GetCurrentFrame().y + animation->GetCurrentFrame().h >= App->entities->player->animation->GetCurrentFrame().y && animation->GetCurrentFrame().y + animation->GetCurrentFrame().h <= App->entities->player->animation->GetCurrentFrame().y + App->entities->player->animation->GetCurrentFrame().h)
+		&& (animation->GetCurrentFrame().x + animation->GetCurrentFrame().w >= App->entities->player->animation->GetCurrentFrame().x && animation->GetCurrentFrame().x + animation->GetCurrentFrame().w <= App->entities->player->animation->GetCurrentFrame().x + App->entities->player->animation->GetCurrentFrame().w && animation->GetCurrentFrame().x + animation->GetCurrentFrame().w >= App->entities->player->animation->GetCurrentFrame().y && animation->GetCurrentFrame().x + animation->GetCurrentFrame().w <= App->entities->player->animation->GetCurrentFrame().y + App->entities->player->animation->GetCurrentFrame().h)
+		&& !App->entities->player->playerAttacking && !App->entities->player->god_mode)
+	{
+		App->audio->PlayFx(2);
+		App->entities->player->SpawnPLayer();
+	}*/
+
+	/*iPoint contactPointRight = { animation->GetCurrentFrame().x + animation->GetCurrentFrame().w, animation->GetCurrentFrame().y + (animation->GetCurrentFrame().h / 2) };
+	iPoint contactPointLeft = { animation->GetCurrentFrame().x, animation->GetCurrentFrame().y + (animation->GetCurrentFrame().h / 2) };*/
+
+	if (batPos.y == playerPos.y && (batPos.x == playerPos.x + App->entities->player->animation->GetCurrentFrame().w || batPos.x == playerPos.x) && !App->entities->player->god_mode)
+	{
+		if (!App->entities->player->playerAttacking)
+		{
+			App->audio->PlayFx(2);
+			App->entities->player->SpawnPLayer();
+			pos = spawn;
+		}
+		else to_destroy = true;
+	}
+
 	return true;
 }
 
 bool BigBat::CleanUp()
 {
 	App->tex->UnLoad(texture);
-	/*delete &idle;
-	delete &idleSwordUp;
-	delete &running;
-	delete &attack;
-	delete &death;*/
 	animation = nullptr;
 	texture = nullptr;
 	return true;
@@ -170,7 +192,7 @@ bool BigBat::Save(pugi::xml_node& data) const
 
 void BigBat::LoadTexture()
 {
-	texture = App->tex->Load("textures/Enemies/BigBat_spritesheet.png");
+	texture = App->tex->Load("textures/Enemies/Enemy_Bat.png");
 }
 
 void BigBat::LoadAnimation(pugi::xml_node animation_node, Animation* animation)
@@ -182,35 +204,4 @@ void BigBat::LoadAnimation(pugi::xml_node animation_node, Animation* animation)
 	animation->loop = animation_node.attribute("loop").as_bool();
 	animation->offset_x = animation_node.attribute("offset_x").as_int();
 	animation->offset_y = animation_node.attribute("offset_y").as_int();
-}
-
-bool BigBat::CollisionWithPlayer()
-{
-	iPoint checkPoint1 = { animation->GetCurrentFrame().x, animation->GetCurrentFrame().y };
-	iPoint checkPoint2 = { animation->GetCurrentFrame().x + animation->GetCurrentFrame().w, animation->GetCurrentFrame().y };
-	iPoint checkPoint3 = { animation->GetCurrentFrame().x, animation->GetCurrentFrame().y + animation->GetCurrentFrame().h };
-	iPoint checkPoint4 = { animation->GetCurrentFrame().x + animation->GetCurrentFrame().w, animation->GetCurrentFrame().y + animation->GetCurrentFrame().h };
-
-	iPoint playerPoint1 = { App->entities->player->animation->GetCurrentFrame().x, App->entities->player->animation->GetCurrentFrame().y };
-	iPoint playerPoint2 = { App->entities->player->animation->GetCurrentFrame().x + App->entities->player->animation->GetCurrentFrame().w, App->entities->player->animation->GetCurrentFrame().y };
-	iPoint playerPoint3 = { App->entities->player->animation->GetCurrentFrame().x, App->entities->player->animation->GetCurrentFrame().y + App->entities->player->animation->GetCurrentFrame().h };
-
-	if (checkPoint1.x >= playerPoint1.x && checkPoint1.x <= playerPoint2.x && checkPoint1.y >= playerPoint1.y && checkPoint1.y <= playerPoint3.y )
-	{
-		return true;
-	}
-	if (checkPoint2.x >= playerPoint1.x && checkPoint2.x <= playerPoint2.x && checkPoint2.y >= playerPoint1.y && checkPoint2.y <= playerPoint3.y)
-	{
-		return true;
-	}
-	if (checkPoint3.x >= playerPoint1.x && checkPoint3.x <= playerPoint2.x && checkPoint3.y >= playerPoint1.y && checkPoint3.y <= playerPoint3.y)
-	{
-		return true;
-	}
-	if (checkPoint4.x >= playerPoint1.x && checkPoint4.x <= playerPoint2.x && checkPoint4.y >= playerPoint1.y && checkPoint4.y <= playerPoint3.y)
-	{
-		return true;
-	}
-
-	return false;
 }

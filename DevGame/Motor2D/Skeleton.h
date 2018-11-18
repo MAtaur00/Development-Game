@@ -36,10 +36,15 @@ public:
 	Animation walk = Animation();
 	Animation death = Animation();
 
-	p2Point<int> spawn;
-
 	EntityData skeletonData;
 
+	iPoint skeletonPos;
+	iPoint playerPos;
+	fPoint playerPosition;
+	iPoint nextPoint;
+	iPoint spawnPos;
+
+	fPoint spawn;
 };
 
 #endif // !_SKELETON_H_

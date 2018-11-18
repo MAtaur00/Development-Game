@@ -10,11 +10,14 @@
 #include "j1Scene.h"
 #include "Player.h"
 #include "ModulePathfindingWalker.h"
+#include "j1Audio.h"
 
 BlackBandit::BlackBandit(int x, int y, ENTITY_TYPE type) : Entity(x, y, type)
 {
 	pos.x = x;
 	pos.y = y;
+	spawn.x = x;
+	spawn.y = y;
 	pugi::xml_document	config_file;
 	pugi::xml_node* node = &App->LoadEntities(config_file);
 	node = &node->child("enemies").child("blackBandit");
@@ -112,7 +115,22 @@ bool BlackBandit::Update(float dt)
 	}
 	pos.x += banditData.speed;
 	pos.y += banditData.jumpSpeed;
-	
+
+	if (banditPos.y == playerPos.y && (banditPos.x == playerPos.x + App->entities->player->animation->GetCurrentFrame().w || banditPos.x == playerPos.x) && !App->entities->player->god_mode)
+	{
+		if (!App->entities->player->playerAttacking)
+		{
+			App->audio->PlayFx(2);
+			App->entities->player->SpawnPLayer();
+			pos = spawn;
+		}
+		else
+		{
+			animation = &death;
+			to_destroy = true;
+		}
+	}
+
 	return true;
 }
 

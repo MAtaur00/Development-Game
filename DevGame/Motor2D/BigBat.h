@@ -29,8 +29,6 @@ public:
 
 	void LoadAnimation(pugi::xml_node animation_node, Animation* animation);
 
-	bool CollisionWithPlayer();
-
 public:
 	Animation fly = Animation();
 	//Animation idleSwordUp = Animation();
@@ -46,6 +44,8 @@ public:
 	fPoint playerPosition;
 	iPoint nextPoint;
 	iPoint spawnPos;
+
+	fPoint spawn;
 };
 
 #endif // !_BIGBAT_H__

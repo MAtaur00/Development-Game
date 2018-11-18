@@ -37,8 +37,6 @@ public:
 	Animation death = Animation();
 	Animation falling = Animation();
 
-	p2Point<int> spawn;
-
 	EntityData banditData;
 
 	iPoint banditPos;
@@ -47,6 +45,7 @@ public:
 	iPoint nextPoint;
 	iPoint spawnPos;
 
+	fPoint spawn;
 };
 
 #endif // !_BLACKBANDIT_H_

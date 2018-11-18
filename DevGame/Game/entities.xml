@@ -104,15 +104,14 @@
     <bigBat>
       <animations>
         <animation name="fly" speed="0.02" loop="true" offset_x ="0" offset_y ="0">
-          <frame x="2" y="5" w="53" h="57"/>
-          <frame x="2" y="86" w="53" h="57"/>
-          <frame x="2" y="167" w="53" h="57"/>
-          <frame x="2" y="86" w="53" h="57"/>
-          <frame x="2" y="5" w="53" h="57"/>
-        </animation>
-
-        <animation name="death" speed="0.02" loop="true" offset_x ="0" offset_y ="0">
-          <frame x="246" y="15" w="46" h="41"/>
+          <frame x="0" y="0" w="26" h="30"/>
+          <frame x="32" y="0" w="26" h="30"/>
+          <frame x="64" y="0" w="26" h="30"/>
+          <frame x="96" y="0" w="26" h="30"/>
+          <frame x="128" y="0" w="26" h="30"/>
+          <frame x="96" y="0" w="26" h="30"/>
+          <frame x="64" y="0" w="26" h="30"/>
+          <frame x="32" y="0" w="26" h="30"/>
         </animation>
       </animations>
     </bigBat>
@@ -209,8 +208,8 @@
       </animation>
 
       <animation name="kick1" speed="0.13" loop="false" offset_x ="9" offset_y ="6">
-        <frame x="29" y="725" w="30" h="24"/>
-        <frame x="79" y="725" w="30" h="24"/>
+        <frame x="29" y="725" w="30" h="26"/>
+        <frame x="79" y="725" w="30" h="26"/>
         <frame x="129" y="723" w="35" h="26"/>
       </animation>
 

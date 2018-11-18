@@ -8,6 +8,9 @@
 #include "j1Window.h"
 #include "ModuleEntities.h"
 #include "j1Scene.h"
+#include "Player.h"
+#include "ModulePathfindingWalker.h"
+#include "j1Audio.h"
 
 Skeleton::Skeleton(int x, int y, ENTITY_TYPE type) : Entity(x, y, type)
 {
@@ -47,16 +50,79 @@ bool Skeleton::Start()
 
 bool Skeleton::Update(float dt)
 {
+	skeletonData.jumpSpeed = 0.0f;
+	skeletonData.speed = 0.0f;
 	animation = &idle;
 	fPoint tempPos = pos;
 
 	// GRAVITY
 	tempPos.y += skeletonData.gravity * dt;
 	if (CheckCollision(GetEntityTile({ tempPos.x, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::AIR
-		&& CheckCollision(GetEntityTile({ tempPos.x, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::AIR)
+		&& CheckCollision(GetEntityTile({ tempPos.x + animation->GetCurrentFrame().w, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::AIR)
 	{
 		pos = tempPos;
+		animation = &walk;
 	}
+
+	playerPosition = App->entities->player->pos;
+	skeletonPos = App->map->WorldToMap(pos.x, pos.y);
+	playerPos = App->map->WorldToMap(playerPosition.x, playerPosition.y);
+
+	if (skeletonPos.x < playerPos.x + 8 && skeletonPos.x > playerPos.x - 8 && skeletonPos.y < playerPos.y + 8 && skeletonPos.y > playerPos.y - 8)
+	{
+		if (App->pathfindingWalker->CreatePath(skeletonPos, playerPos) != -1)
+		{
+			const p2DynArray<iPoint>* path = App->pathfindingWalker->GetLastPath();
+
+			if (App->map->draw_logic)
+			{
+				for (uint i = 0; i < path->Count(); ++i)
+				{
+					iPoint nextPoint = App->map->MapToWorld(path->At(i)->x, path->At(i)->y);
+					App->render->Blit(path_texture, nextPoint.x, nextPoint.y);
+				}
+			}
+			if (path->Count() > 0)
+			{
+				iPoint pathPoint = iPoint(path->At(0)->x, path->At(0)->y);
+				if (pathPoint.x < skeletonPos.x)
+				{
+					animation = &walk;
+					flip = SDL_RendererFlip::SDL_FLIP_NONE;
+					skeletonData.speed = -70 * dt;
+				}
+				else if (pathPoint.x > skeletonPos.x)
+				{
+					animation = &walk;
+					flip = SDL_RendererFlip::SDL_FLIP_HORIZONTAL;
+					skeletonData.speed = 70 * dt;
+				}
+				if (pathPoint.y > skeletonPos.y)
+				{
+					animation = &walk;
+					skeletonData.jumpSpeed = 70 * dt;
+				}
+			}
+		}
+	}
+	pos.x += skeletonData.speed;
+	pos.y += skeletonData.jumpSpeed;
+
+	if (skeletonPos.y == playerPos.y && (skeletonPos.x == playerPos.x + App->entities->player->animation->GetCurrentFrame().w || skeletonPos.x == playerPos.x) && !App->entities->player->god_mode)
+	{
+		if (!App->entities->player->playerAttacking)
+		{
+			App->audio->PlayFx(2);
+			App->entities->player->SpawnPLayer();
+			pos = spawn;
+		}
+		else
+		{
+			animation = &death;
+			to_destroy = true;
+		}
+	}
+
 	return true;
 }
 

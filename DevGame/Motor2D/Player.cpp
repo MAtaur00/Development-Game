@@ -220,7 +220,7 @@ bool Player::Update(float dt)
 					pos.y = tempPos.y;
 				animation = &jumping;
 			}
-			if (stop_jump > jump_time + 600)
+			if (stop_jump > jump_time + 800)
 			{
 				is_jumping = false;
 			}

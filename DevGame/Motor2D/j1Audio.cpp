@@ -171,7 +171,7 @@ bool j1Audio::PlayFx(unsigned int id, int repeat)
 	{
 		
 		Mix_PlayChannel(-1, fx[id - 1], repeat);
-		Mix_VolumeChunk(Mix_GetChunk(id - 1), App->config.child("audio").child("volume_fx").attribute("value").as_int());
+		//(Mix_GetChunk(id - 1), App->config.child("audio").child("volume_fx").attribute("value").as_int());
 	}
 
 	return ret;
