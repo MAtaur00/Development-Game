@@ -118,17 +118,9 @@ bool BlackBandit::Update(float dt)
 
 	if (banditPos.y == playerPos.y && (banditPos.x == playerPos.x + App->entities->player->animation->GetCurrentFrame().w || banditPos.x == playerPos.x) && !App->entities->player->god_mode)
 	{
-		if (!App->entities->player->playerAttacking)
-		{
-			App->audio->PlayFx(2);
-			App->entities->player->SpawnPLayer();
-			pos = spawn;
-		}
-		else
-		{
-			animation = &death;
-			to_destroy = true;
-		}
+		App->audio->PlayFx(2);
+		App->entities->player->SpawnPLayer();
+		pos = spawn;
 	}
 
 	return true;

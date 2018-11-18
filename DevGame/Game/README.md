@@ -1,4 +1,4 @@
-﻿# Underground Hero
+﻿# Development-Game
 
 
 ## The game
@@ -23,6 +23,8 @@ This game is a platformer game where you will have to reach the end of the two l
 
 * F10 God Mode
 
+* F11 Framerate Cap/Uncap
+
 ## Controls
 
 * Left and Right arrows to move.
@@ -30,12 +32,28 @@ This game is a platformer game where you will have to reach the end of the two l
 * Left or Right while falling if you have a wall in your left or right to slide down.
 * Up arrow to jump while sliding walls.
 
-## Authors 
+## Authors and tasks
 
 **Marc Tarrés Urbieta:** [MAtaur00](https://github.com/MAtaur00)
 
+* Character attacks
+
+* Entity system with animations taken from xml file
+
+* Pathfinding algorythm
+
 **Aitor Vélez Tolosa:** [AitorVelez](https://github.com/AitorVelez)
  
+* FPS cap
+
+* Brofiler
+
+* Changed TMX for both maps, new art.
+
+* Enemy animations
+
+* UML
+
 ## Credits
 
 * Map art: https://opengameart.org/content/dirt-platformer-tiles
