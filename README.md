@@ -44,6 +44,18 @@ This game is a platformer game where you will have to reach the end of the two l
 
 **Aitor Vélez Tolosa:** [AitorVelez](https://github.com/AitorVelez)
  
+* FPS cap
+
+* Brofiler
+
+* Changed TMX for both maps, new art.
+
+* Enemy animations
+
+* UML
+
+* Fade to black
+
 ## Credits
 
 * Map art: https://opengameart.org/content/dirt-platformer-tiles
