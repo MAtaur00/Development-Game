@@ -134,12 +134,6 @@ bool BigBat::Update(float dt)
 	pos.x += batData.speed;
 	pos.y += batData.jumpSpeed;
 
-	/*if (CollisionWithPlayer() && !App->entities->player->god_mode && !App->entities->player->playerAttacking) {
-		
-		App->audio->PlayFx(2);
-		App->entities->player->SpawnPLayer();
-	}*/
-
 	return true;
 }
 

@@ -43,21 +43,10 @@ bool ModulePathfindingWalker::CheckBoundaries(const iPoint& pos) const
 }
 
 // Utility: returns true is the tile is walkable
-bool ModulePathfindingWalker::IsWalkable(const iPoint& pos, ENTITY_TYPE type) const
+bool ModulePathfindingWalker::IsWalkable(const iPoint& pos) const
 {
 	uchar t = GetTileAt(pos);
-	switch (type)
-	{
-	case BIGBAT:
-		return t != INVALID_WALK_CODE && t > 0;
-		break;
-	case BLACKBANDIT:
-		return t != INVALID_WALK_CODE && t > 1;
-		break;
-	default:
-		return false;
-		break;
-	}
+	return t != INVALID_WALK_CODE && t > 0;
 }
 
 // Utility: return the walkability value of a tile
@@ -126,75 +115,25 @@ PathNodeWalker::PathNodeWalker(const PathNodeWalker& node) : g(node.g), h(node.h
 // PathNode -------------------------------------------------------------------------
 // Fills a list (PathList) of all valid adjacent pathnodes
 // ----------------------------------------------------------------------------------
-uint PathNodeWalker::FindWalkableAdjacents(PathListWalker& list_to_fill, ENTITY_TYPE type) const
+uint PathNodeWalker::FindWalkableAdjacents(PathListWalker& list_to_fill) const
 {
 	iPoint cell;
 	uint before = list_to_fill.list.count();
 
-	if (type == BIGBAT)
-	{
-		// north
-		cell.create(pos.x, pos.y + 1);
-		if (App->pathfindingWalker->IsWalkable(cell, type))
-			list_to_fill.list.add(PathNodeWalker(-1, -1, cell, this));
+	// south
+	cell.create(pos.x, pos.y - 1);
+	if (App->pathfindingWalker->IsWalkable(cell))
+		list_to_fill.list.add(PathNodeWalker(-1, -1, cell, this));
 
-		// south
-		cell.create(pos.x, pos.y - 1);
-		if (App->pathfindingWalker->IsWalkable(cell, type))
-			list_to_fill.list.add(PathNodeWalker(-1, -1, cell, this));
+	// east
+	cell.create(pos.x + 1, pos.y);
+	if (App->pathfindingWalker->IsWalkable(cell))
+		list_to_fill.list.add(PathNodeWalker(-1, -1, cell, this));
 
-		// east
-		cell.create(pos.x + 1, pos.y);
-		if (App->pathfindingWalker->IsWalkable(cell, type))
-			list_to_fill.list.add(PathNodeWalker(-1, -1, cell, this));
-
-		// west
-		cell.create(pos.x - 1, pos.y);
-		if (App->pathfindingWalker->IsWalkable(cell, type))
-			list_to_fill.list.add(PathNodeWalker(-1, -1, cell, this));
-
-		// north-east
-		cell.create(pos.x + 1, pos.y + 1);
-		if (App->pathfindingWalker->IsWalkable(cell, type))
-			list_to_fill.list.add(PathNodeWalker(-1, -1, cell, this));
-
-		// north-west
-		cell.create(pos.x - 1, pos.y + 1);
-		if (App->pathfindingWalker->IsWalkable(cell, type))
-			list_to_fill.list.add(PathNodeWalker(-1, -1, cell, this));
-
-		// south-east
-		cell.create(pos.x + 1, pos.y - 1);
-		if (App->pathfindingWalker->IsWalkable(cell, type))
-			list_to_fill.list.add(PathNodeWalker(-1, -1, cell, this));
-
-		// south-west
-		cell.create(pos.x - 1, pos.y - 1);
-		if (App->pathfindingWalker->IsWalkable(cell, type))
-			list_to_fill.list.add(PathNodeWalker(-1, -1, cell, this));
-	}
-	else if (type == BLACKBANDIT)
-	{
-		//// north
-		//cell.create(pos.x, pos.y + 1);
-		//if (App->pathfinding->IsWalkable(cell, type))
-		//	list_to_fill.list.add(PathNode(-1, -1, cell, this));
-
-		//// south
-		//cell.create(pos.x, pos.y - 1);
-		//if (App->pathfinding->IsWalkable(cell, type))
-		//	list_to_fill.list.add(PathNode(-1, -1, cell, this));
-
-		// east
-		cell.create(pos.x + 1, pos.y);
-		if (App->pathfindingWalker->IsWalkable(cell, type))
-			list_to_fill.list.add(PathNodeWalker(-1, -1, cell, this));
-
-		// west
-		cell.create(pos.x - 1, pos.y);
-		if (App->pathfindingWalker->IsWalkable(cell, type))
-			list_to_fill.list.add(PathNodeWalker(-1, -1, cell, this));
-	}
+	// west
+	cell.create(pos.x - 1, pos.y);
+	if (App->pathfindingWalker->IsWalkable(cell))
+		list_to_fill.list.add(PathNodeWalker(-1, -1, cell, this));
 
 	return list_to_fill.list.count();
 }
@@ -221,12 +160,12 @@ int PathNodeWalker::CalculateF(const iPoint& destination)
 // ----------------------------------------------------------------------------------
 // Actual A* algorithm: return number of steps in the creation of the path or -1 ----
 // ----------------------------------------------------------------------------------
-int ModulePathfindingWalker::CreatePath(const iPoint& origin, const iPoint& destination, ENTITY_TYPE type)
+int ModulePathfindingWalker::CreatePath(const iPoint& origin, const iPoint& destination)
 {
 	last_path.Clear();
 	// TODO 1: if origin or destination are not walkable, return -1
 
-	if (!IsWalkable(origin, type) || !IsWalkable(destination, type))
+	if (!IsWalkable(origin) || !IsWalkable(destination))
 		return -1;
 
 	// TODO 2: Create two lists: open, close
@@ -271,7 +210,7 @@ int ModulePathfindingWalker::CreatePath(const iPoint& origin, const iPoint& dest
 			// If it is NOT found, calculate its F and add it to the open list
 			// If it is already in the open list, check if it is a better path (compare G)
 			// If it is a better path, Update the parent
-			close.list.end->data.FindWalkableAdjacents(neighbours, type);
+			close.list.end->data.FindWalkableAdjacents(neighbours);
 			p2List_item<PathNodeWalker>* iterator = neighbours.list.start;
 			for (iterator; iterator != NULL; iterator = iterator->next)
 			{

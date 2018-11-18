@@ -53,6 +53,7 @@ bool j1Scene::Start()
 	uchar* data = NULL;
 	if (App->map->CreateWalkabilityMap(w, h, &data, true))
 		App->pathfinding->SetMap(w, h, data);
+
 	int w2, h2;
 	uchar* data2 = NULL;
 	if (App->map->CreateWalkabilityMap(w2, h2, &data2, false))
@@ -148,7 +149,7 @@ bool j1Scene::Update(float dt)
 	float camera_speed = 125.0f;
 
 	if (App->entities->player->god_mode)
-		camera_speed = 4;
+		camera_speed = 300.0f;
 
 	if (App->entities->player->pos.x - (-App->render->camera.x + (1 * App->render->camera.w / 2)) >= 0)
 	{
@@ -242,10 +243,15 @@ bool j1Scene::LoadScene(int map)
 			spawnEntity = App->map->TileToWorld(i);
 			App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, BLACKBANDIT);
 		}
-		if (layer->data->data[i] == 269)
+		/*if (layer->data->data[i] == 269)
 		{
 			spawnEntity = App->map->TileToWorld(i);
 			App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, SKELETON);
+		}*/
+		if (layer->data->data[i] == 338)
+		{
+			spawnEntity = App->map->TileToWorld(i);
+			App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, BIGBAT);
 		}
 	}
 	/*App->entities->player->FindPlayerSpawn();
@@ -256,7 +262,7 @@ bool j1Scene::LoadScene(int map)
 
 // Load
 bool j1Scene::Load(pugi::xml_node&  savegame) {
-	currmap = savegame.child("Map").attribute("CurrentMap").as_int();
+	currmap = savegame.child("Map").attribute("CurrentMap").as_int();	
 
 	App->map->CleanUp();
 
@@ -271,13 +277,17 @@ bool j1Scene::Load(pugi::xml_node&  savegame) {
 	default:
 		break;
 	}
+
+	App->entities->player->Load(savegame);
 	return true;
 }
 
 //Save
-bool j1Scene::Save(pugi::xml_node& data) const {
-
+bool j1Scene::Save(pugi::xml_node& data) const 
+{
 	pugi::xml_node map = data.append_child("Map");
+
+	App->entities->player->Save(data);
 
 	map.append_attribute("CurrentMap") = currmap;
 	return true;

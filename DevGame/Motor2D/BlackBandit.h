@@ -41,6 +41,12 @@ public:
 
 	EntityData banditData;
 
+	iPoint banditPos;
+	iPoint playerPos;
+	fPoint playerPosition;
+	iPoint nextPoint;
+	iPoint spawnPos;
+
 };
 
 #endif // !_BLACKBANDIT_H_

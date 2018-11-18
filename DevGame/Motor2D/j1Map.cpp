@@ -458,7 +458,7 @@ bool j1Map::CreateWalkabilityMap(int& width, int& height, uchar** buffer, bool c
 
 		if (layer->properties.Get("Navigation", 0) == 0)
 			continue;
-		if (can_fly && !layer->properties.Get("canFly", 0) == 1 || !can_fly && layer->properties.Get("canFly", 0) == 0)
+		if (can_fly && layer->name != "Navigation" || !can_fly && layer->name != "Navigation_Walker")
 			continue;
 
 		uchar* map = new uchar[layer->width*layer->height];
