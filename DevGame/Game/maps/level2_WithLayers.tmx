@@ -24396,6 +24396,7 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
+   <tile gid="269"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -24438,6 +24439,7 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
+   <tile gid="269"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -24476,9 +24478,7 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="269"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -25259,7 +25259,7 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="336"/>
+   <tile gid="269"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
