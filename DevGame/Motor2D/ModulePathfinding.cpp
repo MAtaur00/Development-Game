@@ -2,6 +2,7 @@
 #include "p2Log.h"
 #include "j1App.h"
 #include "ModulePathFinding.h"
+#include "Brofiler/Brofiler.h"
 
 ModulePathfinding::ModulePathfinding() : j1Module(), map(NULL), last_path(DEFAULT_PATH_LENGTH), width(0), height(0)
 {
@@ -187,6 +188,7 @@ int PathNode::CalculateF(const iPoint& destination)
 // ----------------------------------------------------------------------------------
 int ModulePathfinding::CreatePath(const iPoint& origin, const iPoint& destination)
 {
+	BROFILER_CATEGORY("PathfindingCreatePath", Profiler::Color::Violet)
 	last_path.Clear();
 	// TODO 1: if origin or destination are not walkable, return -1
 

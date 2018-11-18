@@ -11,6 +11,7 @@
 #include "j1Window.h"
 #include "j1Audio.h"
 #include "j1App.h"
+#include "Brofiler/Brofiler.h"
 
 ModuleEntities::ModuleEntities() 
 {
@@ -32,6 +33,7 @@ bool ModuleEntities::Start()
 
 bool ModuleEntities::PreUpdate()
 {
+	BROFILER_CATEGORY("EntitesPreUpdate", Profiler::Color::Yellow)
 	p2List_item<Entity*>* item = entities.start;
 	while (item != nullptr)
 	{
@@ -47,6 +49,7 @@ bool ModuleEntities::PreUpdate()
 
 bool ModuleEntities::Update(float dt)
 {
+	BROFILER_CATEGORY("EntitiesUpdate", Profiler::Color::Yellow)
 	for (int i = 0; i < entities.count(); ++i)
 	{
 		if (entities.At(i) != nullptr)
