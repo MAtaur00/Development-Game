@@ -208,23 +208,27 @@ void j1App::FinishUpdate()
 	uint32 frames_on_last_update = prev_last_sec_frame_count;
 
 	if (App->input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN) {
+	
 		if (fpshigh == false) {
-			App->framelimit = 100;
+			framelimit = 100;
 			fpshigh = true;
+
 		}
-		if(fpshigh==true) {
-			App->framelimit = 30;
+		else {
+			framelimit = 30;
 			fpshigh = false;
 		}
 
 		
 	}
-	
-
+	//
+	//if (App->input->GetKey(SDL_SCANCODE_F12) == KEY_DOWN) {
+	//	config.child("vsync").attribute("value").as_bool() = true;
+	//}
 
 	static char title[300];
-	sprintf_s(title, 300, "Av.FPS: %.2f Last Frame Ms: %02u Last sec frames: %i  Time since startup: %.3f Frame Count: %lu Cap: VSYNC: %c ",
-		avg_fps, last_frame_ms, frames_on_last_update, seconds_since_startup, frame_count);
+	sprintf_s(title, 300, "Av.FPS: %.2f Last Frame Ms: %02u Last sec frames: %i  Time since startup: %.3f Frame Count: %lu Cap: %luFPS  VSYNC:  ",
+		avg_fps, last_frame_ms, frames_on_last_update, seconds_since_startup, frame_count,framelimit);
 	App->win->SetTitle(title);
 
 	//Fps 
