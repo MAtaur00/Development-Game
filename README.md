@@ -54,8 +54,6 @@ This game is a platformer game where you will have to reach the end of the two l
 
 * UML
 
-* Fade to black
-
 ## Credits
 
 * Map art: https://opengameart.org/content/dirt-platformer-tiles
