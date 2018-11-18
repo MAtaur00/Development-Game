@@ -8,6 +8,7 @@
 #include "j1Window.h"
 #include "j1Map.h"
 #include "j1Scene.h"
+#include "Brofiler/Brofiler.h"
 #include "ModuleFadeToBlack.h"
 #include "SDL/include/SDL_render.h"
 #include "SDL/include/SDL_timer.h"
@@ -32,6 +33,7 @@ bool ModuleFadeToBlack::Start()
 // Update: draw background
 bool ModuleFadeToBlack::Update(float dt)
 {
+	BROFILER_CATEGORY("FadeToBlackUpdate", Profiler::Color::Tomato)
 	if (current_step == fade_step::none)
 		return true;
 
