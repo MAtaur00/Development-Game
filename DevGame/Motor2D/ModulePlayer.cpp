@@ -8,6 +8,7 @@
 #include "j1Audio.h"
 #include "j1Window.h"
 #include "ModuleFadeToBlack.h"
+#include "Brofiler/Brofiler.h"
 
 
 ModulePlayer::ModulePlayer()
@@ -84,6 +85,7 @@ bool ModulePlayer::Start()
 
 bool ModulePlayer::Update(float dt)
 {
+	BROFILER_CATEGORY("Update", Profiler::Color::Blue)
 	if (!sword)
 		animation = &idle;
 	else if (sword)
