@@ -31,6 +31,10 @@ This game is a platformer game where you will have to reach the end of the two l
 * Up arrow to jump.
 * Left or Right while falling if you have a wall in your left or right to slide down.
 * Up arrow to jump while sliding walls.
+* Q for punch.
+* W for kick.
+* Q Shift long punch.
+* W+Shift long kick.
 
 ## Authors and tasks
 
