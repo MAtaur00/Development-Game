@@ -6,6 +6,7 @@
 Thank you for downloading!
 This game is a platformer game where you will have to reach the end of the two levels in order to complete the game. Our character has the hability of sliding down through walls and jumping meanwhile.
 
+-The enemy Black Bandit can't be killed, you will just have to avoid him.
 
 ## Debugging Fucionalities
 
@@ -31,9 +32,11 @@ This game is a platformer game where you will have to reach the end of the two l
 * Up arrow to jump.
 * Left or Right while falling if you have a wall in your left or right to slide down.
 * Up arrow to jump while sliding walls.
+
+**Attacks**
 * Q for punch.
 * W for kick.
-* Q Shift long punch.
+* Q+Shift long punch.
 * W+Shift long kick.
 
 ## Authors and tasks
