@@ -65,6 +65,7 @@ This game is a platformer game where you will have to reach the end of the two l
 
 * Map art: https://opengameart.org/content/dirt-platformer-tiles
 * Character art: https://rvros.itch.io/animated-pixel-hero
+* GUI: https://dribbble.com/shots/893593-Adventure-Game-Mini-RPG-UI-Pack-Free-PSD
 
 ## License
 
