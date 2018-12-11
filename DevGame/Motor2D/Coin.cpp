@@ -65,13 +65,13 @@ bool Coin::Update(float dt)
 	pos.x += coinData.speed;
 	pos.y += coinData.jumpSpeed;
 
-	if (coinPos.y == playerPos.y && (coinPos.x == playerPos.x + App->entities->player->animation->GetCurrentFrame().w || coinPos.x == playerPos.x) && !App->entities->player->god_mode)
+	/*if (coinPos.y == playerPos.y && (coinPos.x == playerPos.x + App->entities->player->animation->GetCurrentFrame().w || coinPos.x == playerPos.x) && !App->entities->player->god_mode)
 	{
 		App->audio->PlayFx(2);
 		App->entities->player->SpawnPLayer();
 		pos = spawn;
 	}
-
+	*/
 	return true;
 }
 
