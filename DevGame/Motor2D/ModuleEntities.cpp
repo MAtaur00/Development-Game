@@ -4,6 +4,7 @@
 #include "BlackBandit.h"
 #include "Skeleton.h"
 #include "BigBat.h"
+#include "Coin.h"
 #include "j1Textures.h"
 #include "j1Render.h"
 #include "j1Map.h"
@@ -116,6 +117,15 @@ bool ModuleEntities::SpawnEntity(int x, int y, ENTITY_TYPE type)
 		ret = true;
 		break;
 	}
+
+	case COIN:
+	{
+		Coin* coin = new Coin(x, y, COIN);
+		entities.add(coin);
+		ret = true;
+		break;
+	}
+
 
 	default:
 	{ 

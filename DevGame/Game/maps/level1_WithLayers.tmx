@@ -21054,7 +21054,7 @@
    <tile gid="337"/>
   </data>
  </layer>
- <layer name="Navigation_Walker" width="150" height="20" visible="0" opacity="0.3">
+ <layer name="Navigation_Walker" width="150" height="20" opacity="0.3">
   <properties>
    <property name="Navigation" type="int" value="1"/>
    <property name="canFly" type="int" value="2"/>
@@ -26024,7 +26024,7 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="71"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>

@@ -88,6 +88,12 @@ bool j1Scene::Start()
 			spawnEntity = App->map->TileToWorld(i);
 			App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, BIGBAT);
 		}
+
+		if (layer->data->data[i] == 71)
+		{
+			spawnEntity = App->map->TileToWorld(i);
+			App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, COIN);
+		}
 	}
 
 	return true;
