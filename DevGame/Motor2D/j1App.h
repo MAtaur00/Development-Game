@@ -19,6 +19,8 @@ class ModuleFadeToBlack;
 class ModuleEntities;
 class ModulePathfinding;
 class ModulePathfindingWalker;
+class j1Fonts;
+class j1Gui;
 
 class j1App
 {
@@ -88,17 +90,19 @@ private:
 public:
 
 	// Modules
-	j1Window*			win;
-	j1Input*			input;
-	j1Render*			render;
-	j1Textures*			tex;
-	j1Audio*			audio;
-	j1Scene*			scene;
-	j1Map*				map;
-	ModuleFadeToBlack*  fade;
-	ModuleEntities*		entities;
-	ModulePathfinding*	pathfinding;
-	ModulePathfindingWalker* pathfindingWalker;
+	j1Window*			win = NULL;
+	j1Input*			input = NULL;
+	j1Render*			render = NULL;
+	j1Textures*			tex = NULL;
+	j1Audio*			audio = NULL;
+	j1Scene*			scene = NULL;
+	j1Map*				map = NULL;
+	ModuleFadeToBlack*  fade = NULL;
+	ModuleEntities*		entities = NULL;
+	ModulePathfinding*	pathfinding = NULL;
+	ModulePathfindingWalker* pathfindingWalker = NULL;
+	j1Fonts*			font = NULL;
+	j1Gui*				gui = NULL;
 	uint32	framelimit;
 
 	float				dt = 0;
