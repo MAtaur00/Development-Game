@@ -1,16 +1,16 @@
-#ifndef __MENU_H__
-#define __MENU_H__
+#ifndef __INGAMEMENU_H__
+#define __INGAMEMENU_H__
 
 #include "j1Module.h"
 
 class Image;
 class Button;
 
-class Menu : public j1Module
+class InGameMenu : public j1Module
 {
 public:
-	Menu();
-	~Menu();
+	InGameMenu();
+	~InGameMenu();
 
 	bool Awake(pugi::xml_node& config);
 
@@ -31,11 +31,9 @@ public:
 	Image* bg_image = nullptr;
 
 	Button* button_continue = nullptr;
-	Button* button_new_game = nullptr;
 	Button* button_settings = nullptr;
-	Button* button_credits = nullptr;
-	Button* button_exit = nullptr;
+	Button* button_main_menu = nullptr;
 };
 
 
-#endif // __MENU_H__
+#endif // __INGAMEMENU_H__

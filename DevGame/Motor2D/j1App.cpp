@@ -19,6 +19,9 @@
 #include "j1Fonts.h"
 #include "j1Gui.h"
 #include "Menu.h"
+#include "InGameMenu.h"
+#include "Settings.h"
+#include "Credits.h"
 #include "Brofiler/Brofiler.h"
 
 // Constructor
@@ -46,6 +49,9 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	font = new j1Fonts();
 	gui = new j1Gui();
 	menu = new Menu();
+	inGameMenu = new InGameMenu();
+	settings = new Settings();
+	credits = new Credits();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -62,6 +68,9 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(font);
 	AddModule(gui);
 	AddModule(menu);
+	AddModule(inGameMenu);
+	AddModule(settings);
+	AddModule(credits);
 
 	// render last to swap buffer
 	AddModule(render);

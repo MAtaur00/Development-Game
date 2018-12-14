@@ -27,7 +27,3 @@ bool UI_Element::Draw() {
 bool UI_Element::CleanUp() {
 	return true;
 }
-
-bool UI_Element::MouseOnRect() {
-	return true;
-}

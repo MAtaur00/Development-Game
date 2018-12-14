@@ -6,12 +6,7 @@
 
 #define CURSOR_WIDTH 2
 
-enum UI_State
-{
-	IDLE = 1,
-	HOVER = 2,
-	CLICK = 3
-};
+enum UI_State;
 
 struct UI_info
 {
@@ -68,8 +63,6 @@ public:
 	UI_Element* AddScrollbar(int x, int y, SDL_Rect rect, UI_Element* parent, j1Module* CallBack);
 
 	UI_Element* AddCheckbox(int x, int y, SDL_Rect rect, UI_Element* parent, j1Module* CallBack);
-
-	SDL_Texture* GetAtlas() const;
 
 private:
 

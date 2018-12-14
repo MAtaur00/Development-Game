@@ -5,6 +5,12 @@
 #include "SDL/include/SDL.h"
 
 struct SDL_Texture;
+enum UI_State
+{
+	IDLE = 1,
+	HOVER = 2,
+	CLICK = 3
+};
 
 class UI_Element
 {
@@ -41,8 +47,6 @@ public:
 
 	// Called before quitting
 	virtual bool CleanUp();
-
-	virtual bool MouseOnRect();
 
 	virtual void UI_Interaction(UI_State state) {};
 };

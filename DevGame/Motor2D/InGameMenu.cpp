@@ -1,4 +1,4 @@
-#include "Menu.h"
+#include "InGameMenu.h"
 #include "j1Gui.h"
 #include "Button.h"
 #include "Image.h"
@@ -9,28 +9,26 @@
 #include "j1App.h"
 #include "Brofiler/Brofiler.h"
 
-Menu::Menu()
+InGameMenu::InGameMenu()
 {
-	name.create("menu");
+	name.create("inGameMenu");
 }
 
-Menu::~Menu() {}
+InGameMenu::~InGameMenu() {}
 
-bool Menu::Awake(pugi::xml_node& conf)
+bool InGameMenu::Awake(pugi::xml_node& conf)
 {
 	bool ret = true;
 	return ret;
 }
 
-bool Menu::Start()
+bool InGameMenu::Start()
 {
 	bg_image = (Image*)App->gui->AddImage(0, 0, { 0, 0, 640, 480 }, NULL, this);
 
 	button_continue = (Button*)App->gui->AddButton(0, 0, { 998, 45, 246, 61 }, NULL, this);
-	button_new_game = (Button*)App->gui->AddButton(0, 0, { 998, 45, 246, 61 }, NULL, this);
 	button_settings = (Button*)App->gui->AddButton(0, 0, { 998, 45, 246, 61 }, NULL, this);
-	button_credits = (Button*)App->gui->AddButton(0, 0, { 998, 45, 246, 61 }, NULL, this);
-	button_exit = (Button*)App->gui->AddButton(0, 0, { 1295, 46, 246, 59 }, NULL, this);
+	button_main_menu = (Button*)App->gui->AddButton(0, 0, { 1295, 46, 246, 59 }, NULL, this);
 
 	return true;
 }

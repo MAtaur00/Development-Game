@@ -46,7 +46,7 @@ bool Label::SetText(char* text) {
 	{
 		uint w = 0, h = 0;
 		App->tex->GetSize(tex, w, h);
-		SDL_Rect rect = debug_UI = { 0, 0, w, h };
+		SDL_Rect rect = debug_UI = { 0, 0, (int)w, (int)h };
 
 		texture = tex;
 

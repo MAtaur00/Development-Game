@@ -22,6 +22,9 @@ class ModulePathfindingWalker;
 class j1Fonts;
 class j1Gui;
 class Menu;
+class InGameMenu;
+class Settings;
+class Credits;
 
 class j1App
 {
@@ -105,6 +108,9 @@ public:
 	j1Fonts*			font = NULL;
 	j1Gui*				gui = NULL;
 	Menu*				menu = NULL;
+	InGameMenu*			inGameMenu = NULL;
+	Settings*			settings = NULL;
+	Credits*			credits = NULL;
 	uint32	framelimit;
 
 	float				dt = 0;
