@@ -21,6 +21,7 @@ class ModulePathfinding;
 class ModulePathfindingWalker;
 class j1Fonts;
 class j1Gui;
+class Menu;
 
 class j1App
 {
@@ -103,6 +104,7 @@ public:
 	ModulePathfindingWalker* pathfindingWalker = NULL;
 	j1Fonts*			font = NULL;
 	j1Gui*				gui = NULL;
+	Menu*				menu = NULL;
 	uint32	framelimit;
 
 	float				dt = 0;

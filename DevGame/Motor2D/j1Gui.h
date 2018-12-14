@@ -2,12 +2,35 @@
 #define __j1GUI_H__
 
 #include "j1Module.h"
+#include "UI.h"
 
 #define CURSOR_WIDTH 2
 
-// TODO 1: Create your structure of classes
+enum UI_State
+{
+	IDLE = 1,
+	HOVER = 2,
+	CLICK = 3
+};
 
-// ---------------------------------------------------
+struct UI_info
+{
+	UI_Element* parent = nullptr;
+
+	fPoint position;
+
+	int h, w;
+
+	fPoint parent_pos;
+
+	UI_State state;
+
+	UI_State state_previous;
+
+	j1Module* CallBack = nullptr;
+};
+
+
 class j1Gui : public j1Module
 {
 public:
@@ -26,21 +49,34 @@ public:
 	// Called before all Updates
 	bool PreUpdate();
 
+	bool Update(float dt);
+
 	// Called after all Updates
 	bool PostUpdate();
 
 	// Called before quitting
 	bool CleanUp();
 
-	// TODO 2: Create the factory methods
-	// Gui creation functions
+	SDL_Texture* GetAtlas() const;
 
-	const SDL_Texture* GetAtlas() const;
+	UI_Element* AddImage(int x, int y, SDL_Rect rect, UI_Element* parent, j1Module* CallBack);
+
+	UI_Element* AddButton(int x, int y, SDL_Rect rect, UI_Element* parent, j1Module* CallBack);
+
+	UI_Element* AddLabel(int x, int y, UI_Element* parent, j1Module* CallBack);
+
+	UI_Element* AddScrollbar(int x, int y, SDL_Rect rect, UI_Element* parent, j1Module* CallBack);
+
+	UI_Element* AddCheckbox(int x, int y, SDL_Rect rect, UI_Element* parent, j1Module* CallBack);
+
+	SDL_Texture* GetAtlas() const;
 
 private:
 
 	SDL_Texture* atlas;
 	p2SString atlas_file_name;
+
+	p2List<UI_Element*> UI_elements;
 };
 
 #endif // __j1GUI_H__
