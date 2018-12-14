@@ -3,8 +3,8 @@
 
 #include "j1Module.h"
 
-class Image;
-class Button;
+#include "Button.h"
+#include "Image.h"
 
 class Menu : public j1Module
 {

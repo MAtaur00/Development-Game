@@ -7,10 +7,7 @@
 #include "j1Input.h"
 #include "Menu.h"
 
-Label::Label(int x, int y, UI_Element* parent) : UI_Element(x, y, parent) {
-
-	original_pos = position;
-}
+Label::Label(int x, int y, UI_Element* parent) : UI_Element(x, y, parent) {}
 
 Label::~Label() {
 

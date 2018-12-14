@@ -5,12 +5,12 @@
 
 struct SDL_Texture;
 
-class Slider : public UI_Element
+class ScrollBar : public UI_Element
 {
 public:
-	Slider(int x, int y, UI_Element* parent);
+	ScrollBar(int x, int y, UI_Element* parent);
 
-	~Slider() {}
+	~ScrollBar() {}
 
 	bool CleanUp();
 

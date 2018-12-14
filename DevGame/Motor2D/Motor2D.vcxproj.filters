@@ -88,9 +88,6 @@
     <ClCompile Include="Label.cpp">
       <Filter>Desenvolupament  ========\UI</Filter>
     </ClCompile>
-    <ClCompile Include="Menu.cpp">
-      <Filter>Desenvolupament  ========\Modules</Filter>
-    </ClCompile>
     <ClCompile Include="Fonts.cpp">
       <Filter>Desenvolupament  ========\Modules</Filter>
     </ClCompile>
@@ -101,13 +98,16 @@
       <Filter>Desenvolupament  ========\UI</Filter>
     </ClCompile>
     <ClCompile Include="Settings.cpp">
-      <Filter>Desenvolupament  ========\Modules</Filter>
+      <Filter>Desenvolupament  ========\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="Credits.cpp">
-      <Filter>Desenvolupament  ========\Modules</Filter>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Desenvolupament  ========\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="InGameMenu.cpp">
-      <Filter>Desenvolupament  ========\Modules</Filter>
+      <Filter>Desenvolupament  ========\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Credits.cpp">
+      <Filter>Desenvolupament  ========\Scenes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -219,9 +219,6 @@
     <ClInclude Include="Label.h">
       <Filter>Desenvolupament  ========\UI</Filter>
     </ClInclude>
-    <ClInclude Include="Menu.h">
-      <Filter>Desenvolupament  ========\Modules</Filter>
-    </ClInclude>
     <ClInclude Include="Fonts.h">
       <Filter>Desenvolupament  ========\Modules</Filter>
     </ClInclude>
@@ -232,13 +229,16 @@
       <Filter>Desenvolupament  ========\UI</Filter>
     </ClInclude>
     <ClInclude Include="Settings.h">
-      <Filter>Desenvolupament  ========\Modules</Filter>
+      <Filter>Desenvolupament  ========\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="Credits.h">
-      <Filter>Desenvolupament  ========\Modules</Filter>
+    <ClInclude Include="Menu.h">
+      <Filter>Desenvolupament  ========\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="InGameMenu.h">
-      <Filter>Desenvolupament  ========\Modules</Filter>
+      <Filter>Desenvolupament  ========\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Credits.h">
+      <Filter>Desenvolupament  ========\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

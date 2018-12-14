@@ -3,9 +3,9 @@
 
 #include "j1Module.h"
 
-class Image;
-class CheckBox;
-class ScrollBar;
+#include "Image.h"
+#include "Scrollbar.h"
+#include "CheckBox.h"
 
 class Settings : public j1Module
 {

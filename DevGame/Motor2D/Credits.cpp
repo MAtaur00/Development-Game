@@ -1,7 +1,5 @@
 #include "Credits.h"
 #include "j1Gui.h"
-#include "Button.h"
-#include "Image.h"
 #include "j1Textures.h"
 #include "j1Render.h"
 #include "p2Log.h"

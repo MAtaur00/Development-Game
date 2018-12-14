@@ -2,9 +2,8 @@
 #define __CREDITS_H__
 
 #include "j1Module.h"
-
-class Image;
-class Label;
+#include "Label.h"
+#include "Image.h"
 
 class Credits : public j1Module
 {

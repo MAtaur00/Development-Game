@@ -3,6 +3,7 @@
 
 #include "j1Module.h"
 #include "UI.h"
+#include "p2List.h"
 
 #define CURSOR_WIDTH 2
 
