@@ -61,13 +61,17 @@ This game is a platformer game where you will have to reach the end of the two l
 
 * UML
 
+## Team photo
+
+![Marc Tarrés Urbieta/Aitor Vélez Tolosa](https://github.com/MAtaur00/Underground-Hero/blob/master/Other%20files/Team%20Photo/team_photo.jpg?raw=true)
+
 ## Credits
 
 * Map art: https://opengameart.org/content/dirt-platformer-tiles
 * Character art: https://rvros.itch.io/animated-pixel-hero
 * GUI: https://dribbble.com/shots/893593-Adventure-Game-Mini-RPG-UI-Pack-Free-PSD
 
-## Gameplay Video
+## Gameplay Video (testing)
 
 [![](https://cdn02.nintendo-europe.com/media/images/10_share_images/games_15/nintendo_ds_22/SI_NDS_NewSuperMarioBrosDS_image1600w.jpg)](https://www.youtube.com/watch?v=w2NjUDfOp2o)
 
