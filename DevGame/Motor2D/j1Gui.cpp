@@ -53,6 +53,8 @@ bool j1Gui::Update(float dt)
 			UI_elements.At(i)->data->Draw();
 		}
 	}
+
+	return true;
 }
 
 // Called after all Updates

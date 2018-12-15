@@ -1,3 +1,6 @@
+#ifndef __CHECKBOX_H__
+#define __CHECKBOX_H__
+
 #include "UI.h"
 #include "Image.h"
 #include "p2List.h"
@@ -26,3 +29,5 @@ public:
 
 	SDL_Texture* tex;
 };
+
+#endif

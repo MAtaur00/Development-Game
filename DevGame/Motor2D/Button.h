@@ -1,3 +1,6 @@
+#ifndef __BUTTON_H__
+#define __BUTTON_H__
+
 #include "UI.h"
 #include "Label.h"
 #include "Image.h"
@@ -22,11 +25,13 @@ public:
 public:
 	Label* label = nullptr;
 
-	SDL_Rect idle;
-	SDL_Rect hover;
-	SDL_Rect click;
+	SDL_Rect button_idle;
+	SDL_Rect button_hover;
+	SDL_Rect button_click;
 
 	bool clicked = false;
 
 	SDL_Texture* tex;
 };
+
+#endif

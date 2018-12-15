@@ -20,9 +20,9 @@ bool Button::Define(SDL_Rect idle, SDL_Rect hover, SDL_Rect click, char* text)
 {
 	bool ret = false;
 
-	this->idle = idle;
-	this->hover = hover;
-	this->click = click;
+	button_idle = idle;
+	button_hover = hover;
+	button_click = click;
 	
 	label = (Label*)App->gui->AddLabel(position.x, position.y, this, nullptr);
 	label->SetText(text);
@@ -37,15 +37,15 @@ void Button::UI_Interaction(UI_State state)
 	switch (state)
 	{
 	case IDLE:
-		rect = idle;
+		rect = button_idle;
 		break;
 
 	case HOVER:
-		rect = hover;
+		rect = button_hover;
 		break;
 
 	case CLICK:
-		rect = click;
+		rect = button_click;
 		break;
 	}
 }

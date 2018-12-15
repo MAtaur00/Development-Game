@@ -14,8 +14,8 @@ Label::~Label() {
 }
 
 
-bool Label::Update(float dt) {
-
+bool Label::Update(float dt) 
+{
 	return true;
 }
 

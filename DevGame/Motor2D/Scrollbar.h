@@ -1,3 +1,6 @@
+#ifndef __SCROLLBAR_H__
+#define __SCROLLBAR_H__
+
 #include "p2List.h"
 #include "UI.h"
 #include "Image.h"
@@ -28,3 +31,5 @@ public:
 
 	SDL_Texture* tex;
 };
+
+#endif

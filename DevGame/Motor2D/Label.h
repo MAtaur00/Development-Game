@@ -1,3 +1,6 @@
+#ifndef __LABEL_H__
+#define __LABEL_H__
+
 #include "UI.h"
 #include "p2SString.h"
 #include "p2List.h"
@@ -20,3 +23,5 @@ public:
 	p2SString text;
 
 };
+
+#endif

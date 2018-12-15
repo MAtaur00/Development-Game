@@ -1,3 +1,6 @@
+#ifndef __IMAGE_H__
+#define __IMAGE_H__
+
 #include "UI.h"
 #include "j1Textures.h"
 #include "SDL/include/SDL.h"
@@ -18,3 +21,5 @@ public:
 
 	SDL_Texture* tex = nullptr;
 };
+
+#endif
