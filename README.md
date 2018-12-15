@@ -67,6 +67,10 @@ This game is a platformer game where you will have to reach the end of the two l
 * Character art: https://rvros.itch.io/animated-pixel-hero
 * GUI: https://dribbble.com/shots/893593-Adventure-Game-Mini-RPG-UI-Pack-Free-PSD
 
+## Gameplay Video
+
+[![](https://cdn02.nintendo-europe.com/media/images/10_share_images/games_15/nintendo_ds_22/SI_NDS_NewSuperMarioBrosDS_image1600w.jpg)](https://www.youtube.com/watch?v=w2NjUDfOp2o)
+
 ## License
 
 MIT License
