@@ -2,7 +2,6 @@
 #include "Entity.h"
 #include "Player.h"
 #include "BlackBandit.h"
-#include "Skeleton.h"
 #include "BigBat.h"
 #include "Coin.h"
 #include "j1Textures.h"
@@ -99,13 +98,6 @@ bool ModuleEntities::SpawnEntity(int x, int y, ENTITY_TYPE type)
 	{
 		BlackBandit* bandit = new BlackBandit(x, y, BLACKBANDIT);
 		entities.add(bandit);
-		ret = true;
-		break;
-	}
-	case SKELETON:
-	{
-		Skeleton* skeleton = new Skeleton(x, y, SKELETON);
-		entities.add(skeleton);
 		ret = true;
 		break;
 	}
