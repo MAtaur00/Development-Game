@@ -3,6 +3,58 @@
 <entities>
 
   <enemies>
+    <skeleton>
+      <animations>
+        <animation name ="idle" speed ="0.1" loop ="true" offset_x ="0" offset_y="0">
+          <frame x="3" y="138" w="24" h="32"/>
+          <frame x="27" y="138" w="24" h="32"/>
+          <frame x="51" y="138" w="24" h="32"/>
+          <frame x="75" y="138" w="24" h="32"/>
+          <frame x="99" y="138" w="24" h="32"/>
+          <frame x="123" y="138" w="24" h="32"/>
+          <frame x="147" y="138" w="24" h="32"/>
+          <frame x="171" y="138" w="24" h="32"/>
+          <frame x="195" y="138" w="24" h="32"/>
+          <frame x="219" y="138" w="24" h="32"/>
+          <frame x="243" y="138" w="24" h="32"/>
+        </animation>
+
+        <animation name="notice" speed="0.1" loop="false" offset_x ="0" offset_y ="0">
+          <frame x="3" y="6" w="22" h="32"/>
+          <frame x="25" y="6" w="22" h="32"/>
+          <frame x="47" y="6" w="22" h="32"/>
+          <frame x="69" y="6" w="22" h="32"/>
+        </animation>
+
+        <animation name="hit" speed="0.1" loop="false" offset_x ="0" offset_y ="0">
+          <frame x="4" y="94" w="29" h="32"/>
+          <frame x="34" y="94" w="29" h="32"/>
+          <frame x="63" y="94" w="29" h="32"/>
+          <frame x="93" y="94" w="29" h="32"/>
+          <frame x="123" y="94" w="29" h="32"/>
+          <frame x="154" y="94" w="29" h="32"/>
+          <frame x="184" y="94" w="29" h="32"/>
+          <frame x="214" y="94" w="29" h="32"/>
+        </animation>
+
+        <animation name="walk" speed="0.1" loop="true" offset_x ="0" offset_y ="0">
+          <frame x="366" y="138" w="22" h="32"/>
+          <frame x="388" y="138" w="22" h="32"/>
+          <frame x="410" y="138" w="22" h="32"/>
+          <frame x="432" y="138" w="22" h="32"/>
+          <frame x="455" y="138" w="22" h="32"/>
+          <frame x="477" y="138" w="22" h="32"/>
+          <frame x="499" y="138" w="22" h="32"/>
+          <frame x="521" y="138" w="22" h="32"/>
+          <frame x="543" y="138" w="22" h="32"/>
+          <frame x="565" y="138" w="22" h="32"/>
+          <frame x="587" y="138" w="22" h="32"/>
+          <frame x="609" y="138" w="22" h="32"/>
+          <frame x="631" y="138" w="22" h="32"/>
+        </animation>
+      </animations>
+    </skeleton>
+   
     <blackBandit>
       <animations>
         <animation name ="idle" speed ="0.05" loop ="true" offset_x ="0" offset_y="0">
