@@ -73,7 +73,7 @@ This game is a platformer game where you will have to reach the end of the two l
 
 ## Gameplay Video (testing)
 
-[![](https://cdn02.nintendo-europe.com/media/images/10_share_images/games_15/nintendo_ds_22/SI_NDS_NewSuperMarioBrosDS_image1600w.jpg)](https://www.youtube.com/watch?v=w2NjUDfOp2o)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/9DEpsvblBMo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## License
 
@@ -102,5 +102,8 @@ SOFTWARE.
 ## Github repository link
 
 https://github.com/MAtaur00/Development-Game
+
+
+
 
 
