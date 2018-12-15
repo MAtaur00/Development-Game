@@ -24,15 +24,20 @@ bool Menu::Start()
 {
 	bg_image = (Image*)App->gui->AddImage(0, 0, { 0, 0, 640, 480 }, NULL, this);
 
-	button_continue = (Button*)App->gui->AddButton(0, 0, { 998, 45, 246, 61 }, NULL, this);
-	button_new_game = (Button*)App->gui->AddButton(0, 0, { 998, 45, 246, 61 }, NULL, this);
-	button_settings = (Button*)App->gui->AddButton(0, 0, { 998, 45, 246, 61 }, NULL, this);
-	button_exit = (Button*)App->gui->AddButton(0, 0, { 1295, 46, 246, 59 }, NULL, this);
+	button_continue = (Button*)App->gui->AddButton(200, 350, { 998, 45, 246, 61 }, { 998, 164, 246, 61 }, { 998, 301, 246, 61 }, "Continue", NULL, this);
+	button_new_game = (Button*)App->gui->AddButton(550, 350, { 998, 45, 246, 61 }, { 998, 164, 246, 61 }, { 998, 301, 246, 61 }, "New Game", NULL, this);
+	button_settings = (Button*)App->gui->AddButton(200, 500, { 998, 45, 246, 61 }, { 998, 164, 246, 61 }, { 998, 301, 246, 61 }, "Settings", NULL, this);
+	button_exit = (Button*)App->gui->AddButton(550, 500, { 1295, 46, 246, 59 }, { 1295, 165, 246, 59 }, { 1295, 302, 246, 59 }, "Exit", NULL, this);
 
 	return true;
 }
 
 bool Menu::PreUpdate()
+{
+	return true;
+}
+
+bool Menu::Update(float dt)
 {
 	return true;
 }

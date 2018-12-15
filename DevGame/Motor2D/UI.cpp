@@ -17,9 +17,9 @@ bool UI_Element::Update(float dt) {
 }
 
 bool UI_Element::Draw() {
-	if (texture != nullptr)
+	if (atlas != nullptr)
 	{
-		App->render->Blit(texture, position.x, position.y, &rect);
+		App->render->Blit(atlas, position.x, position.y, &rect);
 	}
 	return true;
 }

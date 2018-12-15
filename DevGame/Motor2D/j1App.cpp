@@ -75,6 +75,13 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	// render last to swap buffer
 	AddModule(render);
 
+	menu->active = true;
+	scene->active = false;
+	entities->active = false;
+	inGameMenu->active = false;
+	settings->active = false;
+	credits->active = false;
+
 	PERF_PEEK(ptimer);
 }
 
@@ -147,7 +154,9 @@ bool j1App::Start()
 
 	while(item != NULL && ret == true)
 	{
-		ret = item->data->Start();
+		if (item->data->active == true) {
+			ret = item->data->Start();
+		}
 		item = item->next;
 	}
 	
@@ -236,14 +245,11 @@ void j1App::FinishUpdate()
 		if (fpshigh == false) {
 			framelimit = 60;
 			fpshigh = true;
-
 		}
 		else {
 			framelimit = 30;
 			fpshigh = false;
 		}
-
-		
 	}
 	//
 	//if (App->input->GetKey(SDL_SCANCODE_F12) == KEY_DOWN) {

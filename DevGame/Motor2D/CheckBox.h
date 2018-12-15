@@ -21,6 +21,8 @@ public:
 
 	void UI_Interaction(UI_State state);
 
+	bool Draw();
+
 public:
 	SDL_Rect idle;
 	SDL_Rect click;

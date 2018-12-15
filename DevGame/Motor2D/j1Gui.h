@@ -57,11 +57,11 @@ public:
 
 	UI_Element* AddImage(int x, int y, SDL_Rect rect, UI_Element* parent, j1Module* CallBack);
 
-	UI_Element* AddButton(int x, int y, SDL_Rect rect, UI_Element* parent, j1Module* CallBack);
+	UI_Element* AddButton(int x, int y, SDL_Rect idle, SDL_Rect hover, SDL_Rect click, char* name, UI_Element* parent, j1Module* CallBack);
 
 	UI_Element* AddLabel(int x, int y, UI_Element* parent, j1Module* CallBack);
 
-	UI_Element* AddScrollbar(int x, int y, SDL_Rect rect, UI_Element* parent, j1Module* CallBack);
+	UI_Element* AddScrollbar(int x, int y, SDL_Rect bar, SDL_Rect slider, UI_Element* parent, j1Module* CallBack);
 
 	UI_Element* AddCheckbox(int x, int y, SDL_Rect rect, UI_Element* parent, j1Module* CallBack);
 

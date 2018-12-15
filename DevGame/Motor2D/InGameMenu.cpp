@@ -22,11 +22,12 @@ bool InGameMenu::Awake(pugi::xml_node& conf)
 
 bool InGameMenu::Start()
 {
-	bg_image = (Image*)App->gui->AddImage(0, 0, { 0, 0, 640, 480 }, NULL, this);
+	//bg_image = (Image*)App->gui->AddImage(0, 0, { 0, 0, 640, 480 }, NULL, this);
 
-	button_continue = (Button*)App->gui->AddButton(0, 0, { 998, 45, 246, 61 }, NULL, this);
-	button_settings = (Button*)App->gui->AddButton(0, 0, { 998, 45, 246, 61 }, NULL, this);
-	button_main_menu = (Button*)App->gui->AddButton(0, 0, { 1295, 46, 246, 59 }, NULL, this);
+	button_continue = (Button*)App->gui->AddButton(0, 0, { 998, 45, 246, 61 }, { 998, 164, 246, 61 }, { 998, 301, 246, 61 }, "Resume", NULL, this);
+	button_main_menu = (Button*)App->gui->AddButton(0, 0, { 1295, 46, 246, 59 }, { 1295, 165, 246, 59 }, { 1295, 302, 246, 59 }, "Main Menu", NULL, this);
+
+	//volume = (ScrollBar*)App->gui->AddScrollbar(0, 0, { 1393, 521, 246, 41 }, { 1663, 514, 52, 48 }, NULL, this);
 
 	return true;
 }

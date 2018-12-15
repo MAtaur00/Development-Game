@@ -18,6 +18,8 @@ public:
 
 	bool SetText(char* text);
 
+	bool Draw();
+
 public:
 
 	p2SString text;

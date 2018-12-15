@@ -11,7 +11,7 @@ struct SDL_Texture;
 class ScrollBar : public UI_Element
 {
 public:
-	ScrollBar(int x, int y, UI_Element* parent);
+	/*ScrollBar(int x, int y, UI_Element* parent);
 
 	~ScrollBar() {}
 
@@ -19,7 +19,7 @@ public:
 
 	bool Define(SDL_Rect idle, SDL_Rect slider, char* text);
 
-	void UI_Interaction(UI_State state);
+	void UI_Interaction(UI_State state);*/
 
 
 public:

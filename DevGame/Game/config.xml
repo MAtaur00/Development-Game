@@ -1,8 +1,7 @@
 <!-- Config file for the game -->
 
 <config>
-  <app framerate_cap ="30
-       ">
+  <app framerate_cap ="30">
     <title>Game Development Testbed</title>
     <organization>UPC</organization>
   </app>
@@ -36,5 +35,9 @@
     <maps map ="level1_WithLayers.tmx"></maps>
     <maps map ="level2_WithLayers.tmx"></maps>
   </scene>
+
+  <gui>
+    <atlas file="textures/UI/GUI_atlas.png"></atlas>
+  </gui>
 
 </config>

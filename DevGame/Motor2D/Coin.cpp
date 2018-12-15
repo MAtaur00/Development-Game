@@ -51,11 +51,11 @@ bool Coin::Update(float dt)
 	animation = &coinRot;
 	fPoint tempPos = pos;
 
-	if (coinPos.y == playerPos.y && (coinPos.x == playerPos.x + App->entities->player->animation->GetCurrentFrame().w || coinPos.x == playerPos.x) && !App->entities->player->god_mode)
+	/*if (coinPos.y == playerPos.y && (coinPos.x == playerPos.x + App->entities->player->animation->GetCurrentFrame().w || coinPos.x == playerPos.x) && !App->entities->player->god_mode)
 	{
 		to_destroy = true;
 		coin_counter++;
-	}
+	}*/
 	
 	return true;
 }

@@ -9,6 +9,8 @@
 #include "Image.h"
 #include "Label.h"
 #include "Button.h"
+#include "CheckBox.h"
+#include "Scrollbar.h"
 
 j1Gui::j1Gui() : j1Module()
 {
@@ -20,12 +22,12 @@ j1Gui::~j1Gui()
 {}
 
 // Called before render is available
-bool j1Gui::Awake(pugi::xml_node& conf)
+bool j1Gui::Awake(pugi::xml_node& config)
 {
 	LOG("Loading GUI atlas");
 	bool ret = true;
 
-	atlas_file_name = conf.child("atlas").attribute("file").as_string("");
+	atlas_file_name = config.child("atlas").attribute("file").as_string("");
 
 	return ret;
 }
@@ -94,11 +96,15 @@ UI_Element* j1Gui::AddImage(int x, int y, SDL_Rect rect, UI_Element* parent, j1M
 	return image;
 }
 
-UI_Element* j1Gui::AddButton(int x, int y, SDL_Rect rect, UI_Element* parent, j1Module* CallBack)
+UI_Element* j1Gui::AddButton(int x, int y, SDL_Rect idle, SDL_Rect hover, SDL_Rect click, char* name, UI_Element* parent, j1Module* CallBack)
 {
-	Button* button = new Button(x, y, parent);
+	Button* button = new Button(x, y, idle, hover, click, parent);
+
+	Label* text = new Label(x+70, y+15, button);
+	text->SetText(name);
 
 	UI_elements.add(button);
+	UI_elements.add(text);
 
 	return button;
 }
@@ -111,6 +117,24 @@ UI_Element* j1Gui::AddLabel(int x, int y, UI_Element* parent, j1Module* CallBack
 
 	return label;
 }
+
+UI_Element* j1Gui::AddCheckbox(int x, int y, SDL_Rect rect, UI_Element* parent, j1Module* CallBack)
+{
+	CheckBox* checkBox = new CheckBox(x, y, parent);
+
+	UI_elements.add(checkBox);
+
+	return checkBox;
+}
+
+//UI_Element* j1Gui::AddScrollbar(int x, int y, SDL_Rect rect, SDL_Rect slider, UI_Element* parent, j1Module* CallBack)
+//{
+//	ScrollBar* volume_scrollbar = new ScrollBar(x, y, parent);
+//
+//	UI_elements.add(volume_scrollbar);
+//
+//	return volume_scrollbar;
+//}
 
 // class Gui ---------------------------------------------------
 

@@ -16,6 +16,8 @@ public:
 	Image(int x, int y, SDL_Rect image_rect, UI_Element* parent);
 	~Image();
 
+	bool Draw();
+
 
 public:
 

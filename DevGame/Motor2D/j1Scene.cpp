@@ -1,4 +1,5 @@
 #include "p2Defs.h"
+#include "j1Gui.h"
 #include "p2Log.h"
 #include "j1App.h"
 #include "j1Input.h"
@@ -134,18 +135,12 @@ bool j1Scene::Update(float dt)
 
 	}
 
-	
-
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN) {
 		LOG("1");
 		vsyncCont = App->config.child("vsync").append_attribute("value").as_bool();
 		vsyncCont =true;
 	
 	}
-
-
-
-
 
 	float camera_speed = 125.0f;
 

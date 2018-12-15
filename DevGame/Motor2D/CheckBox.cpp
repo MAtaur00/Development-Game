@@ -41,3 +41,11 @@ void CheckBox::UI_Interaction(UI_State state)
 		break;
 	}
 }
+
+bool CheckBox::Draw() {
+	if (atlas != nullptr)
+	{
+		App->render->Blit(atlas, position.x, position.y, &rect);
+	}
+	return true;
+}

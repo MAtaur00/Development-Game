@@ -3,6 +3,9 @@
 
 #include "p2Point.h"
 #include "SDL/include/SDL.h"
+#include "Animation.h"
+#include "j1Render.h"
+#include "j1App.h"
 
 struct SDL_Texture;
 enum UI_State
@@ -29,6 +32,8 @@ public:
 
 	UI_Element* parent;
 
+	Animation* animation = nullptr;
+
 public:
 
 	//Constructor
@@ -43,7 +48,6 @@ public:
 
 	// Called each loop iteration
 	virtual bool Draw();
-
 
 	// Called before quitting
 	virtual bool CleanUp();

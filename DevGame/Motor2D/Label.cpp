@@ -54,3 +54,11 @@ bool Label::SetText(char* text) {
 	}
 	return ret;
 }
+
+bool Label::Draw() {
+	if (texture != nullptr)
+	{
+		App->render->Blit(texture, position.x, position.y, &rect);
+	}
+	return true;
+}

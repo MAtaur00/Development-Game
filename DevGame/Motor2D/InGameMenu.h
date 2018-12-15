@@ -5,6 +5,7 @@
 
 #include "Button.h"
 #include "Image.h"
+#include "Scrollbar.h"
 
 class InGameMenu : public j1Module
 {
@@ -33,6 +34,8 @@ public:
 	Button* button_continue = nullptr;
 	Button* button_settings = nullptr;
 	Button* button_main_menu = nullptr;
+
+	ScrollBar* volume = nullptr;
 };
 
 

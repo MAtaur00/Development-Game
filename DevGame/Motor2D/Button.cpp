@@ -8,28 +8,20 @@
 #include "j1Gui.h"
 
 
-Button::Button(int x, int y, UI_Element* parent) : UI_Element(x, y, parent) {}
+Button::Button(int x, int y, SDL_Rect idle, SDL_Rect hover, SDL_Rect click, UI_Element* parent) : UI_Element(x, y, parent)
+{
+	this->position.x = x;
+	this->position.y = y;
+	this->button_idle = idle;
+	this->button_hover = hover;
+	this->button_click = click;
+
+	rect = idle;
+}
 
 bool Button::CleanUp()
 {
 	return true;
-}
-
-
-bool Button::Define(SDL_Rect idle, SDL_Rect hover, SDL_Rect click, char* text)
-{
-	bool ret = false;
-
-	button_idle = idle;
-	button_hover = hover;
-	button_click = click;
-	
-	label = (Label*)App->gui->AddLabel(position.x, position.y, this, nullptr);
-	label->SetText(text);
-
-	rect = idle;
-
-	return ret;
 }
 
 void Button::UI_Interaction(UI_State state)
@@ -48,4 +40,12 @@ void Button::UI_Interaction(UI_State state)
 		rect = button_click;
 		break;
 	}
+}
+
+bool Button::Draw() {
+	if (atlas != nullptr)
+	{
+		App->render->Blit(atlas, position.x, position.y, &rect);
+	}
+	return true;
 }
