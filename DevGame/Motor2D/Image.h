@@ -13,7 +13,7 @@ class Image : public UI_Element
 {
 public:
 
-	Image(int x, int y, SDL_Rect image_rect, UI_Element* parent);
+	Image(int x, int y, SDL_Rect image_rect, UI_Element* parent, j1Module* CallBack);
 	~Image();
 
 	bool Draw();

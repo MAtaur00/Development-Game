@@ -5,6 +5,8 @@
 #include "p2Log.h"
 #include "j1Window.h"
 #include "j1App.h"
+#include "j1Scene.h"
+#include "Settings.h"
 #include "Brofiler/Brofiler.h"
 
 Menu::Menu()
@@ -22,12 +24,12 @@ bool Menu::Awake(pugi::xml_node& conf)
 
 bool Menu::Start()
 {
-	bg_image = (Image*)App->gui->AddImage(0, 0, { 0, 0, 640, 480 }, NULL, this);
+	bg_image = (Image*)App->gui->AddImage(0, 0, { 0, 0, 1024, 640 }, NULL, this);
 
-	button_continue = (Button*)App->gui->AddButton(200, 350, { 998, 45, 246, 61 }, { 998, 164, 246, 61 }, { 998, 301, 246, 61 }, "Continue", NULL, this);
-	button_new_game = (Button*)App->gui->AddButton(550, 350, { 998, 45, 246, 61 }, { 998, 164, 246, 61 }, { 998, 301, 246, 61 }, "New Game", NULL, this);
-	button_settings = (Button*)App->gui->AddButton(200, 500, { 998, 45, 246, 61 }, { 998, 164, 246, 61 }, { 998, 301, 246, 61 }, "Settings", NULL, this);
-	button_exit = (Button*)App->gui->AddButton(550, 500, { 1295, 46, 246, 59 }, { 1295, 165, 246, 59 }, { 1295, 302, 246, 59 }, "Exit", NULL, this);
+	button_continue = (Button*)App->gui->AddButton(200, 350, { 998, 45, 246, 61 }, { 998, 301, 246, 61 }, { 998, 164, 246, 61 }, "Continue", NULL, this);
+	button_new_game = (Button*)App->gui->AddButton(550, 350, { 998, 45, 246, 61 }, { 998, 301, 246, 61 }, { 998, 164, 246, 61 }, "New Game", NULL, this);
+	button_settings = (Button*)App->gui->AddButton(200, 500, { 998, 45, 246, 61 }, { 998, 301, 246, 61 }, { 998, 164, 246, 61 }, "Settings", NULL, this);
+	button_exit = (Button*)App->gui->AddButton(550, 500, { 1295, 46, 246, 59 }, { 1295, 302, 246, 59 }, { 1295, 165, 246, 59 }, "Exit", NULL, this);
 
 	return true;
 }
@@ -39,5 +41,57 @@ bool Menu::PreUpdate()
 
 bool Menu::Update(float dt)
 {
+
+
+	return true;
+}
+
+void Menu::CallBack(UI_Element* element)
+{
+	if (element == button_continue)
+	{
+		active = false;
+		App->scene->active = true;
+		App->scene->Start();
+		App->scene->loadScene = true;
+	}
+	else if (element == button_new_game)
+	{
+		active = false;
+		App->scene->active = true;
+		App->scene->Start();
+	}
+	else if (element == button_settings)
+	{
+		active = false;
+		App->settings->active = true;
+		App->settings->Start();
+	}
+	else if (element == button_exit)
+	{
+		exit = true;
+	}
+}
+
+bool Menu::PostUpdate()
+{
+	return !exit;
+}
+
+bool Menu::CleanUp()
+{
+	App->gui->UI_elements.del(App->gui->UI_elements.At(App->gui->UI_elements.find(button_continue->text)));
+	App->gui->UI_elements.del(App->gui->UI_elements.At(App->gui->UI_elements.find(button_continue)));
+	App->gui->UI_elements.del(App->gui->UI_elements.At(App->gui->UI_elements.find(button_new_game->text)));
+	App->gui->UI_elements.del(App->gui->UI_elements.At(App->gui->UI_elements.find(button_new_game)));
+	App->gui->UI_elements.del(App->gui->UI_elements.At(App->gui->UI_elements.find(button_settings->text)));
+	App->gui->UI_elements.del(App->gui->UI_elements.At(App->gui->UI_elements.find(button_settings)));
+	App->gui->UI_elements.del(App->gui->UI_elements.At(App->gui->UI_elements.find(button_exit->text)));
+	App->gui->UI_elements.del(App->gui->UI_elements.At(App->gui->UI_elements.find(button_exit)));
+	delete button_continue;
+	delete button_new_game;
+	delete button_settings;
+	delete button_exit;
+
 	return true;
 }

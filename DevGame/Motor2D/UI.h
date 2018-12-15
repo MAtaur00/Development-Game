@@ -34,11 +34,13 @@ public:
 
 	Animation* animation = nullptr;
 
+	j1Module* callback = nullptr;
+
 public:
 
 	//Constructor
 	UI_Element() {}
-	UI_Element(int x, int y, UI_Element* parent);
+	UI_Element(int x, int y, UI_Element* parent, j1Module* CallBack);
 
 	//Destructor
 	virtual ~UI_Element() {}
@@ -53,6 +55,8 @@ public:
 	virtual bool CleanUp();
 
 	virtual void UI_Interaction(UI_State state) {};
+
+	bool Intersection();
 };
 
 #endif //__UI__H

@@ -42,7 +42,7 @@ Coin::~Coin() { CleanUp(); }
 bool Coin::Start()
 {
 	LoadTexture();
-	coin_counter = 0;
+	App->entities->player->coin_counter = 0;
 	return true;
 }
 
@@ -54,7 +54,8 @@ bool Coin::Update(float dt)
 	/*if (coinPos.y == playerPos.y && (coinPos.x == playerPos.x + App->entities->player->animation->GetCurrentFrame().w || coinPos.x == playerPos.x) && !App->entities->player->god_mode)
 	{
 		to_destroy = true;
-		coin_counter++;
+		App->entities->player->coin_counter++;
+		
 	}*/
 	
 	return true;
@@ -64,11 +65,6 @@ bool Coin::CleanUp()
 {
 	App->tex->UnLoad(texture);
 	delete &coinRot;
-	/*delete &idle;
-	delete &idleSwordUp;
-	delete &running;
-	delete &attack;
-	delete &death;*/
 	animation = nullptr;
 	texture = nullptr;
 	return true;

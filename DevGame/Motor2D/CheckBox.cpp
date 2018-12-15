@@ -8,7 +8,7 @@
 #include "j1Gui.h"
 
 
-CheckBox::CheckBox(int x, int y, UI_Element* parent) : UI_Element(x, y, parent) {}
+CheckBox::CheckBox(int x, int y, UI_Element* parent, j1Module* CallBack) : UI_Element(x, y, parent, CallBack) {}
 
 bool CheckBox::CleanUp()
 {

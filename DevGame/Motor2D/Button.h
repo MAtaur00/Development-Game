@@ -13,9 +13,9 @@ struct SDL_Texture;
 class Button : public UI_Element
 {
 public:
-	Button(int x, int y, SDL_Rect idle, SDL_Rect hover, SDL_Rect click, UI_Element* parent);
+	Button(int x, int y, SDL_Rect idle, SDL_Rect hover, SDL_Rect click, UI_Element* parent, Label* name, j1Module* CallBack);
 
-	~Button() {}
+	~Button();
 
 	bool CleanUp();
 
@@ -23,7 +23,10 @@ public:
 
 	bool Draw();
 
+	bool Update(float dt);
+
 public:
+	Label* text;
 
 	SDL_Rect button_idle;
 	SDL_Rect button_hover;

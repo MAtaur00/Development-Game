@@ -10,7 +10,7 @@ class Label : public UI_Element
 {
 public:
 
-	Label(int x, int y, UI_Element* parent);
+	Label(int x, int y, UI_Element* parent, j1Module* CallBack);
 	~Label();
 
 	bool Update(float dt);

@@ -42,8 +42,6 @@ public:
 	iPoint spawnPos;
 
 	fPoint spawn;
-
-	int coin_counter = 0;
 };
 
 #endif // !_COIN_H__

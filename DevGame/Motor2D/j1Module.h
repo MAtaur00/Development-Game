@@ -11,6 +11,8 @@
 
 class j1App;
 
+class UI_Element;
+
 class j1Module
 {
 private:
@@ -91,6 +93,11 @@ public:
 			enabled = false;
 			CleanUp();
 		}
+	}
+
+	virtual void CallBack(UI_Element* element)
+	{
+
 	}
 
 public:

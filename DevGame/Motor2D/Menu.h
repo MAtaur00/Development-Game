@@ -20,11 +20,13 @@ public:
 
 	bool Update(float dt);
 
-	/*bool PostUpdate();
+	bool PostUpdate();
 
 	bool CleanUp();
 
-	void CreateMenu();*/
+	/*void CreateMenu();*/
+
+	void CallBack(UI_Element* element);
 
 public:
 
@@ -39,6 +41,8 @@ public:
 	Label* button_new_game_text = nullptr;
 	Label* button_settings_text = nullptr;
 	Label* button_exit_text = nullptr;
+
+	bool exit = false;
 };
 
 

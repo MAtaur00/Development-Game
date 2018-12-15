@@ -52,6 +52,7 @@ bool j1Gui::Update(float dt)
 	{
 		if (UI_elements.At(i) != nullptr)
 		{
+			UI_elements.At(i)->data->Update(dt);
 			UI_elements.At(i)->data->Draw();
 		}
 	}
@@ -89,7 +90,7 @@ SDL_Texture* j1Gui::GetAtlas() const
 
 UI_Element* j1Gui::AddImage(int x, int y, SDL_Rect rect, UI_Element* parent, j1Module* CallBack)
 {
-	Image* image = new Image(x, y, rect, parent);
+	Image* image = new Image(x, y, rect, parent, CallBack);
 
 	UI_elements.add(image);
 
@@ -98,9 +99,11 @@ UI_Element* j1Gui::AddImage(int x, int y, SDL_Rect rect, UI_Element* parent, j1M
 
 UI_Element* j1Gui::AddButton(int x, int y, SDL_Rect idle, SDL_Rect hover, SDL_Rect click, char* name, UI_Element* parent, j1Module* CallBack)
 {
-	Button* button = new Button(x, y, idle, hover, click, parent);
+	Label* text = new Label(x + 70, y + 15, NULL, CallBack);
+	Button* button = new Button(x, y, idle, hover, click, parent, text, CallBack);
 
-	Label* text = new Label(x+70, y+15, button);
+	text->parent = button;
+	
 	text->SetText(name);
 
 	UI_elements.add(button);
@@ -111,7 +114,7 @@ UI_Element* j1Gui::AddButton(int x, int y, SDL_Rect idle, SDL_Rect hover, SDL_Re
 
 UI_Element* j1Gui::AddLabel(int x, int y, UI_Element* parent, j1Module* CallBack)
 {
-	Label* label = new Label(x, y, parent);
+	Label* label = new Label(x, y, parent, CallBack);
 
 	UI_elements.add(label);
 
@@ -120,7 +123,7 @@ UI_Element* j1Gui::AddLabel(int x, int y, UI_Element* parent, j1Module* CallBack
 
 UI_Element* j1Gui::AddCheckbox(int x, int y, SDL_Rect rect, UI_Element* parent, j1Module* CallBack)
 {
-	CheckBox* checkBox = new CheckBox(x, y, parent);
+	CheckBox* checkBox = new CheckBox(x, y, parent, CallBack);
 
 	UI_elements.add(checkBox);
 

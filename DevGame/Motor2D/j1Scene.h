@@ -2,6 +2,7 @@
 #define __j1SCENE_H__
 
 #include "j1Module.h"
+#include "j1Timer.h"
 
 struct SDL_Texture;
 
@@ -41,6 +42,10 @@ public:
 	bool Save(pugi::xml_node& data) const;
 
 	int currmap = 1;
+
+	bool loadScene = false;
+
+	j1Timer game_time;
 
 private:
 

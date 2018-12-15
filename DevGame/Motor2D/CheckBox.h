@@ -11,7 +11,7 @@ struct SDL_Texture;
 class CheckBox : public UI_Element
 {
 public:
-	CheckBox(int x, int y, UI_Element* parent);
+	CheckBox(int x, int y, UI_Element* parent, j1Module* CallBack);
 
 	~CheckBox() {}
 

@@ -11,6 +11,7 @@
 #include "j1Scene.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleEntities.h"
+#include "Coin.h"
 #include "Entity.h"
 #include "Player.h"
 #include "ModulePathfinding.h"
@@ -49,6 +50,8 @@ bool j1Scene::Awake(pugi::xml_node& config)
 bool j1Scene::Start()
 {
 	App->map->Load(CurrentMap->data);
+
+	game_time.Start();
 
 	int w, h;
 	uchar* data = NULL;
@@ -104,6 +107,9 @@ bool j1Scene::PreUpdate()
 // Called each loop iteration
 bool j1Scene::Update(float dt)
 {
+	const char* coins = std::to_string(App->entities->player->coin_counter).c_str();
+
+
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
 		LoadScene(1);
 	}
@@ -120,7 +126,8 @@ bool j1Scene::Update(float dt)
 		App->SaveGame("save_game.xml");
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) {
+	if (App->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN || loadScene) {
+		loadScene = false;
 		App->LoadGame("save_game.xml");
 	}
 
@@ -179,7 +186,8 @@ bool j1Scene::PostUpdate()
 // Called before quitting
 bool j1Scene::CleanUp()
 {
-	App->entities->player->to_destroy = true;
+	if (App->entities->player)
+		App->entities->player->to_destroy = true;
 	LOG("Freeing scene");
 	return true;
 }

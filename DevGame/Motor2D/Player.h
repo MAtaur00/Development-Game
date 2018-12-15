@@ -88,6 +88,8 @@ public:
 	EntityData playerData;
 
 	int lifes = 3;
+
+	int coin_counter = 0;
 };
 
 #endif // !_PLAYER_H_
