@@ -109,7 +109,6 @@
     <ClCompile Include="PugiXml\src\pugixml.cpp" />
     <ClCompile Include="Scrollbar.cpp" />
     <ClCompile Include="Settings.cpp" />
-    <ClCompile Include="Skeleton.cpp" />
     <ClCompile Include="UI.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -153,7 +152,6 @@
     <ClInclude Include="PugiXml\src\pugixml.hpp" />
     <ClInclude Include="Scrollbar.h" />
     <ClInclude Include="Settings.h" />
-    <ClInclude Include="Skeleton.h" />
     <ClInclude Include="UI.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
