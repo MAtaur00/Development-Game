@@ -30,3 +30,8 @@ bool InGameMenu::Start()
 
 	return true;
 }
+
+bool InGameMenu::PreUpdate()
+{
+	return true;
+}

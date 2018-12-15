@@ -32,3 +32,8 @@ bool Settings::Start()
 
 	return true;
 }
+
+bool Settings::PreUpdate()
+{
+	return true;
+}

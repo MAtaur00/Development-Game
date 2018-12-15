@@ -28,3 +28,8 @@ bool Credits::Start()
 
 	return true;
 }
+
+bool Credits::PreUpdate()
+{
+	return true;
+}

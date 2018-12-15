@@ -16,9 +16,9 @@ public:
 
 	bool Start();
 
-	/*bool PreUpdate();
+	bool PreUpdate();
 
-	bool Update(float dt);
+	/*bool Update(float dt);
 
 	bool PostUpdate();
 
@@ -33,7 +33,6 @@ public:
 	Button* button_continue = nullptr;
 	Button* button_new_game = nullptr;
 	Button* button_settings = nullptr;
-	Button* button_credits = nullptr;
 	Button* button_exit = nullptr;
 };
 

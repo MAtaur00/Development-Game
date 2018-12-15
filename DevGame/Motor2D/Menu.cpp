@@ -31,3 +31,8 @@ bool Menu::Start()
 
 	return true;
 }
+
+bool Menu::PreUpdate()
+{
+	return true;
+}

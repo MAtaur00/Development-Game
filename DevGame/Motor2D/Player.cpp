@@ -126,7 +126,8 @@ bool Player::Update(float dt)
 		{
 			App->audio->PlayFx(2);
 			//App->fade->FadeToBlack(App->scene, App->scene, 0.5f);
-			SpawnPLayer();
+			if (lifes > 0)
+				SpawnPLayer();
 		}
 		//--------------------------------
 

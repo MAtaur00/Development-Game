@@ -28,7 +28,6 @@ Coin::Coin(int x, int y, ENTITY_TYPE type) : Entity(x, y, type)
 
 		if (tmp == "coinRot")
 			LoadAnimation(animations, &coinRot);
-	
 
 		animation = &coinRot;
 	}
@@ -43,41 +42,28 @@ Coin::~Coin() { CleanUp(); }
 bool Coin::Start()
 {
 	LoadTexture();
-	path_texture = App->tex->Load("textures/cross_texture.png");
+	coin_counter = 0;
 	return true;
 }
 
 bool Coin::Update(float dt)
 {
-	coinData.jumpSpeed = 0.0f;
-	coinData.speed = 0.0f;
 	animation = &coinRot;
 	fPoint tempPos = pos;
 
-	// GRAVITY
-
-
-	playerPosition = App->entities->player->pos;
-	coinPos = App->map->WorldToMap(pos.x, pos.y);
-	playerPos = App->map->WorldToMap(playerPosition.x, playerPosition.y);
-
-
-	pos.x += coinData.speed;
-	pos.y += coinData.jumpSpeed;
-
-	/*if (coinPos.y == playerPos.y && (coinPos.x == playerPos.x + App->entities->player->animation->GetCurrentFrame().w || coinPos.x == playerPos.x) && !App->entities->player->god_mode)
+	if (coinPos.y == playerPos.y && (coinPos.x == playerPos.x + App->entities->player->animation->GetCurrentFrame().w || coinPos.x == playerPos.x) && !App->entities->player->god_mode)
 	{
-		App->audio->PlayFx(2);
-		App->entities->player->SpawnPLayer();
-		pos = spawn;
+		to_destroy = true;
+		coin_counter++;
 	}
-	*/
+	
 	return true;
 }
 
 bool Coin::CleanUp()
 {
 	App->tex->UnLoad(texture);
+	delete &coinRot;
 	/*delete &idle;
 	delete &idleSwordUp;
 	delete &running;

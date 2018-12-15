@@ -18,7 +18,7 @@ public:
 
 	bool Start();
 
-	//bool PreUpdate();
+	bool PreUpdate();
 
 	//bool Update(float dt);
 

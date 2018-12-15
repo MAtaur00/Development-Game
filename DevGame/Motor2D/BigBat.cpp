@@ -155,7 +155,8 @@ bool BigBat::Update(float dt)
 		if (!App->entities->player->playerAttacking)
 		{
 			App->audio->PlayFx(2);
-			App->entities->player->SpawnPLayer();
+			if (App->entities->player->lifes > 0)
+				App->entities->player->SpawnPLayer();
 			pos = spawn;
 		}
 		else to_destroy = true;

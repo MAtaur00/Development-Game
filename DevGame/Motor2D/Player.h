@@ -86,6 +86,8 @@ public:
 	p2Point<int> spawn;
 
 	EntityData playerData;
+
+	int lifes = 3;
 };
 
 #endif // !_PLAYER_H_
