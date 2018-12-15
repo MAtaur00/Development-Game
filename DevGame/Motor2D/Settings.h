@@ -6,6 +6,7 @@
 #include "Image.h"
 #include "Scrollbar.h"
 #include "CheckBox.h"
+#include "Button.h"
 
 class Settings : public j1Module
 {
@@ -17,15 +18,15 @@ public:
 
 	bool Start();
 
-	bool PreUpdate();
+	//bool PreUpdate();
 
-	bool Update(float dt);
+	//bool Update(float dt);
 
-	bool PostUpdate();
+	//bool PostUpdate();
 
-	bool CleanUp();
+	//bool CleanUp();
 
-	void CreateMenu();
+	//void CreateMenu();
 
 public:
 
@@ -34,6 +35,8 @@ public:
 	CheckBox* vsync_checkbox = nullptr;
 
 	ScrollBar* volume_slider = nullptr;
+
+	Button* button_credits = nullptr;
 };
 
 

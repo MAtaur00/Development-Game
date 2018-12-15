@@ -28,5 +28,7 @@ bool Settings::Start()
 
 	//volume_slider = (ScrollBar*)App->gui->AddScrollbar(0, 0, {}, NULL, this);
 
+	button_credits = (Button*)App->gui->AddButton(0, 0, { 998, 45, 246, 61 }, NULL, this);
+
 	return true;
 }

@@ -88,9 +88,6 @@
     <ClCompile Include="Label.cpp">
       <Filter>Desenvolupament  ========\UI</Filter>
     </ClCompile>
-    <ClCompile Include="Fonts.cpp">
-      <Filter>Desenvolupament  ========\Modules</Filter>
-    </ClCompile>
     <ClCompile Include="Scrollbar.cpp">
       <Filter>Desenvolupament  ========\UI</Filter>
     </ClCompile>
@@ -218,9 +215,6 @@
     </ClInclude>
     <ClInclude Include="Label.h">
       <Filter>Desenvolupament  ========\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="Fonts.h">
-      <Filter>Desenvolupament  ========\Modules</Filter>
     </ClInclude>
     <ClInclude Include="Scrollbar.h">
       <Filter>Desenvolupament  ========\UI</Filter>

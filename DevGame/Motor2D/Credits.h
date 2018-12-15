@@ -15,7 +15,7 @@ public:
 
 	bool Start();
 
-	bool PreUpdate();
+	/*bool PreUpdate();
 
 	bool Update(float dt);
 
@@ -23,7 +23,7 @@ public:
 
 	bool CleanUp();
 
-	void CreateMenu();
+	void CreateMenu();*/
 
 public:
 

@@ -27,7 +27,6 @@ bool Menu::Start()
 	button_continue = (Button*)App->gui->AddButton(0, 0, { 998, 45, 246, 61 }, NULL, this);
 	button_new_game = (Button*)App->gui->AddButton(0, 0, { 998, 45, 246, 61 }, NULL, this);
 	button_settings = (Button*)App->gui->AddButton(0, 0, { 998, 45, 246, 61 }, NULL, this);
-	button_credits = (Button*)App->gui->AddButton(0, 0, { 998, 45, 246, 61 }, NULL, this);
 	button_exit = (Button*)App->gui->AddButton(0, 0, { 1295, 46, 246, 59 }, NULL, this);
 
 	return true;

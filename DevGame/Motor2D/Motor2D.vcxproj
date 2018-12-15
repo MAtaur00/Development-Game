@@ -83,7 +83,6 @@
     <ClCompile Include="Coin.cpp" />
     <ClCompile Include="Credits.cpp" />
     <ClCompile Include="Entity.cpp" />
-    <ClCompile Include="Fonts.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="InGameMenu.cpp" />
     <ClCompile Include="j1Fonts.cpp" />
@@ -122,7 +121,6 @@
     <ClInclude Include="Coin.h" />
     <ClInclude Include="Credits.h" />
     <ClInclude Include="Entity.h" />
-    <ClInclude Include="Fonts.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="InGameMenu.h" />
     <ClInclude Include="j1Fonts.h" />
