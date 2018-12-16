@@ -21,7 +21,6 @@
 #include "Menu.h"
 #include "InGameMenu.h"
 #include "Settings.h"
-#include "Credits.h"
 #include "Brofiler/Brofiler.h"
 
 // Constructor
@@ -51,7 +50,6 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	menu = new Menu();
 	inGameMenu = new InGameMenu();
 	settings = new Settings();
-	credits = new Credits();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -70,7 +68,6 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(menu);
 	AddModule(inGameMenu);
 	AddModule(settings);
-	AddModule(credits);
 
 	// render last to swap buffer
 	AddModule(render);
@@ -80,7 +77,6 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	entities->active = false;
 	inGameMenu->active = false;
 	settings->active = false;
-	credits->active = false;
 
 	PERF_PEEK(ptimer);
 }

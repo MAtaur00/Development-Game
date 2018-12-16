@@ -24,7 +24,6 @@ class j1Gui;
 class Menu;
 class InGameMenu;
 class Settings;
-class Credits;
 
 class j1App
 {
@@ -110,7 +109,6 @@ public:
 	Menu*				menu = NULL;
 	InGameMenu*			inGameMenu = NULL;
 	Settings*			settings = NULL;
-	Credits*			credits = NULL;
 	uint32	framelimit;
 
 	float				dt = 0;
