@@ -52,12 +52,14 @@ void Settings::CallBack(UI_Element* element)
 	{
 		active = false;
 		App->menu->active = true;
+		CleanUp();
 		App->menu->Start();
 	}
 	else if (element == button_back)
 	{
 		active = false;
 		App->menu->active = true;
+		CleanUp();
 		App->menu->Start();
 	}
 }
@@ -69,15 +71,17 @@ bool Settings::PostUpdate()
 
 bool Settings::CleanUp()
 {
+	App->gui->UI_elements.del(App->gui->UI_elements.At(App->gui->UI_elements.find(bg_image)));
 	App->gui->UI_elements.del(App->gui->UI_elements.At(App->gui->UI_elements.find(button_credits->text)));
 	App->gui->UI_elements.del(App->gui->UI_elements.At(App->gui->UI_elements.find(button_credits)));
 	App->gui->UI_elements.del(App->gui->UI_elements.At(App->gui->UI_elements.find(button_back->text)));
 	App->gui->UI_elements.del(App->gui->UI_elements.At(App->gui->UI_elements.find(button_back)));
 	App->gui->UI_elements.del(App->gui->UI_elements.At(App->gui->UI_elements.find(vsync_checkbox)));
+
+	delete bg_image;
 	delete button_credits;
 	delete button_back;
 	delete vsync_checkbox;
-
 
 	return true;
 }

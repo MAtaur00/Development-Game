@@ -65,6 +65,10 @@ public:
 
 	UI_Element* AddCheckbox(int x, int y, SDL_Rect idle, SDL_Rect click, UI_Element* parent, j1Module* CallBack);
 
+	void DestroyUI();
+
+	/*void DestroyElement(UI_Element &element);*/
+
 private:
 
 	SDL_Texture* atlas;

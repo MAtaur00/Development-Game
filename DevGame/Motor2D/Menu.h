@@ -32,15 +32,12 @@ public:
 
 	Image* bg_image = nullptr;
 
+	Label* title = nullptr;
+
 	Button* button_continue = nullptr;
 	Button* button_new_game = nullptr;
 	Button* button_settings = nullptr;
 	Button* button_exit = nullptr;
-
-	Label* button_continue_text = nullptr;
-	Label* button_new_game_text = nullptr;
-	Label* button_settings_text = nullptr;
-	Label* button_exit_text = nullptr;
 
 	bool exit = false;
 };

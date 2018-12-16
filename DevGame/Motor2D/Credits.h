@@ -4,6 +4,7 @@
 #include "j1Module.h"
 #include "Label.h"
 #include "Image.h"
+#include "Button.h"
 
 class Credits : public j1Module
 {
@@ -17,17 +18,19 @@ public:
 
 	bool PreUpdate();
 
-	/*bool Update(float dt);
+	bool Update(float dt);
 
 	bool PostUpdate();
 
 	bool CleanUp();
 
-	void CreateMenu();*/
+	void CallBack(UI_Element* element);
 
 public:
 
 	Image* bg_image = nullptr;
+
+	Button* button_credits_back = nullptr;
 
 	Label* credits_label = nullptr;
 };

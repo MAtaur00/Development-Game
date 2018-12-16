@@ -17,8 +17,6 @@ public:
 
 	bool CleanUp();
 
-	void UI_Interaction(UI_State state);
-
 	bool Draw();
 
 	bool Update(float dt);

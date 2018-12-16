@@ -8,19 +8,12 @@
 #include "j1App.h"
 
 struct SDL_Texture;
-enum UI_State
-{
-	IDLE = 1,
-	HOVER = 2,
-	CLICK = 3
-};
 
 class UI_Element
 {
 
 public:
 	fPoint position;
-	fPoint original_pos;
 
 	SDL_Texture* atlas = nullptr;
 
@@ -35,6 +28,8 @@ public:
 	Animation* animation = nullptr;
 
 	j1Module* callback = nullptr;
+
+	bool destroy = false;
 
 public:
 

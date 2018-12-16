@@ -19,20 +19,19 @@ public:
 
 	bool PreUpdate();
 
-	/*bool Update(float dt);
+	bool Update(float dt);
 
 	bool PostUpdate();
 
 	bool CleanUp();
 
-	void CreateMenu();*/
+	void CallBack(UI_Element* element);
 
 public:
 
 	Image* bg_image = nullptr;
 
-	Button* button_continue = nullptr;
-	Button* button_settings = nullptr;
+	Button* button_resume = nullptr;
 	Button* button_main_menu = nullptr;
 
 	ScrollBar* volume = nullptr;

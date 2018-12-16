@@ -24,20 +24,6 @@ bool CheckBox::CleanUp()
 	return true;
 }
 
-void CheckBox::UI_Interaction(UI_State state)
-{
-	switch (state)
-	{
-	case IDLE:
-		rect = idle;
-		break;
-
-	case CLICK:
-		rect = click;
-		break;
-	}
-}
-
 bool CheckBox::Draw() {
 	if (atlas != nullptr)
 	{

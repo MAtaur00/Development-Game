@@ -6,6 +6,9 @@
 
 struct SDL_Texture;
 
+class Image;
+class Label;
+
 class j1Scene : public j1Module
 {
 public:

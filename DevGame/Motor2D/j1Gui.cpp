@@ -43,6 +43,15 @@ bool j1Gui::Start()
 // Update all guis
 bool j1Gui::PreUpdate()
 {
+	for (uint i = 0; i < UI_elements.count(); i++)
+	{
+		if (UI_elements[i]->destroy == true)
+		{
+			delete (UI_elements[i]);
+			UI_elements[i] = nullptr;
+			UI_elements.del(App->gui->UI_elements.At(App->gui->UI_elements.find(UI_elements[i])));
+		}
+	}
 	return true;
 }
 
@@ -52,8 +61,9 @@ bool j1Gui::Update(float dt)
 	{
 		if (UI_elements.At(i) != nullptr)
 		{
-			UI_elements.At(i)->data->Update(dt);
 			UI_elements.At(i)->data->Draw();
+			UI_elements.At(i)->data->Update(dt);
+			
 		}
 	}
 
@@ -141,3 +151,13 @@ UI_Element* j1Gui::AddCheckbox(int x, int y, SDL_Rect idle, SDL_Rect click, UI_E
 
 // class Gui ---------------------------------------------------
 
+void j1Gui::DestroyUI()
+{
+	p2List_item<UI_Element*>* item = UI_elements.start;
+	while (item != nullptr)
+	{
+		delete item->data;
+		UI_elements.del(item);
+		item = item->next;
+	}
+}

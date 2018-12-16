@@ -16,6 +16,7 @@
 #include "Player.h"
 #include "Image.h"
 #include "Label.h"
+#include "InGameMenu.h"
 #include "ModulePathfinding.h"
 #include "ModulePathfindingWalker.h"
 
@@ -184,8 +185,11 @@ bool j1Scene::PostUpdate()
 {
 	bool ret = true;
 
-	if(App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-		ret = false;
+	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+	{
+		App->inGameMenu->active = true;
+		App->inGameMenu->Start();
+	}
 
 	return ret;
 }
