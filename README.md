@@ -25,8 +25,6 @@ The game has a main menu, by pressing continue, a previously saved game can be p
 
 * F2  Start from the beginning of the current level
 
-* F3 Start from the next level
-
 * F5  Save the current state 
 
 * F6  Load the previous state (even across levels)
@@ -51,6 +49,8 @@ In this game you are a hero who has to complete 2 levels in order to win.Enjoy!
 * W for kick.
 * Q+Shift long punch.
 * W+Shift long kick.
+
+-Enemy Black Bandit can't be killed, just dodge it!
 
 ## Authors and tasks
 
