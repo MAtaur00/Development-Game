@@ -167,6 +167,11 @@ bool Player::Update(float dt)
 				else if (CheckCollision(GetPlayerTile({ tempPos.x + animation->GetCurrentFrame().w, tempPos.y })) == COLLISION_TYPE::WIN
 					&& CheckCollision(GetPlayerTile({ tempPos.x + animation->GetCurrentFrame().w, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::WIN)
 				{
+					if (App->scene->coins_collected >= 10)
+					{
+						if (App->scene->lives < 3)
+							App->scene->lives += 1;
+					}
 					App->scene->LoadScene();
 				}
 			}
