@@ -1,19 +1,29 @@
 ﻿# Development-Game
 
+## Github repository link
+
+[Link to Underground Hero Repository](https://github.com/MAtaur00/Development-Game)
+
 
 ## The game
 
 Thank you for downloading!
-This game is a platformer game where you will have to reach the end of the two levels in order to complete the game. Our character has the hability of sliding down through walls and jumping meanwhile.
+We are developing this game as an assignment teached by Ricard Pillosu. This game is a platformer game where you will have to reach the end of the two levels in order to complete the game. Our character has the hability of sliding down through walls and jumping meanwhile.
 
+
+## Core Subsystems
+
+For the first assingment we used Tiled, for the creation of the maps, Tiled has also allowed us u create navigation and collision layers.We also learned how to save and load the game. Then we implemented the pathfinding system using A*.Later we learned how to cap Fps, and we used the tool brofile.For The third assingment we had to implement a UI system that provides the game of a menu.
+
+## UI specifications
+
+The game has a main menu, by pressing continue, a previously saved game can be played. The settings button allows the player to enable and disable VSYNC, credits can also be seen. When pressing ESC in game a menu opens, there you can save the game, go back to the main menu or closing it and keep playing.
 
 ## Debugging Fucionalities
 
 * F1  Start from the very first level 
 
 * F2  Start from the beginning of the current level
-
-* F3 Start from the next level
 
 * F5  Save the current state 
 
@@ -27,10 +37,20 @@ This game is a platformer game where you will have to reach the end of the two l
 
 ## Controls
 
+In this game you are a hero who has to complete 2 levels in order to win.Enjoy!
+
 * Left and Right arrows to move.
 * Up arrow to jump.
 * Left or Right while falling if you have a wall in your left or right to slide down.
 * Up arrow to jump while sliding walls.
+
+**Attacks**
+* Q for punch.
+* W for kick.
+* Q+Shift long punch.
+* W+Shift long kick.
+
+-Enemy Black Bandit can't be killed, just dodge it!
 
 ## Authors and tasks
 
@@ -54,10 +74,20 @@ This game is a platformer game where you will have to reach the end of the two l
 
 * UML
 
+## Team photo
+
+![Marc Tarrés Urbieta/Aitor Vélez Tolosa](https://github.com/MAtaur00/Underground-Hero/blob/master/Other%20files/Team%20Photo/team_photo.jpg?raw=true)
+
+
+## Gameplay Video 
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/FcZJZd9e-BU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ## Credits
 
 * Map art: https://opengameart.org/content/dirt-platformer-tiles
 * Character art: https://rvros.itch.io/animated-pixel-hero
+* GUI: https://dribbble.com/shots/893593-Adventure-Game-Mini-RPG-UI-Pack-Free-PSD
 
 ## License
 
@@ -85,6 +115,9 @@ SOFTWARE.
 
 ## Github repository link
 
-https://github.com/MAtaur00/Development-Game
+[Link to Underground Hero Repository](https://github.com/MAtaur00/Development-Game)
+
+
+
 
 
