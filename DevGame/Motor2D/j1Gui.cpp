@@ -83,8 +83,8 @@ bool j1Gui::CleanUp()
 	p2List_item<UI_Element*>* item = UI_elements.start;
 	while (item != nullptr)
 	{
-		delete item->data;
 		UI_elements.del(item);
+		delete item->data;
 		item = item->next;
 	}
 

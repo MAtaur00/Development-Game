@@ -43,7 +43,7 @@ Coin::~Coin() { CleanUp(); }
 bool Coin::Start()
 {
 	LoadTexture();
-	App->entities->player->coin_counter = 0;
+	App->entities->player->coin_counter;
 	return true;
 }
 

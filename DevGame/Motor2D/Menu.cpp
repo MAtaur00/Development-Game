@@ -35,6 +35,8 @@ bool Menu::Start()
 	button_settings = (Button*)App->gui->AddButton(200, 500, { 1298, 70, 246, 61 }, { 1298, 326, 246, 61 }, { 1298, 189, 246, 61 }, "Settings", NULL, this);
 	button_exit = (Button*)App->gui->AddButton(550, 500, { 1595, 71, 246, 59 }, { 1595, 327, 246, 59 }, { 1595, 190, 246, 59 }, "Exit", NULL, this);
 
+	website = (Button*)App->gui->AddButton(375, 250, { 1298, 70, 246, 61 }, { 1298, 326, 246, 61 }, { 1298, 189, 246, 61 }, "Website", NULL, this);
+
 	return true;
 }
 
@@ -83,6 +85,10 @@ void Menu::CallBack(UI_Element* element)
 	{
 		exit = true;
 	}
+	else if (element == website)
+	{
+		ShellExecuteA(NULL, "open", "https://mataur00.github.io/Underground-Hero/", NULL, NULL, SW_SHOWNORMAL);
+	}
 }
 
 bool Menu::PostUpdate()
@@ -105,12 +111,16 @@ bool Menu::CleanUp()
 	App->gui->UI_elements.del(App->gui->UI_elements.At(App->gui->UI_elements.find(title->text)));
 	App->gui->UI_elements.del(App->gui->UI_elements.At(App->gui->UI_elements.find(title)));
 
+	App->gui->UI_elements.del(App->gui->UI_elements.At(App->gui->UI_elements.find(website->text)));
+	App->gui->UI_elements.del(App->gui->UI_elements.At(App->gui->UI_elements.find(website)));
+
 	delete bg_image;
 	delete button_continue;
 	delete button_new_game;
 	delete button_settings;
 	delete button_exit;
 	delete title;
+	delete website;
 
 	return true;
 }

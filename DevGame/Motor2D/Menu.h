@@ -37,6 +37,8 @@ public:
 	Button* button_settings = nullptr;
 	Button* button_exit = nullptr;
 
+	Button* website = nullptr;
+
 	bool exit = false;
 };
 
