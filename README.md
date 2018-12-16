@@ -3,6 +3,7 @@
 ## Github repository link
 
 [Link to Underground Hero Repository](https://github.com/MAtaur00/Development-Game)
+[Link to last release](https://github.com/MAtaur00/Underground-Hero/releases/tag/1.0)
 
 
 ## The game
