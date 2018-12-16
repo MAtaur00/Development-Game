@@ -6,6 +6,7 @@
 #include "j1Window.h"
 #include "j1App.h"
 #include "Menu.h"
+#include "Credits.h"
 #include "Brofiler/Brofiler.h"
 
 Settings::Settings()
@@ -51,9 +52,9 @@ void Settings::CallBack(UI_Element* element)
 	if (element == button_credits)
 	{
 		active = false;
-		App->menu->active = true;
+		App->credits->active = true;
 		CleanUp();
-		App->menu->Start();
+		App->credits->Start();
 	}
 	else if (element == button_back)
 	{

@@ -38,11 +38,19 @@ bool CheckBox::Update(float dt)
 	{
 		if (App->input->GetMouseButtonDown(1))
 		{
-			rect = click;
+			if (!clicked)
+			{
+				clicked = true;
+				rect = click;
+			}
+			else if (clicked)
+			{
+				clicked = false;
+				rect = idle;
+			}
 			App->scene->vsyncCont = App->config.child("vsync").append_attribute("value").as_bool();
 			App->scene->vsyncCont = !App->scene->vsyncCont;
 		}
-		else rect = idle;
 	}
 
 	return true;

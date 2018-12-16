@@ -27,8 +27,6 @@ bool Credits::Start()
 
 	button_credits_back = (Button*)App->gui->AddButton(550, 500, { 1595, 71, 246, 59 }, { 1595, 327, 246, 59 }, { 1595, 190, 246, 59 }, "Back", NULL, this);
 
-	credits_label = (Label*)App->gui->AddLabel(0, 0, NULL, this);
-
 	return true;
 }
 
