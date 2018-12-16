@@ -28,8 +28,7 @@ bool Menu::Start()
 {
 	bg_image = (Image*)App->gui->AddImage(0, 0, { 0, 0, 1024, 640 }, NULL, this);
 
-	Label* title = (Label*)App->gui->AddLabel(100, 100, NULL, this);
-	title->SetText("UNDERGROUND HERO");
+	title = (Button*)App->gui->AddButton(310, 100, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, "UNDERGROUND HERO", NULL, this);
 
 	button_continue = (Button*)App->gui->AddButton(200, 350, { 1298, 70, 246, 61 }, { 1298, 326, 246, 61 }, { 1298, 189, 246, 61 }, "Continue", NULL, this);
 	button_new_game = (Button*)App->gui->AddButton(550, 350, { 1298, 70, 246, 61 }, { 1298, 326, 246, 61 }, { 1298, 189, 246, 61 }, "New Game", NULL, this);
@@ -60,7 +59,7 @@ void Menu::CallBack(UI_Element* element)
 			App->entities->active = true;
 			CleanUp();
 			App->scene->Start();
-			App->entities->active = true;
+			App->entities->Start();
 			App->scene->loadScene = true;
 		}
 	}
@@ -71,11 +70,11 @@ void Menu::CallBack(UI_Element* element)
 		App->entities->active = true;
 		CleanUp();
 		App->scene->Start();
-		App->entities->active = true;
+		App->entities->Start();
 	}
 	else if (element == button_settings)
 	{
-		//active = false;
+		active = false;
 		App->settings->active = true;
 		CleanUp();
 		App->settings->Start();
@@ -103,13 +102,15 @@ bool Menu::CleanUp()
 	App->gui->UI_elements.del(App->gui->UI_elements.At(App->gui->UI_elements.find(button_exit->text)));
 	App->gui->UI_elements.del(App->gui->UI_elements.At(App->gui->UI_elements.find(button_exit)));
 
+	App->gui->UI_elements.del(App->gui->UI_elements.At(App->gui->UI_elements.find(title->text)));
+	App->gui->UI_elements.del(App->gui->UI_elements.At(App->gui->UI_elements.find(title)));
+
 	delete bg_image;
 	delete button_continue;
 	delete button_new_game;
 	delete button_settings;
 	delete button_exit;
-
-	//title->~Label();
+	delete title;
 
 	return true;
 }

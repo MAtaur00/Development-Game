@@ -57,7 +57,7 @@ void Settings::CallBack(UI_Element* element)
 	else if (element == button_back)
 	{
 		active = false;
-		//App->menu->active = true;
+		App->menu->active = true;
 		CleanUp();
 		App->menu->Start();
 	}

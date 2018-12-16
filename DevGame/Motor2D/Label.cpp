@@ -58,7 +58,7 @@ bool Label::SetText(const char* text) {
 bool Label::Draw() {
 	if (texture != nullptr)
 	{
-		App->render->Blit(texture, position.x, position.y, &rect);
+		App->render->Blit(texture, position.x, position.y, &rect, 0.0f);
 	}
 	return true;
 }

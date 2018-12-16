@@ -5,7 +5,6 @@
 
 #include "Button.h"
 #include "Image.h"
-#include "Scrollbar.h"
 
 class InGameMenu : public j1Module
 {
@@ -34,8 +33,6 @@ public:
 	Button* button_resume = nullptr;
 	Button* button_save = nullptr;
 	Button* button_main_menu = nullptr;
-
-	ScrollBar* volume = nullptr;
 
 	bool has_started = false;
 

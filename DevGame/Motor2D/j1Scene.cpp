@@ -95,14 +95,14 @@ bool j1Scene::Start()
 		}
 	}
 
-	ui_coin = (Image*)App->gui->AddImage(App->render->camera.x + 400, 20, { 1459, 488, 32, 32 }, NULL, this);
+	ui_coin = (Image*)App->gui->AddImage(400, 20, { 1459, 488, 32, 32 }, NULL, this);
 
-	game_time_label = (Label*)App->gui->AddLabel(App->render->camera.x + 20, 20, NULL, this);
+	game_time_label = (Label*)App->gui->AddLabel(20, 20, NULL, this);
 	static char score_timer[6];
 	sprintf_s(score_timer, 6, "%02i:%02i", 0, 0);
 	game_time_label->SetText(score_timer);
 
-	coin_score = (Label*)App->gui->AddLabel(App->render->camera.x + 450, 20, NULL, this);
+	coin_score = (Label*)App->gui->AddLabel(450, 20, NULL, this);
 	static char score_coins[6];
 	sprintf_s(score_coins, 6, "%c %i", 'x', 0);
 	coin_score->SetText(score_coins);
@@ -135,13 +135,13 @@ bool j1Scene::Update(float dt)
 		coin_score->SetText(score_coins);
 
 		if (App->entities->player->lives >= 1)
-			life1 = (Image*)App->gui->AddImage(App->render->camera.x + 800, 20, { 1565, 489, 36, 32 }, NULL, this);
+			life1 = (Image*)App->gui->AddImage(800, 20, { 1565, 489, 36, 32 }, NULL, this);
 
 		if (App->entities->player->lives >= 2)
-			life2 = (Image*)App->gui->AddImage(App->render->camera.x + 850, 20, { 1565, 489, 36, 32 }, NULL, this);
+			life2 = (Image*)App->gui->AddImage(850, 20, { 1565, 489, 36, 32 }, NULL, this);
 
 		if (App->entities->player->lives >= 3)
-			life3 = (Image*)App->gui->AddImage(App->render->camera.x + 900, 20, { 1565, 489, 36, 32 }, NULL, this);
+			life3 = (Image*)App->gui->AddImage(900, 20, { 1565, 489, 36, 32 }, NULL, this);
 	}
 
 
@@ -234,8 +234,6 @@ bool j1Scene::PostUpdate()
 	App->gui->UI_elements.del(App->gui->UI_elements.At(App->gui->UI_elements.find(life2)));
 	App->gui->UI_elements.del(App->gui->UI_elements.At(App->gui->UI_elements.find(life3)));
 
-	
-
 	return ret;
 }
 
@@ -247,6 +245,9 @@ bool j1Scene::CleanUp()
 
 	//game_time_label->~Label();
 
+	App->gui->UI_elements.del(App->gui->UI_elements.At(App->gui->UI_elements.find(ui_coin)));
+
+	delete ui_coin;
 	delete life1;
 	delete life2;
 	delete life3;

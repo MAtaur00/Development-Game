@@ -24,15 +24,13 @@ public:
 
 	bool CleanUp();
 
-	/*void CreateMenu();*/
-
 	void CallBack(UI_Element* element);
 
 public:
 
 	Image* bg_image = nullptr;
 
-	Label* title;
+	Button* title = nullptr;
 
 	Button* button_continue = nullptr;
 	Button* button_new_game = nullptr;

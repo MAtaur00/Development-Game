@@ -85,9 +85,6 @@
     <ClCompile Include="Label.cpp">
       <Filter>Desenvolupament  ========\UI</Filter>
     </ClCompile>
-    <ClCompile Include="Scrollbar.cpp">
-      <Filter>Desenvolupament  ========\UI</Filter>
-    </ClCompile>
     <ClCompile Include="CheckBox.cpp">
       <Filter>Desenvolupament  ========\UI</Filter>
     </ClCompile>
@@ -208,9 +205,6 @@
       <Filter>Desenvolupament  ========\UI</Filter>
     </ClInclude>
     <ClInclude Include="Label.h">
-      <Filter>Desenvolupament  ========\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="Scrollbar.h">
       <Filter>Desenvolupament  ========\UI</Filter>
     </ClInclude>
     <ClInclude Include="CheckBox.h">

@@ -107,7 +107,6 @@
     <ClCompile Include="j1Window.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PugiXml\src\pugixml.cpp" />
-    <ClCompile Include="Scrollbar.cpp" />
     <ClCompile Include="Settings.cpp" />
     <ClCompile Include="UI.cpp" />
   </ItemGroup>
@@ -150,7 +149,6 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="PugiXml\src\pugiconfig.hpp" />
     <ClInclude Include="PugiXml\src\pugixml.hpp" />
-    <ClInclude Include="Scrollbar.h" />
     <ClInclude Include="Settings.h" />
     <ClInclude Include="UI.h" />
   </ItemGroup>

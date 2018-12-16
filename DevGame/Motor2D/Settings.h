@@ -4,7 +4,6 @@
 #include "j1Module.h"
 
 #include "Image.h"
-#include "Scrollbar.h"
 #include "CheckBox.h"
 #include "Button.h"
 
@@ -35,8 +34,6 @@ public:
 	Image* bg_image = nullptr;
 
 	CheckBox* vsync_checkbox = nullptr;
-
-	ScrollBar* volume_slider = nullptr;
 
 	Button* button_credits = nullptr;
 
