@@ -41,6 +41,8 @@ public:
 	Button* button_credits = nullptr;
 
 	Button* button_back = nullptr;
+
+	bool has_started = false;
 };
 
 

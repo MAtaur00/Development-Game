@@ -58,72 +58,74 @@ bool BlackBandit::Start()
 
 bool BlackBandit::Update(float dt)
 {
-	banditData.jumpSpeed = 0.0f;
-	banditData.speed = 0.0f;
-	animation = &idle;
-	fPoint tempPos = pos;
-
-	// GRAVITY
-	tempPos.y += banditData.gravity * dt;
-	if (CheckCollision(GetEntityTile({ tempPos.x, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::AIR
-		&& CheckCollision(GetEntityTile({ tempPos.x + animation->GetCurrentFrame().w, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::AIR)
+	if (!App->scene->pause)
 	{
-		pos = tempPos;
-		animation = &falling;
-	}
+		banditData.jumpSpeed = 0.0f;
+		banditData.speed = 0.0f;
+		animation = &idle;
+		fPoint tempPos = pos;
 
-	playerPosition = App->entities->player->pos;
-	banditPos = App->map->WorldToMap(pos.x, pos.y);
-	playerPos = App->map->WorldToMap(playerPosition.x, playerPosition.y);
-
-	if (banditPos.x < playerPos.x + 8 && banditPos.x > playerPos.x - 8 && banditPos.y < playerPos.y + 8 && banditPos.y > playerPos.y - 8)
-	{
-		if (App->pathfindingWalker->CreatePath(banditPos, playerPos) != -1)
+		// GRAVITY
+		tempPos.y += banditData.gravity * dt;
+		if (CheckCollision(GetEntityTile({ tempPos.x, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::AIR
+			&& CheckCollision(GetEntityTile({ tempPos.x + animation->GetCurrentFrame().w, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::AIR)
 		{
-			const p2DynArray<iPoint>* path = App->pathfindingWalker->GetLastPath();
+			pos = tempPos;
+			animation = &falling;
+		}
 
-			if (App->map->draw_logic)
+		playerPosition = App->entities->player->pos;
+		banditPos = App->map->WorldToMap(pos.x, pos.y);
+		playerPos = App->map->WorldToMap(playerPosition.x, playerPosition.y);
+
+		if (banditPos.x < playerPos.x + 8 && banditPos.x > playerPos.x - 8 && banditPos.y < playerPos.y + 8 && banditPos.y > playerPos.y - 8)
+		{
+			if (App->pathfindingWalker->CreatePath(banditPos, playerPos) != -1)
 			{
-				for (uint i = 0; i < path->Count(); ++i)
+				const p2DynArray<iPoint>* path = App->pathfindingWalker->GetLastPath();
+
+				if (App->map->draw_logic)
 				{
-					iPoint nextPoint = App->map->MapToWorld(path->At(i)->x, path->At(i)->y);
-					App->render->Blit(path_texture, nextPoint.x, nextPoint.y);
+					for (uint i = 0; i < path->Count(); ++i)
+					{
+						iPoint nextPoint = App->map->MapToWorld(path->At(i)->x, path->At(i)->y);
+						App->render->Blit(path_texture, nextPoint.x, nextPoint.y);
+					}
 				}
-			}
-			if (path->Count() > 0)
-			{
-				iPoint pathPoint = iPoint(path->At(0)->x, path->At(0)->y);
-				if (pathPoint.x < banditPos.x)
+				if (path->Count() > 0)
 				{
-					animation = &running;
-					flip = SDL_RendererFlip::SDL_FLIP_NONE;
-					banditData.speed = -70 * dt;
-				}
-				else if (pathPoint.x > banditPos.x)
-				{
-					animation = &running;
-					flip = SDL_RendererFlip::SDL_FLIP_HORIZONTAL;
-					banditData.speed = 70 * dt;
-				}
-				if (pathPoint.y > banditPos.y)
-				{
-					animation = &falling;
-					banditData.jumpSpeed = 70 * dt;
+					iPoint pathPoint = iPoint(path->At(0)->x, path->At(0)->y);
+					if (pathPoint.x < banditPos.x)
+					{
+						animation = &running;
+						flip = SDL_RendererFlip::SDL_FLIP_NONE;
+						banditData.speed = -70 * dt;
+					}
+					else if (pathPoint.x > banditPos.x)
+					{
+						animation = &running;
+						flip = SDL_RendererFlip::SDL_FLIP_HORIZONTAL;
+						banditData.speed = 70 * dt;
+					}
+					if (pathPoint.y > banditPos.y)
+					{
+						animation = &falling;
+						banditData.jumpSpeed = 70 * dt;
+					}
 				}
 			}
 		}
-	}
-	pos.x += banditData.speed;
-	pos.y += banditData.jumpSpeed;
+		pos.x += banditData.speed;
+		pos.y += banditData.jumpSpeed;
 
-	if (banditPos.y == playerPos.y && (banditPos.x == playerPos.x + App->entities->player->animation->GetCurrentFrame().w || banditPos.x == playerPos.x) && !App->entities->player->god_mode)
-	{
-		App->audio->PlayFx(2);
-		if (App->entities->player->lifes > 0)
+		if (banditPos.y == playerPos.y && (banditPos.x == playerPos.x + App->entities->player->animation->GetCurrentFrame().w || banditPos.x == playerPos.x) && !App->entities->player->god_mode)
+		{
+			App->audio->PlayFx(2);
+			App->entities->player->lives -= 1;
 			App->entities->player->SpawnPLayer();
-		pos = spawn;
+			pos = spawn;
+		}
 	}
-
 	return true;
 }
 

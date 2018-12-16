@@ -87,7 +87,7 @@ public:
 
 	EntityData playerData;
 
-	int lifes = 3;
+	int lives = 3;
 
 	int coin_counter = 0;
 };

@@ -11,9 +11,9 @@
 Label::Label(int x, int y, UI_Element* parent, j1Module* CallBack) : UI_Element(x, y, parent, CallBack) {}
 
 Label::~Label() {
+	text.~p2SString();
 	App->gui->UI_elements.del(App->gui->UI_elements.At(App->gui->UI_elements.find(this)));
 	App->tex->UnLoad(texture);
-	text.~p2SString();
 }
 
 

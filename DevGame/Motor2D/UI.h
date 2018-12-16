@@ -25,8 +25,6 @@ public:
 
 	UI_Element* parent;
 
-	Animation* animation = nullptr;
-
 	j1Module* callback = nullptr;
 
 	bool destroy = false;

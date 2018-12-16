@@ -18,6 +18,7 @@ Coin::Coin(int x, int y, ENTITY_TYPE type) : Entity(x, y, type)
 	pos.y = y;
 	spawn.x = x;
 	spawn.y = y;
+	spawnPos = App->map->WorldToMap(x, y);
 	pugi::xml_document	config_file;
 	pugi::xml_node* node = &App->LoadEntities(config_file);
 	node = &node->child("enemies").child("coin");
@@ -51,12 +52,16 @@ bool Coin::Update(float dt)
 	animation = &coinRot;
 	fPoint tempPos = pos;
 
-	/*if (coinPos.y == playerPos.y && (coinPos.x == playerPos.x + App->entities->player->animation->GetCurrentFrame().w || coinPos.x == playerPos.x) && !App->entities->player->god_mode)
+	playerPosition = App->entities->player->pos;
+	coinPos = App->map->WorldToMap(pos.x, pos.y);
+	playerPos = App->map->WorldToMap(playerPosition.x, playerPosition.y);
+
+	if (coinPos.y == playerPos.y && (coinPos.x == playerPos.x + App->entities->player->animation->GetCurrentFrame().w || coinPos.x == playerPos.x) && !App->entities->player->god_mode)
 	{
 		to_destroy = true;
 		App->entities->player->coin_counter++;
 		
-	}*/
+	}
 	
 	return true;
 }
@@ -64,7 +69,6 @@ bool Coin::Update(float dt)
 bool Coin::CleanUp()
 {
 	App->tex->UnLoad(texture);
-	delete &coinRot;
 	animation = nullptr;
 	texture = nullptr;
 	return true;

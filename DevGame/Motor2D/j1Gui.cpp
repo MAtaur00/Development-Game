@@ -10,7 +10,6 @@
 #include "Label.h"
 #include "Button.h"
 #include "CheckBox.h"
-#include "Scrollbar.h"
 
 j1Gui::j1Gui() : j1Module()
 {
@@ -131,33 +130,19 @@ UI_Element* j1Gui::AddLabel(int x, int y, UI_Element* parent, j1Module* CallBack
 	return label;
 }
 
-UI_Element* j1Gui::AddCheckbox(int x, int y, SDL_Rect idle, SDL_Rect click, UI_Element* parent, j1Module* CallBack)
+UI_Element* j1Gui::AddCheckbox(int x, int y, SDL_Rect idle, SDL_Rect click, char* name, UI_Element* parent, j1Module* CallBack)
 {
-	CheckBox* checkBox = new CheckBox(x, y, idle, click, parent, CallBack);
+	Label* text = new Label(x + 30, y, NULL, CallBack);
+	CheckBox* checkBox = new CheckBox(x, y, idle, click, parent, text, CallBack);
+
+	text->parent = checkBox;
+
+	text->SetText(name);
 
 	UI_elements.add(checkBox);
+	UI_elements.add(text);
 
 	return checkBox;
 }
 
-//UI_Element* j1Gui::AddScrollbar(int x, int y, SDL_Rect rect, SDL_Rect slider, UI_Element* parent, j1Module* CallBack)
-//{
-//	ScrollBar* volume_scrollbar = new ScrollBar(x, y, parent);
-//
-//	UI_elements.add(volume_scrollbar);
-//
-//	return volume_scrollbar;
-//}
-
 // class Gui ---------------------------------------------------
-
-void j1Gui::DestroyUI()
-{
-	p2List_item<UI_Element*>* item = UI_elements.start;
-	while (item != nullptr)
-	{
-		delete item->data;
-		UI_elements.del(item);
-		item = item->next;
-	}
-}

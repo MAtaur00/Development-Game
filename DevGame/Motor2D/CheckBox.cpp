@@ -8,8 +8,7 @@
 #include "j1Scene.h"
 #include "j1Gui.h"
 
-
-CheckBox::CheckBox(int x, int y, SDL_Rect idle, SDL_Rect click, UI_Element* parent, j1Module* CallBack) : UI_Element(x, y, parent, CallBack) 
+CheckBox::CheckBox(int x, int y, SDL_Rect idle, SDL_Rect click, UI_Element* parent, Label* name, j1Module* CallBack) : UI_Element(x, y, parent, CallBack)
 {
 	this->position.x = x;
 	this->position.y = y;
@@ -17,6 +16,8 @@ CheckBox::CheckBox(int x, int y, SDL_Rect idle, SDL_Rect click, UI_Element* pare
 	this->click = click;
 
 	rect = idle;
+
+	text = name;
 }
 
 bool CheckBox::CleanUp()

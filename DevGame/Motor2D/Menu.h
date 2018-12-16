@@ -32,7 +32,7 @@ public:
 
 	Image* bg_image = nullptr;
 
-	Label* title = nullptr;
+	Label* title;
 
 	Button* button_continue = nullptr;
 	Button* button_new_game = nullptr;

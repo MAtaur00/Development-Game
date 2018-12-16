@@ -3,6 +3,7 @@
 
 #include "UI.h"
 #include "Image.h"
+#include "Label.h"
 #include "p2List.h"
 #include "SDL/include/SDL.h"
 
@@ -11,7 +12,7 @@ struct SDL_Texture;
 class CheckBox : public UI_Element
 {
 public:
-	CheckBox(int x, int y, SDL_Rect idle, SDL_Rect click, UI_Element* parent, j1Module* CallBack);
+	CheckBox(int x, int y, SDL_Rect idle, SDL_Rect click, UI_Element* parent, Label* name, j1Module* CallBack);
 
 	~CheckBox() {}
 
@@ -27,7 +28,7 @@ public:
 
 	bool clicked = false;
 
-	SDL_Texture* tex;
+	Label* text;
 };
 
 #endif

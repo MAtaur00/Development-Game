@@ -6,8 +6,8 @@
 
 struct SDL_Texture;
 
-class Image;
-class Label;
+#include "Image.h"
+#include "Label.h"
 
 class j1Scene : public j1Module
 {
@@ -48,7 +48,7 @@ public:
 
 	bool loadScene = false;
 
-	j1Timer game_time;
+	j1Timer game_time, pause_time;
 
 	bool vsyncCont;
 
@@ -57,6 +57,20 @@ public:
 	Label* game_time_label;
 
 	uint saved_time = 0;
+
+	bool pause = false;
+
+	int coins_collected = 0;
+
+	uint timer_pause = 0u;
+	uint timer_game;
+	int start_time = 0;
+
+	Label* coin_score = nullptr;
+
+	Image* life1 = nullptr;
+	Image* life2 = nullptr;
+	Image* life3 = nullptr;
 
 private:
 

@@ -14,10 +14,9 @@
 #include "Coin.h"
 #include "Entity.h"
 #include "Player.h"
-#include "Image.h"
-#include "Label.h"
 #include "InGameMenu.h"
 #include "ModulePathfinding.h"
+#include "Menu.h"
 #include "ModulePathfindingWalker.h"
 
 j1Scene::j1Scene() : j1Module()
@@ -53,8 +52,6 @@ bool j1Scene::Awake(pugi::xml_node& config)
 bool j1Scene::Start()
 {
 	App->map->Load(CurrentMap->data);
-
-	game_time.Start();
 
 	int w, h;
 	uchar* data = NULL;
@@ -98,7 +95,20 @@ bool j1Scene::Start()
 		}
 	}
 
-	ui_coin = (Image*)App->gui->AddImage(50, 850, { 1459, 488, 32, 32 }, NULL, this);
+	ui_coin = (Image*)App->gui->AddImage(App->render->camera.x + 400, 20, { 1459, 488, 32, 32 }, NULL, this);
+
+	game_time_label = (Label*)App->gui->AddLabel(App->render->camera.x + 20, 20, NULL, this);
+	static char score_timer[6];
+	sprintf_s(score_timer, 6, "%02i:%02i", 0, 0);
+	game_time_label->SetText(score_timer);
+
+	coin_score = (Label*)App->gui->AddLabel(App->render->camera.x + 450, 20, NULL, this);
+	static char score_coins[6];
+	sprintf_s(score_coins, 6, "%c %i", 'x', 0);
+	coin_score->SetText(score_coins);
+
+	game_time.Start();
+	timer_pause = 0u;
 
 	return true;
 }
@@ -112,11 +122,28 @@ bool j1Scene::PreUpdate()
 // Called each loop iteration
 bool j1Scene::Update(float dt)
 {
-	const char* coins = std::to_string(App->entities->player->coin_counter).c_str();
+	if (!pause) {
 
-	const char* time = std::to_string(game_time.Read()).c_str();
-	game_time_label = (Label*)App->gui->AddLabel(50, 750, NULL, this);
-	game_time_label->SetText(time);
+		static char score_timer[6];
+		timer_game = start_time + ((uint)game_time.ReadSec() - timer_pause);
+		sprintf_s(score_timer, 6, "%02i:%02i", timer_game / 60, timer_game % 60);
+		game_time_label->SetText(score_timer);
+
+		static char score_coins[6];
+		coins_collected = App->entities->player->coin_counter;
+		sprintf_s(score_coins, 6, "%c %i", 'x', coins_collected);
+		coin_score->SetText(score_coins);
+
+		if (App->entities->player->lives >= 1)
+			life1 = (Image*)App->gui->AddImage(App->render->camera.x + 800, 20, { 1565, 489, 36, 32 }, NULL, this);
+
+		if (App->entities->player->lives >= 2)
+			life2 = (Image*)App->gui->AddImage(App->render->camera.x + 850, 20, { 1565, 489, 36, 32 }, NULL, this);
+
+		if (App->entities->player->lives >= 3)
+			life3 = (Image*)App->gui->AddImage(App->render->camera.x + 900, 20, { 1565, 489, 36, 32 }, NULL, this);
+	}
+
 
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
 		LoadScene(1);
@@ -187,9 +214,27 @@ bool j1Scene::PostUpdate()
 
 	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 	{
+		pause = true;
+		pause_time.Start();
 		App->inGameMenu->active = true;
 		App->inGameMenu->Start();
 	}
+
+	if (App->entities->player->lives <= 0)
+	{
+		active = false;
+		App->entities->active = false;
+		App->menu->active = true;
+		CleanUp();
+		//App->entities->CleanUp();
+		App->menu->Start();
+	}
+
+	App->gui->UI_elements.del(App->gui->UI_elements.At(App->gui->UI_elements.find(life1)));
+	App->gui->UI_elements.del(App->gui->UI_elements.At(App->gui->UI_elements.find(life2)));
+	App->gui->UI_elements.del(App->gui->UI_elements.At(App->gui->UI_elements.find(life3)));
+
+	
 
 	return ret;
 }
@@ -199,6 +244,12 @@ bool j1Scene::CleanUp()
 {
 	if (App->entities->player)
 		App->entities->player->to_destroy = true;
+
+	//game_time_label->~Label();
+
+	delete life1;
+	delete life2;
+	delete life3;
 	LOG("Freeing scene");
 	return true;
 }
@@ -287,7 +338,9 @@ bool j1Scene::Load(pugi::xml_node&  savegame) {
 	default:
 		break;
 	}
-	game_time.Start();
+
+	start_time = savegame.child("timer").attribute("time").as_int();
+
 	App->entities->player->Load(savegame);
 	return true;
 }
@@ -296,11 +349,13 @@ bool j1Scene::Load(pugi::xml_node&  savegame) {
 bool j1Scene::Save(pugi::xml_node& data) const 
 {
 	pugi::xml_node map = data.append_child("Map");
+	pugi::xml_node timer = data.append_child("timer");
 
 	App->entities->player->Save(data);
 
 	map.append_attribute("CurrentMap") = currmap;
 
-	map.append_attribute("GameTime") = game_time.Read();
+	timer.append_attribute("time") = timer_game;
+
 	return true;
 }

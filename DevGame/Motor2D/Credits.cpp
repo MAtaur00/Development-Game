@@ -23,6 +23,8 @@ bool Credits::Awake(pugi::xml_node& conf)
 
 bool Credits::Start()
 {
+	has_started = true;
+
 	bg_image = (Image*)App->gui->AddImage(0, 0, { 0, 0, 1024, 640 }, NULL, this);
 
 	button_credits_back = (Button*)App->gui->AddButton(550, 500, { 1595, 71, 246, 59 }, { 1595, 327, 246, 59 }, { 1595, 190, 246, 59 }, "Back", NULL, this);
@@ -59,12 +61,17 @@ bool Credits::PostUpdate()
 
 bool Credits::CleanUp()
 {
-	App->gui->UI_elements.del(App->gui->UI_elements.At(App->gui->UI_elements.find(bg_image)));
-	App->gui->UI_elements.del(App->gui->UI_elements.At(App->gui->UI_elements.find(button_credits_back->text)));
-	App->gui->UI_elements.del(App->gui->UI_elements.At(App->gui->UI_elements.find(button_credits_back)));
+	if (has_started)
+	{
+		App->gui->UI_elements.del(App->gui->UI_elements.At(App->gui->UI_elements.find(bg_image)));
+		App->gui->UI_elements.del(App->gui->UI_elements.At(App->gui->UI_elements.find(button_credits_back->text)));
+		App->gui->UI_elements.del(App->gui->UI_elements.At(App->gui->UI_elements.find(button_credits_back)));
 
-	delete bg_image;
-	delete button_credits_back;
+		delete bg_image;
+		delete button_credits_back;
+
+		has_started = false;
+	}
 
 	return true;
 }

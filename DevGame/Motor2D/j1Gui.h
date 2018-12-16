@@ -61,13 +61,7 @@ public:
 
 	UI_Element* AddLabel(int x, int y, UI_Element* parent, j1Module* CallBack);
 
-	UI_Element* AddScrollbar(int x, int y, SDL_Rect bar, SDL_Rect slider, UI_Element* parent, j1Module* CallBack);
-
-	UI_Element* AddCheckbox(int x, int y, SDL_Rect idle, SDL_Rect click, UI_Element* parent, j1Module* CallBack);
-
-	void DestroyUI();
-
-	/*void DestroyElement(UI_Element &element);*/
+	UI_Element* AddCheckbox(int x, int y, SDL_Rect idle, SDL_Rect click, char* name, UI_Element* parent, j1Module* CallBack);
 
 private:
 

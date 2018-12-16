@@ -31,6 +31,8 @@ public:
 	Image* bg_image = nullptr;
 
 	Button* button_credits_back = nullptr;
+
+	bool has_started = false;
 };
 
 

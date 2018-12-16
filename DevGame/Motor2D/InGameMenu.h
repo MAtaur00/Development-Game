@@ -32,9 +32,14 @@ public:
 	Image* bg_image = nullptr;
 
 	Button* button_resume = nullptr;
+	Button* button_save = nullptr;
 	Button* button_main_menu = nullptr;
 
 	ScrollBar* volume = nullptr;
+
+	bool has_started = false;
+
+	bool saved = false;
 };
 
 

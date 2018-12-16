@@ -50,118 +50,120 @@ bool BigBat::Start()
 
 bool BigBat::Update(float dt)
 {
-	batData.jumpSpeed = 0.0f;
-	batData.speed = 0.0f;
-	playerPosition = App->entities->player->pos;
-
-	batPos = App->map->WorldToMap(pos.x, pos.y);
-	playerPos = App->map->WorldToMap(playerPosition.x, playerPosition.y);
-
-	if (batPos.x < playerPos.x + 8 && batPos.x > playerPos.x - 8 && batPos.y < playerPos.y + 8 && batPos.y > playerPos.y - 8)
+	if (!App->scene->pause)
 	{
-		if (App->pathfinding->CreatePath(batPos, playerPos) != -1)
-		{
-			const p2DynArray<iPoint>* path = App->pathfinding->GetLastPath();
+		batData.jumpSpeed = 0.0f;
+		batData.speed = 0.0f;
+		playerPosition = App->entities->player->pos;
 
-			if (App->map->draw_logic)
+		batPos = App->map->WorldToMap(pos.x, pos.y);
+		playerPos = App->map->WorldToMap(playerPosition.x, playerPosition.y);
+
+		if (batPos.x < playerPos.x + 8 && batPos.x > playerPos.x - 8 && batPos.y < playerPos.y + 8 && batPos.y > playerPos.y - 8)
+		{
+			if (App->pathfinding->CreatePath(batPos, playerPos) != -1)
 			{
-				for (uint i = 0; i < path->Count(); ++i)
+				const p2DynArray<iPoint>* path = App->pathfinding->GetLastPath();
+
+				if (App->map->draw_logic)
 				{
-					iPoint nextPoint = App->map->MapToWorld(path->At(i)->x, path->At(i)->y);
-					App->render->Blit(path_texture, nextPoint.x, nextPoint.y);
+					for (uint i = 0; i < path->Count(); ++i)
+					{
+						iPoint nextPoint = App->map->MapToWorld(path->At(i)->x, path->At(i)->y);
+						App->render->Blit(path_texture, nextPoint.x, nextPoint.y);
+					}
 				}
-			}
-			if (path->Count() > 0)
-			{
-				iPoint pathPoint = iPoint(path->At(0)->x, path->At(0)->y);
-				if (pathPoint.x < batPos.x)
+				if (path->Count() > 0)
 				{
-					flip = SDL_RendererFlip::SDL_FLIP_NONE;
-					batData.speed = -70 * dt;
-				}
-				else if (pathPoint.x > batPos.x)
-				{
-					flip = SDL_RendererFlip::SDL_FLIP_HORIZONTAL;
-					batData.speed = 70 * dt;
-				}
-				if (pathPoint.y < batPos.y)
-				{
-					batData.jumpSpeed = -70 * dt;
-				}
-				else if (pathPoint.y > batPos.y)
-				{
-					batData.jumpSpeed = 70 * dt;
+					iPoint pathPoint = iPoint(path->At(0)->x, path->At(0)->y);
+					if (pathPoint.x < batPos.x)
+					{
+						flip = SDL_RendererFlip::SDL_FLIP_NONE;
+						batData.speed = -70 * dt;
+					}
+					else if (pathPoint.x > batPos.x)
+					{
+						flip = SDL_RendererFlip::SDL_FLIP_HORIZONTAL;
+						batData.speed = 70 * dt;
+					}
+					if (pathPoint.y < batPos.y)
+					{
+						batData.jumpSpeed = -70 * dt;
+					}
+					else if (pathPoint.y > batPos.y)
+					{
+						batData.jumpSpeed = 70 * dt;
+					}
 				}
 			}
 		}
-	}
-	else
-	{
-		if (App->pathfinding->CreatePath(batPos, spawnPos) != -1)
+		else
 		{
-			const p2DynArray<iPoint>* path = App->pathfinding->GetLastPath();
+			if (App->pathfinding->CreatePath(batPos, spawnPos) != -1)
+			{
+				const p2DynArray<iPoint>* path = App->pathfinding->GetLastPath();
 
-			if (App->map->draw_logic)
-			{
-				for (uint i = 0; i < path->Count(); ++i)
+				if (App->map->draw_logic)
 				{
-					iPoint nextPoint = App->map->MapToWorld(path->At(i)->x, path->At(i)->y);
-					App->render->Blit(path_texture, nextPoint.x, nextPoint.y);
+					for (uint i = 0; i < path->Count(); ++i)
+					{
+						iPoint nextPoint = App->map->MapToWorld(path->At(i)->x, path->At(i)->y);
+						App->render->Blit(path_texture, nextPoint.x, nextPoint.y);
+					}
 				}
-			}
-			if (path->Count() > 0)
-			{
-				iPoint pathPoint = iPoint(path->At(0)->x, path->At(0)->y);
-				if (pathPoint.x < batPos.x)
+				if (path->Count() > 0)
 				{
-					flip = SDL_RendererFlip::SDL_FLIP_NONE;
-					batData.speed = -70 * dt;
-				}
-				else if (pathPoint.x > batPos.x)
-				{
-					flip = SDL_RendererFlip::SDL_FLIP_HORIZONTAL;
-					batData.speed = 70 * dt;
-				}
-				if (pathPoint.y < batPos.y)
-				{
-					batData.jumpSpeed = -70 * dt;
-				}
-				else if (pathPoint.y > batPos.y)
-				{
-					batData.jumpSpeed = 70 * dt;
+					iPoint pathPoint = iPoint(path->At(0)->x, path->At(0)->y);
+					if (pathPoint.x < batPos.x)
+					{
+						flip = SDL_RendererFlip::SDL_FLIP_NONE;
+						batData.speed = -70 * dt;
+					}
+					else if (pathPoint.x > batPos.x)
+					{
+						flip = SDL_RendererFlip::SDL_FLIP_HORIZONTAL;
+						batData.speed = 70 * dt;
+					}
+					if (pathPoint.y < batPos.y)
+					{
+						batData.jumpSpeed = -70 * dt;
+					}
+					else if (pathPoint.y > batPos.y)
+					{
+						batData.jumpSpeed = 70 * dt;
+					}
 				}
 			}
 		}
-	}
-	pos.x += batData.speed;
-	pos.y += batData.jumpSpeed;
+		pos.x += batData.speed;
+		pos.y += batData.jumpSpeed;
 
 
-	/*if ((animation->GetCurrentFrame().x >= App->entities->player->animation->GetCurrentFrame().x && App->entities->player->animation->GetCurrentFrame().x <= App->entities->player->animation->GetCurrentFrame().x + App->entities->player->animation->GetCurrentFrame().w && animation->GetCurrentFrame().y >= App->entities->player->animation->GetCurrentFrame().y && App->entities->player->animation->GetCurrentFrame().y <= App->entities->player->animation->GetCurrentFrame().y + App->entities->player->animation->GetCurrentFrame().h)
-		&& (animation->GetCurrentFrame().x + animation->GetCurrentFrame().w >= App->entities->player->animation->GetCurrentFrame().x && animation->GetCurrentFrame().x + animation->GetCurrentFrame().w <= App->entities->player->animation->GetCurrentFrame().x + App->entities->player->animation->GetCurrentFrame().w && animation->GetCurrentFrame().y >= App->entities->player->animation->GetCurrentFrame().y && animation->GetCurrentFrame().y <= App->entities->player->animation->GetCurrentFrame().y + App->entities->player->animation->GetCurrentFrame().h)
-		&& (animation->GetCurrentFrame().x >= App->entities->player->animation->GetCurrentFrame().x && animation->GetCurrentFrame().x <= App->entities->player->animation->GetCurrentFrame().x + App->entities->player->animation->GetCurrentFrame().w && animation->GetCurrentFrame().y + animation->GetCurrentFrame().h >= App->entities->player->animation->GetCurrentFrame().y && animation->GetCurrentFrame().y + animation->GetCurrentFrame().h <= App->entities->player->animation->GetCurrentFrame().y + App->entities->player->animation->GetCurrentFrame().h)
-		&& (animation->GetCurrentFrame().x + animation->GetCurrentFrame().w >= App->entities->player->animation->GetCurrentFrame().x && animation->GetCurrentFrame().x + animation->GetCurrentFrame().w <= App->entities->player->animation->GetCurrentFrame().x + App->entities->player->animation->GetCurrentFrame().w && animation->GetCurrentFrame().x + animation->GetCurrentFrame().w >= App->entities->player->animation->GetCurrentFrame().y && animation->GetCurrentFrame().x + animation->GetCurrentFrame().w <= App->entities->player->animation->GetCurrentFrame().y + App->entities->player->animation->GetCurrentFrame().h)
-		&& !App->entities->player->playerAttacking && !App->entities->player->god_mode)
-	{
-		App->audio->PlayFx(2);
-		App->entities->player->SpawnPLayer();
-	}*/
-
-	/*iPoint contactPointRight = { animation->GetCurrentFrame().x + animation->GetCurrentFrame().w, animation->GetCurrentFrame().y + (animation->GetCurrentFrame().h / 2) };
-	iPoint contactPointLeft = { animation->GetCurrentFrame().x, animation->GetCurrentFrame().y + (animation->GetCurrentFrame().h / 2) };*/
-
-	if (batPos.y == playerPos.y && (batPos.x == playerPos.x + App->entities->player->animation->GetCurrentFrame().w || batPos.x == playerPos.x) && !App->entities->player->god_mode)
-	{
-		if (!App->entities->player->playerAttacking)
+		/*if ((animation->GetCurrentFrame().x >= App->entities->player->animation->GetCurrentFrame().x && App->entities->player->animation->GetCurrentFrame().x <= App->entities->player->animation->GetCurrentFrame().x + App->entities->player->animation->GetCurrentFrame().w && animation->GetCurrentFrame().y >= App->entities->player->animation->GetCurrentFrame().y && App->entities->player->animation->GetCurrentFrame().y <= App->entities->player->animation->GetCurrentFrame().y + App->entities->player->animation->GetCurrentFrame().h)
+			&& (animation->GetCurrentFrame().x + animation->GetCurrentFrame().w >= App->entities->player->animation->GetCurrentFrame().x && animation->GetCurrentFrame().x + animation->GetCurrentFrame().w <= App->entities->player->animation->GetCurrentFrame().x + App->entities->player->animation->GetCurrentFrame().w && animation->GetCurrentFrame().y >= App->entities->player->animation->GetCurrentFrame().y && animation->GetCurrentFrame().y <= App->entities->player->animation->GetCurrentFrame().y + App->entities->player->animation->GetCurrentFrame().h)
+			&& (animation->GetCurrentFrame().x >= App->entities->player->animation->GetCurrentFrame().x && animation->GetCurrentFrame().x <= App->entities->player->animation->GetCurrentFrame().x + App->entities->player->animation->GetCurrentFrame().w && animation->GetCurrentFrame().y + animation->GetCurrentFrame().h >= App->entities->player->animation->GetCurrentFrame().y && animation->GetCurrentFrame().y + animation->GetCurrentFrame().h <= App->entities->player->animation->GetCurrentFrame().y + App->entities->player->animation->GetCurrentFrame().h)
+			&& (animation->GetCurrentFrame().x + animation->GetCurrentFrame().w >= App->entities->player->animation->GetCurrentFrame().x && animation->GetCurrentFrame().x + animation->GetCurrentFrame().w <= App->entities->player->animation->GetCurrentFrame().x + App->entities->player->animation->GetCurrentFrame().w && animation->GetCurrentFrame().x + animation->GetCurrentFrame().w >= App->entities->player->animation->GetCurrentFrame().y && animation->GetCurrentFrame().x + animation->GetCurrentFrame().w <= App->entities->player->animation->GetCurrentFrame().y + App->entities->player->animation->GetCurrentFrame().h)
+			&& !App->entities->player->playerAttacking && !App->entities->player->god_mode)
 		{
 			App->audio->PlayFx(2);
-			if (App->entities->player->lifes > 0)
-				App->entities->player->SpawnPLayer();
-			pos = spawn;
-		}
-		else to_destroy = true;
-	}
+			App->entities->player->SpawnPLayer();
+		}*/
 
+		/*iPoint contactPointRight = { animation->GetCurrentFrame().x + animation->GetCurrentFrame().w, animation->GetCurrentFrame().y + (animation->GetCurrentFrame().h / 2) };
+		iPoint contactPointLeft = { animation->GetCurrentFrame().x, animation->GetCurrentFrame().y + (animation->GetCurrentFrame().h / 2) };*/
+
+		if (batPos.y == playerPos.y && (batPos.x == playerPos.x + App->entities->player->animation->GetCurrentFrame().w || batPos.x == playerPos.x) && !App->entities->player->god_mode)
+		{
+			if (!App->entities->player->playerAttacking)
+			{
+				App->audio->PlayFx(2);
+				App->entities->player->lives -= 1;
+				App->entities->player->SpawnPLayer();
+				pos = spawn;
+			}
+			else to_destroy = true;
+		}
+	}
 	return true;
 }
 

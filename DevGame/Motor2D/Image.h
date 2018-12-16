@@ -20,8 +20,6 @@ public:
 
 
 public:
-
-	SDL_Texture* tex = nullptr;
 };
 
 #endif

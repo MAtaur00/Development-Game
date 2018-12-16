@@ -26,13 +26,11 @@ bool Settings::Start()
 {
 	bg_image = (Image*)App->gui->AddImage(0, 0, { 0, 0, 1024, 640 }, NULL, this);
 
-	vsync_checkbox = (CheckBox*)App->gui->AddCheckbox(200, 200, { 1419, 562, 26, 27 }, { 1452, 562, 26, 27 },  NULL, this);
+	vsync_checkbox = (CheckBox*)App->gui->AddCheckbox(200, 200, { 1419, 562, 26, 27 }, { 1452, 562, 26, 27 }, "VSYNC",  NULL, this);
 
-	//volume_slider = (ScrollBar*)App->gui->AddScrollbar(0, 0, {}, NULL, this);
+	button_credits = (Button*)App->gui->AddButton(200, 300, { 1298, 70, 246, 61 }, { 1298, 326, 246, 61 }, { 1298, 189, 246, 61 }, "Credits", NULL, this);
 
-	button_credits = (Button*)App->gui->AddButton(200, 500, { 1298, 70, 246, 61 }, { 1298, 326, 246, 61 }, { 998, 189, 246, 61 }, "Credits", NULL, this);
-
-	button_back = (Button*)App->gui->AddButton(550, 500, { 1595, 71, 246, 59 }, { 1595, 327, 246, 59 }, { 1595, 190, 246, 59 }, "Back", NULL, this);
+	button_back = (Button*)App->gui->AddButton(550, 300, { 1595, 71, 246, 59 }, { 1595, 327, 246, 59 }, { 1595, 190, 246, 59 }, "Back", NULL, this);
 
 	return true;
 }
@@ -59,7 +57,7 @@ void Settings::CallBack(UI_Element* element)
 	else if (element == button_back)
 	{
 		active = false;
-		App->menu->active = true;
+		//App->menu->active = true;
 		CleanUp();
 		App->menu->Start();
 	}
@@ -72,17 +70,23 @@ bool Settings::PostUpdate()
 
 bool Settings::CleanUp()
 {
-	App->gui->UI_elements.del(App->gui->UI_elements.At(App->gui->UI_elements.find(bg_image)));
-	App->gui->UI_elements.del(App->gui->UI_elements.At(App->gui->UI_elements.find(button_credits->text)));
-	App->gui->UI_elements.del(App->gui->UI_elements.At(App->gui->UI_elements.find(button_credits)));
-	App->gui->UI_elements.del(App->gui->UI_elements.At(App->gui->UI_elements.find(button_back->text)));
-	App->gui->UI_elements.del(App->gui->UI_elements.At(App->gui->UI_elements.find(button_back)));
-	App->gui->UI_elements.del(App->gui->UI_elements.At(App->gui->UI_elements.find(vsync_checkbox)));
+	if (has_started)
+	{
+		App->gui->UI_elements.del(App->gui->UI_elements.At(App->gui->UI_elements.find(bg_image)));
+		App->gui->UI_elements.del(App->gui->UI_elements.At(App->gui->UI_elements.find(button_credits->text)));
+		App->gui->UI_elements.del(App->gui->UI_elements.At(App->gui->UI_elements.find(button_credits)));
+		App->gui->UI_elements.del(App->gui->UI_elements.At(App->gui->UI_elements.find(button_back->text)));
+		App->gui->UI_elements.del(App->gui->UI_elements.At(App->gui->UI_elements.find(button_back)));
+		App->gui->UI_elements.del(App->gui->UI_elements.At(App->gui->UI_elements.find(vsync_checkbox->text)));
+		App->gui->UI_elements.del(App->gui->UI_elements.At(App->gui->UI_elements.find(vsync_checkbox)));
 
-	delete bg_image;
-	delete button_credits;
-	delete button_back;
-	delete vsync_checkbox;
+		delete bg_image;
+		delete button_credits;
+		delete button_back;
+		delete vsync_checkbox;
+
+		has_started = false;
+	}
 
 	return true;
 }
