@@ -79,9 +79,9 @@ In this game you are a hero who has to complete 2 levels in order to win.Enjoy!
 ![Marc Tarrés Urbieta/Aitor Vélez Tolosa](https://github.com/MAtaur00/Underground-Hero/blob/master/Other%20files/Team%20Photo/team_photo.jpg?raw=true)
 
 
-## Gameplay Video (testing)
+## Gameplay Video 
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/9DEpsvblBMo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/FcZJZd9e-BU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Credits
 
