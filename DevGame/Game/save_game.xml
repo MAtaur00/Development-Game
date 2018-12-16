@@ -6,9 +6,9 @@
 	<audio />
 	<map />
 	<scene>
-		<Map CurrentMap="1" />
-		<timer time="1" />
-		<position x="124.792397" y="447.908936" />
+		<Map CurrentMap="2" />
+		<timer time="50" />
+		<position x="2837.24878" y="8.97625732" />
 	</scene>
 	<entities />
 	<:anonymous />
@@ -21,6 +21,6 @@
 	<credits />
 	<credits />
 	<renderer>
-		<camera x="0" y="0" />
+		<camera x="-2333" y="0" />
 	</renderer>
 </game_state>
