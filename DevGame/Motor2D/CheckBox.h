@@ -11,17 +11,17 @@ struct SDL_Texture;
 class CheckBox : public UI_Element
 {
 public:
-	CheckBox(int x, int y, UI_Element* parent, j1Module* CallBack);
+	CheckBox(int x, int y, SDL_Rect idle, SDL_Rect click, UI_Element* parent, j1Module* CallBack);
 
 	~CheckBox() {}
 
 	bool CleanUp();
 
-	bool Define(SDL_Rect idle, SDL_Rect click);
-
 	void UI_Interaction(UI_State state);
 
 	bool Draw();
+
+	bool Update(float dt);
 
 public:
 	SDL_Rect idle;

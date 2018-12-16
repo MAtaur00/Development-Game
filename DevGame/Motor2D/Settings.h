@@ -20,13 +20,15 @@ public:
 
 	bool PreUpdate();
 
-	//bool Update(float dt);
+	bool Update(float dt);
 
-	//bool PostUpdate();
+	bool PostUpdate();
 
-	//bool CleanUp();
+	bool CleanUp();
 
 	//void CreateMenu();
+
+	void CallBack(UI_Element* element);
 
 public:
 
@@ -37,6 +39,8 @@ public:
 	ScrollBar* volume_slider = nullptr;
 
 	Button* button_credits = nullptr;
+
+	Button* button_back = nullptr;
 };
 
 

@@ -7,6 +7,7 @@
 #include "j1App.h"
 #include "j1Scene.h"
 #include "Settings.h"
+#include "ModuleEntities.h"
 #include "Brofiler/Brofiler.h"
 
 Menu::Menu()
@@ -26,10 +27,10 @@ bool Menu::Start()
 {
 	bg_image = (Image*)App->gui->AddImage(0, 0, { 0, 0, 1024, 640 }, NULL, this);
 
-	button_continue = (Button*)App->gui->AddButton(200, 350, { 998, 45, 246, 61 }, { 998, 301, 246, 61 }, { 998, 164, 246, 61 }, "Continue", NULL, this);
-	button_new_game = (Button*)App->gui->AddButton(550, 350, { 998, 45, 246, 61 }, { 998, 301, 246, 61 }, { 998, 164, 246, 61 }, "New Game", NULL, this);
-	button_settings = (Button*)App->gui->AddButton(200, 500, { 998, 45, 246, 61 }, { 998, 301, 246, 61 }, { 998, 164, 246, 61 }, "Settings", NULL, this);
-	button_exit = (Button*)App->gui->AddButton(550, 500, { 1295, 46, 246, 59 }, { 1295, 302, 246, 59 }, { 1295, 165, 246, 59 }, "Exit", NULL, this);
+	button_continue = (Button*)App->gui->AddButton(200, 350, { 1298, 70, 246, 61 }, { 1298, 326, 246, 61 }, { 998, 189, 246, 61 }, "Continue", NULL, this);
+	button_new_game = (Button*)App->gui->AddButton(550, 350, { 1298, 70, 246, 61 }, { 1298, 326, 246, 61 }, { 998, 189, 246, 61 }, "New Game", NULL, this);
+	button_settings = (Button*)App->gui->AddButton(200, 500, { 1298, 70, 246, 61 }, { 1298, 326, 246, 61 }, { 998, 189, 246, 61 }, "Settings", NULL, this);
+	button_exit = (Button*)App->gui->AddButton(550, 500, { 1595, 71, 246, 59 }, { 1595, 327, 246, 59 }, { 1595, 190, 246, 59 }, "Exit", NULL, this);
 
 	return true;
 }
@@ -41,8 +42,6 @@ bool Menu::PreUpdate()
 
 bool Menu::Update(float dt)
 {
-
-
 	return true;
 }
 
@@ -52,14 +51,18 @@ void Menu::CallBack(UI_Element* element)
 	{
 		active = false;
 		App->scene->active = true;
+		App->entities->active = true;
 		App->scene->Start();
+		App->entities->active = true;
 		App->scene->loadScene = true;
 	}
 	else if (element == button_new_game)
 	{
 		active = false;
 		App->scene->active = true;
+		App->entities->active = true;
 		App->scene->Start();
+		App->entities->active = true;
 	}
 	else if (element == button_settings)
 	{

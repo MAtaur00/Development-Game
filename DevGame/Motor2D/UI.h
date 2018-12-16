@@ -54,8 +54,6 @@ public:
 	// Called before quitting
 	virtual bool CleanUp();
 
-	virtual void UI_Interaction(UI_State state) {};
-
 	bool Intersection();
 };
 

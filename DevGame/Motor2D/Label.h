@@ -16,7 +16,7 @@ public:
 	bool Update(float dt);
 	bool CleanUp();
 
-	bool SetText(char* text);
+	bool SetText(const char* text);
 
 	bool Draw();
 

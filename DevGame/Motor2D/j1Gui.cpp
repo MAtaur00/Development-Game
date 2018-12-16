@@ -121,9 +121,9 @@ UI_Element* j1Gui::AddLabel(int x, int y, UI_Element* parent, j1Module* CallBack
 	return label;
 }
 
-UI_Element* j1Gui::AddCheckbox(int x, int y, SDL_Rect rect, UI_Element* parent, j1Module* CallBack)
+UI_Element* j1Gui::AddCheckbox(int x, int y, SDL_Rect idle, SDL_Rect click, UI_Element* parent, j1Module* CallBack)
 {
-	CheckBox* checkBox = new CheckBox(x, y, parent, CallBack);
+	CheckBox* checkBox = new CheckBox(x, y, idle, click, parent, CallBack);
 
 	UI_elements.add(checkBox);
 

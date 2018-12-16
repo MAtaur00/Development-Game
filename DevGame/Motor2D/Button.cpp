@@ -32,24 +32,6 @@ bool Button::CleanUp()
 	return true;
 }
 
-void Button::UI_Interaction(UI_State state)
-{
-	switch (state)
-	{
-	case IDLE:
-		rect = button_idle;
-		break;
-
-	case HOVER:
-		rect = button_hover;
-		break;
-
-	case CLICK:
-		rect = button_click;
-		break;
-	}
-}
-
 bool Button::Draw() {
 	if (atlas != nullptr)
 	{

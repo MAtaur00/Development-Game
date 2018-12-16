@@ -47,11 +47,19 @@ public:
 
 	j1Timer game_time;
 
+	bool vsyncCont;
+
+	Image* ui_coin = nullptr;
+
+	Label* game_time_label;
+
+	uint saved_time = 0;
+
 private:
 
 	p2List<const char*>  MapsList_String;
 	p2List_item<const char*>* CurrentMap = nullptr;
-	bool vsyncCont;
+	
 };
 
 #endif // __j1SCENE_H__

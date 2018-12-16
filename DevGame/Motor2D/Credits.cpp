@@ -22,7 +22,7 @@ bool Credits::Awake(pugi::xml_node& conf)
 
 bool Credits::Start()
 {
-	bg_image = (Image*)App->gui->AddImage(0, 0, { 0, 0, 640, 480 }, NULL, this);
+	bg_image = (Image*)App->gui->AddImage(0, 0, { 0, 0, 1024, 640 }, NULL, this);
 
 	credits_label = (Label*)App->gui->AddLabel(0, 0, NULL, this);
 

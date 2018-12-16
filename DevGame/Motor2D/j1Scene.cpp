@@ -14,6 +14,8 @@
 #include "Coin.h"
 #include "Entity.h"
 #include "Player.h"
+#include "Image.h"
+#include "Label.h"
 #include "ModulePathfinding.h"
 #include "ModulePathfindingWalker.h"
 
@@ -95,6 +97,8 @@ bool j1Scene::Start()
 		}
 	}
 
+	ui_coin = (Image*)App->gui->AddImage(50, 850, { 1459, 488, 32, 32 }, NULL, this);
+
 	return true;
 }
 
@@ -109,6 +113,9 @@ bool j1Scene::Update(float dt)
 {
 	const char* coins = std::to_string(App->entities->player->coin_counter).c_str();
 
+	const char* time = std::to_string(game_time.Read()).c_str();
+	game_time_label = (Label*)App->gui->AddLabel(50, 750, NULL, this);
+	game_time_label->SetText(time);
 
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
 		LoadScene(1);
@@ -145,7 +152,7 @@ bool j1Scene::Update(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN) {
 		LOG("1");
 		vsyncCont = App->config.child("vsync").append_attribute("value").as_bool();
-		vsyncCont =true;
+		vsyncCont = !vsyncCont;
 	
 	}
 
@@ -276,7 +283,7 @@ bool j1Scene::Load(pugi::xml_node&  savegame) {
 	default:
 		break;
 	}
-
+	game_time.Start();
 	App->entities->player->Load(savegame);
 	return true;
 }
@@ -289,5 +296,7 @@ bool j1Scene::Save(pugi::xml_node& data) const
 	App->entities->player->Save(data);
 
 	map.append_attribute("CurrentMap") = currmap;
+
+	map.append_attribute("GameTime") = game_time.Read();
 	return true;
 }

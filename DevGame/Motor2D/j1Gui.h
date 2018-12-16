@@ -63,7 +63,7 @@ public:
 
 	UI_Element* AddScrollbar(int x, int y, SDL_Rect bar, SDL_Rect slider, UI_Element* parent, j1Module* CallBack);
 
-	UI_Element* AddCheckbox(int x, int y, SDL_Rect rect, UI_Element* parent, j1Module* CallBack);
+	UI_Element* AddCheckbox(int x, int y, SDL_Rect idle, SDL_Rect click, UI_Element* parent, j1Module* CallBack);
 
 private:
 

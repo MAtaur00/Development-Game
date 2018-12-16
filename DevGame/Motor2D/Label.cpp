@@ -26,7 +26,7 @@ bool Label::CleanUp() {
 
 	return true;
 }
-bool Label::SetText(char* text) {
+bool Label::SetText(const char* text) {
 
 	bool ret = false;
 
