@@ -53,6 +53,8 @@ bool j1Scene::Start()
 {
 	App->map->Load(CurrentMap->data);
 
+	first_load = false;
+
 	int w, h;
 	uchar* data = NULL;
 	if (App->map->CreateWalkabilityMap(w, h, &data, true))
@@ -95,6 +97,7 @@ bool j1Scene::Start()
 		}
 	}
 
+	coins_collected = 0;
 	ui_coin = (Image*)App->gui->AddImage(400, 20, { 1459, 488, 32, 32 }, NULL, this);
 
 	game_time_label = (Label*)App->gui->AddLabel(20, 20, NULL, this);
@@ -104,7 +107,7 @@ bool j1Scene::Start()
 
 	coin_score = (Label*)App->gui->AddLabel(450, 20, NULL, this);
 	static char score_coins[6];
-	sprintf_s(score_coins, 6, "%c %i", 'x', 0);
+	sprintf_s(score_coins, 6, "%c %i", 'x', coins_collected);
 	coin_score->SetText(score_coins);
 
 	game_time.Start();
@@ -134,13 +137,13 @@ bool j1Scene::Update(float dt)
 		sprintf_s(score_coins, 6, "%c %i", 'x', coins_collected);
 		coin_score->SetText(score_coins);
 
-		if (App->entities->player->lives >= 1)
+		if (lives >= 1)
 			life1 = (Image*)App->gui->AddImage(800, 20, { 1565, 489, 36, 32 }, NULL, this);
 
-		if (App->entities->player->lives >= 2)
+		if (lives >= 2)
 			life2 = (Image*)App->gui->AddImage(850, 20, { 1565, 489, 36, 32 }, NULL, this);
 
-		if (App->entities->player->lives >= 3)
+		if (lives >= 3)
 			life3 = (Image*)App->gui->AddImage(900, 20, { 1565, 489, 36, 32 }, NULL, this);
 	}
 
@@ -151,10 +154,6 @@ bool j1Scene::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN) {
 		LoadScene(0);
-	}
-
-	if (App->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN) {
-		LoadScene();
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) {
@@ -220,7 +219,7 @@ bool j1Scene::PostUpdate()
 		App->inGameMenu->Start();
 	}
 
-	if (App->entities->player->lives <= 0)
+	if (lives <= 0)
 	{
 		active = false;
 		App->entities->active = false;
@@ -296,6 +295,7 @@ bool j1Scene::LoadScene(int map)
 
 	}
 	App->map->Load(CurrentMap->data);
+	App->gui->Start();
 	iPoint spawnEntity;
 	p2List_item<MapLayer*>* layer = App->map->data.layers.end;
 	for (int i = 0; i < (layer->data->width * layer->data->height); i++)
@@ -316,8 +316,16 @@ bool j1Scene::LoadScene(int map)
 			App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, BIGBAT);
 		}
 	}
-	/*App->entities->player->FindPlayerSpawn();
-	App->entities->player->SpawnPLayer();*/
+	ui_coin = (Image*)App->gui->AddImage(400, 20, { 1459, 488, 32, 32 }, NULL, this);
+
+	if (lives >= 1)
+		life1 = (Image*)App->gui->AddImage(800, 20, { 1565, 489, 36, 32 }, NULL, this);
+
+	if (lives >= 2)
+		life2 = (Image*)App->gui->AddImage(850, 20, { 1565, 489, 36, 32 }, NULL, this);
+
+	if (lives >= 3)
+		life3 = (Image*)App->gui->AddImage(900, 20, { 1565, 489, 36, 32 }, NULL, this);
 
 	return true;
 }

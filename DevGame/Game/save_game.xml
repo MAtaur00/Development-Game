@@ -7,8 +7,8 @@
 	<map />
 	<scene>
 		<Map CurrentMap="1" />
-		<timer time="4" />
-		<position x="32" y="446.056671" />
+		<timer time="1" />
+		<position x="124.792397" y="447.908936" />
 	</scene>
 	<entities />
 	<:anonymous />

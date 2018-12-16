@@ -35,7 +35,7 @@ bool Button::CleanUp()
 bool Button::Draw() {
 	if (atlas != nullptr)
 	{
-		App->render->Blit(atlas, position.x, position.y, &rect);
+		App->render->Blit(atlas, position.x, position.y, &rect, 0.0f);
 	}
 	return true;
 }

@@ -129,8 +129,8 @@ bool Player::Update(float dt)
 			{
 				App->audio->PlayFx(2);
 				//App->fade->FadeToBlack(App->scene, App->scene, 0.5f);
-				lives -= 1;
-				if (lives > 0)
+				App->scene->lives -= 1;
+				if (App->scene->lives > 0)
 					SpawnPLayer();
 			}
 			//--------------------------------
@@ -167,7 +167,6 @@ bool Player::Update(float dt)
 				else if (CheckCollision(GetPlayerTile({ tempPos.x + animation->GetCurrentFrame().w, tempPos.y })) == COLLISION_TYPE::WIN
 					&& CheckCollision(GetPlayerTile({ tempPos.x + animation->GetCurrentFrame().w, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::WIN)
 				{
-					//App->fade->FadeToBlack(App->scene, App->scene, 0.5f);
 					App->scene->LoadScene();
 				}
 			}

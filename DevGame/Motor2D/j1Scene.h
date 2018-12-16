@@ -60,17 +60,23 @@ public:
 
 	bool pause = false;
 
-	int coins_collected = 0;
+	int coins_collected;
 
 	uint timer_pause = 0u;
 	uint timer_game;
 	int start_time = 0;
+
+	bool first_load = true;
 
 	Label* coin_score = nullptr;
 
 	Image* life1 = nullptr;
 	Image* life2 = nullptr;
 	Image* life3 = nullptr;
+
+	int map = 1;
+
+	int lives = 3;
 
 private:
 
