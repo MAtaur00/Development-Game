@@ -1,12 +1,20 @@
 ﻿# Development-Game
 
+## Github repository link
+
+[Link to Underground Hero Repository](https://github.com/MAtaur00/Development-Game)
+
 
 ## The game
 
 Thank you for downloading!
-This game is a platformer game where you will have to reach the end of the two levels in order to complete the game. Our character has the hability of sliding down through walls and jumping meanwhile.
+We are developing this game as an assignment teached by Ricard Pillosu. This game is a platformer game where you will have to reach the end of the two levels in order to complete the game. Our character has the hability of sliding down through walls and jumping meanwhile.
 
--The enemy Black Bandit can't be killed, you will just have to avoid him.
+
+## Core Subsystems
+
+For the first assingment we used Tiled, for the creation of the maps, Tiled has also allowed us u create navigation and collision layers.We also learned how to save and load the game. Then we implemented the pathfinding system using A*.Later we learned how to cap Fps, and we used the tool brofile.For The third assingment we had to implement a UI system that provides the game of a menu.
+
 
 ## Debugging Fucionalities
 
@@ -27,6 +35,8 @@ This game is a platformer game where you will have to reach the end of the two l
 * F11 Framerate Cap/Uncap
 
 ## Controls
+
+In this game you are a hero who has to complete 2 levels in order to win.Enjoy!
 
 * Left and Right arrows to move.
 * Up arrow to jump.
@@ -65,15 +75,16 @@ This game is a platformer game where you will have to reach the end of the two l
 
 ![Marc Tarrés Urbieta/Aitor Vélez Tolosa](https://github.com/MAtaur00/Underground-Hero/blob/master/Other%20files/Team%20Photo/team_photo.jpg?raw=true)
 
+
+## Gameplay Video (testing)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/9DEpsvblBMo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ## Credits
 
 * Map art: https://opengameart.org/content/dirt-platformer-tiles
 * Character art: https://rvros.itch.io/animated-pixel-hero
 * GUI: https://dribbble.com/shots/893593-Adventure-Game-Mini-RPG-UI-Pack-Free-PSD
-
-## Gameplay Video (testing)
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/9DEpsvblBMo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## License
 
@@ -101,7 +112,7 @@ SOFTWARE.
 
 ## Github repository link
 
-https://github.com/MAtaur00/Development-Game
+[Link to Underground Hero Repository](https://github.com/MAtaur00/Development-Game)
 
 
 
