@@ -15,6 +15,9 @@ We are developing this game as an assignment teached by Ricard Pillosu. This gam
 
 For the first assingment we used Tiled, for the creation of the maps, Tiled has also allowed us u create navigation and collision layers.We also learned how to save and load the game. Then we implemented the pathfinding system using A*.Later we learned how to cap Fps, and we used the tool brofile.For The third assingment we had to implement a UI system that provides the game of a menu.
 
+## UI specifications
+
+The game has a main menu, by pressing continue, a previously saved game can be played. The settings button allows the player to enable and disable VSYNC, credits can also be seen. When pressing ESC in game a menu opens, there you can save the game, go back to the main menu or closing it and keep playing.
 
 ## Debugging Fucionalities
 
